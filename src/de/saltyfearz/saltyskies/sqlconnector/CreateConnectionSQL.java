@@ -36,4 +36,20 @@ public class CreateConnectionSQL {
 
     }
   }
+
+  public static void disconnect () {
+
+    try {
+
+      con.close();
+
+      System.out.println("MYSQL - VERBINDUNG GESCHLOSSEN!");
+
+    } catch ( SQLException exc ) {
+
+      exc.printStackTrace();
+
+    }
+  }
+
 }
