@@ -1,10 +1,11 @@
-package de.saltyfearz.saltyskies.sqlconnector;
+package de.saltyfearz.saltyskies.MySQL;
+
+import static de.saltyfearz.saltyskies.MySQL.PlayerSQL.executePlayerSQL;
 
 import de.saltyfearz.saltyskies.SaltySkies;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 
 public class CreateConnectionSQL {
 
@@ -51,5 +52,14 @@ public class CreateConnectionSQL {
 
     }
   }
+
+  public static void startSQLQueryies () throws SQLException {
+    executePlayerSQL();
+
+  }
+
+  public static Connection getConnection () { return con; }
+
+  public static boolean isConnected () { return ( con != null ); }
 
 }

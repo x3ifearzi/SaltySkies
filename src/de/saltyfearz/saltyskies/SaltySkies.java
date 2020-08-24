@@ -1,5 +1,6 @@
 package de.saltyfearz.saltyskies;
 
+import de.saltyfearz.saltyskies.MySQL.CreateConnectionSQL;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class SaltySkies extends JavaPlugin {
@@ -10,6 +11,8 @@ public class SaltySkies extends JavaPlugin {
   public void onEnable () {
 
     SaltySkies.instance = this;
+
+    CreateConnectionSQL.connect();
 
   }
 
