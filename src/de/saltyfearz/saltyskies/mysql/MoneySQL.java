@@ -1,4 +1,4 @@
-package de.saltyfearz.saltyskies.MySQL;
+package de.saltyfearz.saltyskies.mysql;
 
 import de.saltyfearz.saltyskies.SaltySkies;
 import java.sql.Connection;

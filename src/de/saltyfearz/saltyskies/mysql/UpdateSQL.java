@@ -1,4 +1,4 @@
-package de.saltyfearz.saltyskies.MySQL;
+package de.saltyfearz.saltyskies.mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,11 +6,13 @@ import java.sql.SQLException;
 
 public class UpdateSQL {
 
-  public static int updateSQL (final String query, PreparedStatement pS, final Connection con ) throws SQLException {
+  //changedRows ? ?
+
+  public static int updateSQL (final String query, final Connection con ) throws SQLException {
 
     int changedRows = -1;
 
-    pS = con.prepareStatement( query );
+    PreparedStatement pS = con.prepareStatement( query );
 
     changedRows = pS.executeUpdate();
 
