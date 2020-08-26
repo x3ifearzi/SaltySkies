@@ -6,6 +6,7 @@ import de.saltyfearz.saltyskies.commands.SkullCommand;
 import de.saltyfearz.saltyskies.commands.SpawnCommand;
 import de.saltyfearz.saltyskies.commands.TimeCommand;
 import de.saltyfearz.saltyskies.configs.CustomConfigMessager;
+import de.saltyfearz.saltyskies.handler.chathandler.MessageHandlerDE;
 import de.saltyfearz.saltyskies.mysql.CreateConnectionSQL;
 import de.saltyfearz.saltyskies.mysql.CreateTableSQL;
 import java.sql.PreparedStatement;
@@ -17,6 +18,7 @@ public class SaltySkies extends JavaPlugin {
   public static SaltySkies instance;
 
   private CustomConfigMessager configMessenger;
+  private MessageHandlerDE msgDE;
 
   @Override
   public void onEnable () {
@@ -24,10 +26,21 @@ public class SaltySkies extends JavaPlugin {
     SaltySkies.instance = this;
 
     CreateConnectionSQL.connect();
+    try {
+      executeTableCreations();
+    } catch ( SQLException exc ) {
+      //
+    }
 
     this.configMessenger = new CustomConfigMessager(this);
+    this.msgDE = new MessageHandlerDE(this);
+
+    configMessenger.generateMessageFile();
+    configMessenger.getMessageFileConfiguration().options().copyDefaults(true);
+    configMessenger.setMessageFile();
 
     registerCommandsToServer();
+
 
   }
 
@@ -40,13 +53,14 @@ public class SaltySkies extends JavaPlugin {
 
     CommandFramework cfw = new CommandFramework(this);
 
-    cfw.registerCommands(new TimeCommand());
-    cfw.registerCommands(new SpawnCommand());
-    cfw.registerCommands(new SkullCommand());
+    cfw.registerCommands(new TimeCommand(this));
+    cfw.registerCommands(new SpawnCommand(this));
+    cfw.registerCommands(new SkullCommand(this));
 
   }
 
   public void registerListenerToServer() {
+
 
   }
 
@@ -61,5 +75,9 @@ public class SaltySkies extends JavaPlugin {
 
   public CustomConfigMessager getConfigMessenger() {
     return configMessenger;
+  }
+
+  public MessageHandlerDE getMsgDE() {
+    return msgDE;
   }
 }

@@ -9,7 +9,6 @@ public class MoneySQL {
 
   final private SaltySkies plugin;
 
-  private static PreparedStatement pS;
   private static Connection con = CreateConnectionSQL.getConnection();
 
   public MoneySQL( final SaltySkies plugin ) {
@@ -20,9 +19,7 @@ public class MoneySQL {
 
     final String createMoneyTable = "BALANCE ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, TOKENS double, PRIMARY KEY ( ID ), FOREIGN KEY ( PLAYERUUID ) REFERENCES PLAYERDATA ( PLAYERUUID ));";
 
-    CreateTableSQL.createTableSQL(createMoneyTable, pS, con);
+    CreateTableSQL.createTableSQL(createMoneyTable, con);
 
   }
-
-  public String
 }

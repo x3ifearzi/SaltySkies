@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -22,12 +23,11 @@ public class CustomConfigMessager {
 
   public void generateMessageFile() {
 
-    messageFile = new File(Objects.requireNonNull(Bukkit.getServer()
-                                                        .getPluginManager()
-                                                        .getPlugin("SaltySkies"))
-                                  .getDataFolder(), "messagesDE.yml");
+    messageFile = new File(Bukkit.getServer().getPluginManager()
+            .getPlugin("SaltySkies")
+            .getDataFolder(), "messagesDE.yml");
 
-    if (messageFile.exists())
+    if (!messageFile.exists())
       return;
 
     try {
@@ -41,6 +41,7 @@ public class CustomConfigMessager {
       exc.printStackTrace();
 
     }
+    reloadMessageFile();
   }
 
   public void setMessageFile() {

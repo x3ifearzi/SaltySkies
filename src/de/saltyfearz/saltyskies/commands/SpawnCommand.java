@@ -17,6 +17,10 @@ import org.bukkit.entity.Player;
 
 public class SpawnCommand {
 
+  final private SaltySkies plugin;
+
+  public SpawnCommand ( final SaltySkies plugin ) { this.plugin = plugin; }
+
   @Command(name = "setspawn", description = "§6Setze den Einstiegspunkt in der Welt.", usage = "§6/setspawn", permission = "SaltySkies.setspawn")
   public void setSpawn(CommandArgs args) {
 
@@ -34,10 +38,10 @@ public class SpawnCommand {
     );
 
     if (changedRows == -1) {
-        player.sendMessage(MessageHandlerDE.getMessageErrorDE( "spawn-command", "createSpawnFailure"));
+        player.sendMessage(plugin.getMsgDE().getMessageErrorDE( "spawn-command", "createSpawnFailure"));
 
     } else {
-      player.sendMessage(MessageHandlerDE.getMessageSuccessDE("spawn-command", "createSpawnSuccess"));
+      player.sendMessage(plugin.getMsgDE().getMessageSuccessDE("spawn-command", "createSpawnSuccess"));
     }
   }
 
@@ -53,7 +57,7 @@ public class SpawnCommand {
 
     if (spawn == null) {
 
-      player.sendMessage(MessageHandlerDE.getMessageErrorDE( "spawn-command", "spawnNotExists"));
+      player.sendMessage(plugin.getMsgDE().getMessageErrorDE( "spawn-command", "spawnNotExists"));
       return;
 
     }
@@ -68,7 +72,7 @@ public class SpawnCommand {
 
     if (arg.length > 1) {
 
-      player.sendMessage(MessageHandlerDE.getMessageInfoDE( "spawn-command", "syntax"));
+      player.sendMessage(plugin.getMsgDE().getMessageInfoDE( "spawn-command", "syntax"));
       return;
 
     }
@@ -76,7 +80,7 @@ public class SpawnCommand {
     if (arg.length == 0) {
 
       player.teleport( new Location ( world, x, y, z, yaw, pitch ));
-      player.sendMessage(MessageHandlerDE.getMessageSuccessDE( "spawn-command", "spawntp"));
+      player.sendMessage(plugin.getMsgDE().getMessageSuccessDE( "spawn-command", "spawntp"));
 
     } else {
 
@@ -84,13 +88,13 @@ public class SpawnCommand {
 
       if ( target == null ) {
 
-        player.sendMessage(MessageHandlerDE.getMessageInfoDE( "system", "noTargetOnline" ));
+        player.sendMessage(plugin.getMsgDE().getMessageInfoDE( "system", "noTargetOnline" ));
         return;
 
       }
 
       target.teleport( new Location ( world, x, y, z, yaw, pitch ));
-      target.sendMessage(MessageHandlerDE.getMessageInfoDE( "system", "spawntp"));
+      target.sendMessage(plugin.getMsgDE().getMessageInfoDE( "system", "spawntp"));
 
     }
 
