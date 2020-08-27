@@ -94,7 +94,7 @@ public class SpawnCommand {
       }
 
       target.teleport( new Location ( world, x, y, z, yaw, pitch ));
-      target.sendMessage(plugin.getMsgDE().getMessageInfoDE( "system", "spawntp"));
+      target.sendMessage(plugin.getMsgDE().getMessageInfoDE( "spawn-command", "spawntp"));
 
     }
 
