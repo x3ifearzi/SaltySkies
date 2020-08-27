@@ -62,6 +62,10 @@ messages              :
 
     noTargetOnline        : §7 Der Spieler konnte nicht gefunden werden.
 
+    joinmessage           : §7 Der Spieler %target hat den Server betreten.
+
+    quitmessage           : §7 Der Spieler %target hat den Server verlassen.
+
   gamemode-command      :
 
     survivalMode          : §7 Weise dem Spieler %target den Spielmodus §eSURVIVAL §7zu.
