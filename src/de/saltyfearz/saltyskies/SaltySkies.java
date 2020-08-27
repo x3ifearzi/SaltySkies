@@ -2,6 +2,7 @@ package de.saltyfearz.saltyskies;
 
 import de.minnymin.command.Command;
 import de.minnymin.command.CommandFramework;
+import de.saltyfearz.saltyskies.commands.GiveCommand;
 import de.saltyfearz.saltyskies.commands.SkullCommand;
 import de.saltyfearz.saltyskies.commands.SpawnCommand;
 import de.saltyfearz.saltyskies.commands.TimeCommand;
@@ -21,63 +22,70 @@ public class SaltySkies extends JavaPlugin {
   private MessageHandlerDE msgDE;
 
   @Override
-  public void onEnable () {
+  public void onEnable ( ) {
 
     SaltySkies.instance = this;
 
-    CreateConnectionSQL.connect();
+    CreateConnectionSQL.connect( );
     try {
-      executeTableCreations();
+      executeTableCreations( );
     } catch ( SQLException exc ) {
-      //
+      exc.printStackTrace();
     }
 
-    this.configMessenger = new CustomConfigMessager(this);
-    this.msgDE = new MessageHandlerDE(this);
+    this.configMessenger = new CustomConfigMessager( this );
+    this.msgDE = new MessageHandlerDE( this );
 
-    configMessenger.generateMessageFile();
-    configMessenger.getMessageFileConfiguration().options().copyDefaults(true);
-    configMessenger.setMessageFile();
+    registerConfigs();
 
-    registerCommandsToServer();
+    registerCommandsToServer( );
 
 
   }
 
   @Override
-  public void onDisable () {
+  public void onDisable ( ) {
 
   }
 
-  public void registerCommandsToServer() {
+  public void registerCommandsToServer ( ) {
 
-    CommandFramework cfw = new CommandFramework(this);
+    CommandFramework cfw = new CommandFramework( this );
 
-    cfw.registerCommands(new TimeCommand(this));
-    cfw.registerCommands(new SpawnCommand(this));
-    cfw.registerCommands(new SkullCommand(this));
-
-  }
-
-  public void registerListenerToServer() {
-
+    cfw.registerCommands( new TimeCommand( this ) );
+    cfw.registerCommands( new SpawnCommand( this ) );
+    cfw.registerCommands( new SkullCommand( this ) );
+    cfw.registerCommands( new GiveCommand( this ) );
 
   }
 
-  public void executeTableCreations () throws SQLException {
+  public void registerListenerToServer ( ) {
 
-    final String createSpawnTable   = "SPAWN (WORLDNAME varchar ( 32 ), POSITIONX varchar ( 20 ), POSITIONY varchar ( 3 ), POSITIONZ varchar ( 20 ), POSITIONPITCH varchar ( 10 ), POSITIONYAW varchar ( 10 ), PRIMARY KEY ( WORLDNAME ))";
 
-    CreateTableSQL.createTableSQL(createSpawnTable, CreateConnectionSQL.con);
+  }
+
+  public void registerConfigs() {
+
+    configMessenger.generateMessageFile( );
+    configMessenger.getMessageFileConfiguration( ).options( ).copyDefaults( true );
+    configMessenger.setMessageFile( );
+
+  }
+
+  public void executeTableCreations ( ) throws SQLException {
+
+    final String createSpawnTable = "SPAWN (WORLDNAME varchar ( 32 ), POSITIONX varchar ( 20 ), POSITIONY varchar ( 3 ), POSITIONZ varchar ( 20 ), POSITIONPITCH varchar ( 10 ), POSITIONYAW varchar ( 10 ), PRIMARY KEY ( WORLDNAME ))";
+
+    CreateTableSQL.createTableSQL( createSpawnTable, CreateConnectionSQL.con );
 
   }
 
 
-  public CustomConfigMessager getConfigMessenger() {
+  public CustomConfigMessager getConfigMessenger ( ) {
     return configMessenger;
   }
 
-  public MessageHandlerDE getMsgDE() {
+  public MessageHandlerDE getMsgDE ( ) {
     return msgDE;
   }
 }

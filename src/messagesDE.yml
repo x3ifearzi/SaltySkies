@@ -202,7 +202,15 @@ messages              :
 
     itemExists            : §7 Der Gegenstand §f§l» §c%string §f§l« wurde dir §f§l» §c%intx §f§l« in dein Inventar gelegt.
 
-    giveItemToPlayer      : §7 Der Gegenstand §f§l» §c%string §f§l« wurde dem Spieler §f§l» §c%target §f§l« §f§l» §c%intx §f§l« in das Inventar gelegt.
+    giveItemToTarget      : §7 Der Gegenstand §f§l» §c%string §f§l« wurde dem Spieler §f§l» §c%target §f§l« §f§l» §c%intx §f§l« in das Inventar gelegt.
+
+    syntax                : §4 [SYNTAX] §c /give <item> [<amount>] [<player>]
+
+    notEnoughSpaceInv     : §7 Du hast nicht genügend Platz in deinem Inventar, um diesen Gegenstand erhalten zu können.
+
+    notEnoughSpaceInvTarg : §7 Der Spieler %target hat nicht genügend Platz in seinem Inventar, der Spieler kann keine Gegenstände erhalten.
+
+    regex                 : §7 Du darfst nur folgende Zeichen vewenden\U+003A §f'§ca-z§f'§7, §f'§cA-Z§f'§7, §f'§c_§f'§7.
 
   regex                 :
 
