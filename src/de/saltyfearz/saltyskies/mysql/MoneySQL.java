@@ -19,7 +19,7 @@ public class MoneySQL {
 
     final String createMoneyTable = "BALANCE ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, TOKENS double, PRIMARY KEY ( ID ), FOREIGN KEY ( PLAYERUUID ) REFERENCES PLAYERDATA ( PLAYERUUID ));";
 
-    CreateTableSQL.createTableSQL(createMoneyTable, con);
+    CreateTableSQL.createTableSQL(createMoneyTable);
 
   }
 }

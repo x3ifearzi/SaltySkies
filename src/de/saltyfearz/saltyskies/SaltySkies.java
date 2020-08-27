@@ -16,7 +16,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import org.bukkit.Bukkit;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -44,6 +43,7 @@ public class SaltySkies extends JavaPlugin {
 
     registerConfigs( );
 
+    registerListenerToServer( );
     registerCommandsToServer( );
 
 
@@ -85,13 +85,13 @@ public class SaltySkies extends JavaPlugin {
 
     final String createSpawnTable = "SPAWN (WORLDNAME varchar ( 32 ), POSITIONX varchar ( 20 ), POSITIONY varchar ( 3 ), POSITIONZ varchar ( 20 ), POSITIONPITCH varchar ( 10 ), POSITIONYAW varchar ( 10 ), PRIMARY KEY ( WORLDNAME ))";
 
-    final String createPlayerTable = "PLAYERDATA (PLAYERUUID varhcar ( 48 ), PLAYERNAME varchar ( 16 ), IP varchar ( 16 ), PRIMARY KEY ( PLAYERUUID ));";
+    final String createPlayerTable = "PLAYERDATA (PLAYERUUID varchar ( 48 ), PLAYERNAME varchar ( 16 ), IP varchar ( 16 ), PRIMARY KEY ( PLAYERUUID ));";
 
     final String createPlayerPunishTable = "PLAYERPUNISH ( ID int (255) NOT NULL AUTO_INCREMENT, IS_BANNED boolean, IS_BANNED_UNTIL bigint, IS_MUTED boolean, IS_MUTED_UNTIL bigint, PRIMARY KEY ( ID ), FOREIGN KEY ( PLAYERUUID ) REFERENCES PLAYERDATA ( PLAYERUUID ));";
 
-    CreateTableSQL.createTableSQL( createSpawnTable, CreateConnectionSQL.con );
-    CreateTableSQL.createTableSQL( createPlayerTable, CreateConnectionSQL.con );
-    CreateTableSQL.createTableSQL( createPlayerPunishTable, CreateConnectionSQL.con );
+    CreateTableSQL.createTableSQL( createSpawnTable );
+    CreateTableSQL.createTableSQL( createPlayerTable );
+    //CreateTableSQL.createTableSQL( createPlayerPunishTable );
 
   }
 

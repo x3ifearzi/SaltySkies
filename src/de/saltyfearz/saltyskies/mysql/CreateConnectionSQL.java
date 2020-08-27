@@ -1,7 +1,5 @@
 package de.saltyfearz.saltyskies.mysql;
 
-import static de.saltyfearz.saltyskies.mysql.PlayerSQL.executePlayerSQL;
-
 import de.saltyfearz.saltyskies.SaltySkies;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -51,11 +49,6 @@ public class CreateConnectionSQL {
       exc.printStackTrace();
 
     }
-  }
-
-  public static void startSQLQueryies () throws SQLException {
-    executePlayerSQL();
-
   }
 
   public static Connection getConnection () { return con; }

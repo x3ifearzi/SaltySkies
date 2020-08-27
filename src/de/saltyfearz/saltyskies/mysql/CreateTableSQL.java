@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class CreateTableSQL {
 
-  public static void createTableSQL (final String query, final Connection con ) throws SQLException {
+  public static void createTableSQL (final String query) throws SQLException {
 
-    PreparedStatement pS = con.prepareStatement( "CREATE TABLE IF NOT EXISTS " + query );
+    PreparedStatement pS = CreateConnectionSQL.getConnection().prepareStatement( "CREATE TABLE IF NOT EXISTS " + query );
 
     pS.executeUpdate();
 

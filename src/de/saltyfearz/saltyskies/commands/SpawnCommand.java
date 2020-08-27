@@ -79,7 +79,7 @@ public class SpawnCommand {
 
     if (arg.length == 0) {
 
-      player.teleport( new Location ( world, x, y, z, yaw, pitch ));
+      player.teleport( new Location ( world, x, y, z, pitch, yaw ));
       player.sendMessage(plugin.getMsgDE().getMessageSuccessDE( "spawn-command", "spawntp"));
 
     } else {
@@ -94,7 +94,7 @@ public class SpawnCommand {
       }
 
       target.teleport( new Location ( world, x, y, z, yaw, pitch ));
-      target.sendMessage(plugin.getMsgDE().getMessageInfoDE( "spawn-command", "spawntp"));
+      target.sendMessage(plugin.getMsgDE().getMessageInfoDE( "system", "spawntp"));
 
     }
 
