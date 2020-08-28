@@ -2,13 +2,11 @@ package de.saltyfearz.saltyskies;
 
 import de.minnymin.command.Command;
 import de.minnymin.command.CommandFramework;
-import de.saltyfearz.saltyskies.commands.GiveCommand;
-import de.saltyfearz.saltyskies.commands.SkullCommand;
-import de.saltyfearz.saltyskies.commands.SpawnCommand;
-import de.saltyfearz.saltyskies.commands.TimeCommand;
+import de.saltyfearz.saltyskies.commands.*;
 import de.saltyfearz.saltyskies.configs.CustomConfigMessager;
 import de.saltyfearz.saltyskies.events.chatevents.PlayerChatEvent;
 import de.saltyfearz.saltyskies.events.joinevents.FirstJoinEvent;
+import de.saltyfearz.saltyskies.events.playerbuildevents.PlayerBuildEvent;
 import de.saltyfearz.saltyskies.handler.chathandler.MessageHandlerDE;
 import de.saltyfearz.saltyskies.mysql.CreateConnectionSQL;
 import de.saltyfearz.saltyskies.mysql.CreateTableSQL;
@@ -62,6 +60,8 @@ public class SaltySkies extends JavaPlugin {
     cfw.registerCommands( new SpawnCommand( this ) );
     cfw.registerCommands( new SkullCommand( this ) );
     cfw.registerCommands( new GiveCommand( this ) );
+    cfw.registerCommands( new MoneyCommand( this ) );
+    cfw.registerCommands( new BuildCommand( this ) );
 
   }
 
@@ -71,6 +71,7 @@ public class SaltySkies extends JavaPlugin {
 
     plManager.registerEvents( new PlayerChatEvent( ), this );
     plManager.registerEvents( new FirstJoinEvent( this ), this );
+    plManager.registerEvents( new PlayerBuildEvent(), this );
   }
 
   public void registerConfigs ( ) {
@@ -85,13 +86,16 @@ public class SaltySkies extends JavaPlugin {
 
     final String createSpawnTable = "SPAWN (WORLDNAME varchar ( 32 ), POSITIONX varchar ( 20 ), POSITIONY varchar ( 3 ), POSITIONZ varchar ( 20 ), POSITIONPITCH varchar ( 10 ), POSITIONYAW varchar ( 10 ), PRIMARY KEY ( WORLDNAME ))";
 
-    final String createPlayerTable = "PLAYERDATA (PLAYERUUID varhcar ( 48 ), PLAYERNAME varchar ( 16 ), IP varchar ( 16 ), PRIMARY KEY ( PLAYERUUID ));";
+    final String createPlayerTable = "PLAYERDATA (PLAYERUUID varchar ( 48 ), PLAYERNAME varchar ( 16 ), IP varchar ( 16 ), PRIMARY KEY ( PLAYERUUID ));";
 
-    final String createPlayerPunishTable = "PLAYERPUNISH ( ID int (255) NOT NULL AUTO_INCREMENT, IS_BANNED boolean, IS_BANNED_UNTIL bigint, IS_MUTED boolean, IS_MUTED_UNTIL bigint, PRIMARY KEY ( ID ), FOREIGN KEY ( PLAYERUUID ) REFERENCES PLAYERDATA ( PLAYERUUID ));";
+    final String createPlayerPunishTable = "PLAYERPUNISH ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, IS_BANNED boolean, IS_BANNED_UNTIL bigint, IS_MUTED boolean, IS_MUTED_UNTIL bigint, PRIMARY KEY ( ID ), FOREIGN KEY ( PLAYERUUID ) REFERENCES PLAYERDATA ( PLAYERUUID ));";
 
-    CreateTableSQL.createTableSQL( createSpawnTable, CreateConnectionSQL.con );
-    CreateTableSQL.createTableSQL( createPlayerTable, CreateConnectionSQL.con );
-    CreateTableSQL.createTableSQL( createPlayerPunishTable, CreateConnectionSQL.con );
+    final String createPlayerMoneyTable = "PLAYERMONEY ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, MONEY double, FOREIGN KEY ( PLAYERUUID ) REFERENCES PLAYERDATA ( PLAYERUUID ));";
+
+    CreateTableSQL.createTableSQL( createSpawnTable, CreateConnectionSQL.getConnection() );
+    CreateTableSQL.createTableSQL( createPlayerTable, CreateConnectionSQL.getConnection() );
+    CreateTableSQL.createTableSQL( createPlayerPunishTable, CreateConnectionSQL.getConnection() );
+    CreateTableSQL.createTableSQL( createPlayerMoneyTable, CreateConnectionSQL.getConnection() );
 
   }
 

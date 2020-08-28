@@ -68,7 +68,7 @@ public class FirstJoinEvent implements Listener {
     player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "system", "loadingData" ) );
 
     setPlayerData( player );
-    //TODO SETMONEYQUERY FOR PLAYER
+    setPlayerMoney( player );
 
     player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "system", "finishedLoadingData" ) );
 
@@ -80,7 +80,7 @@ public class FirstJoinEvent implements Listener {
 
     try {
 
-      ResultSet result = ResultSQL.resultSQL( searchPlayer, CreateConnectionSQL.con );
+      ResultSet result = ResultSQL.resultSQL( searchPlayer, CreateConnectionSQL.getConnection() );
 
       return result.next( );
 
@@ -93,11 +93,24 @@ public class FirstJoinEvent implements Listener {
 
   public void setPlayerData ( final Player player ) {
 
-    final String insertPlayer = "INSERT INTO PLAYERDATA ( PLAYERUUID, PLAYERNAME, IP ) VALUES ( " + player.getUniqueId().toString().toLowerCase() + ", " + player.getName().toLowerCase() + ", " + player.getAddress().toString() + " );";
+    final String insertPlayer = "INSERT INTO PLAYERDATA ( PLAYERUUID, PLAYERNAME, IP ) VALUES ( '" + player.getUniqueId().toString().toLowerCase() + "', '" + player.getName().toLowerCase() + "', '" + player.getAddress().toString() + "' );";
 
     try {
 
-      UpdateSQL.updateSQL( insertPlayer, CreateConnectionSQL.con );
+      UpdateSQL.updateSQL( insertPlayer, CreateConnectionSQL.getConnection() );
+
+    } catch ( SQLException exc ) {
+      //
+    }
+  }
+
+  public void setPlayerMoney ( final Player player ) {
+
+    final String insertPlayerMoney = "INSERT INTO PLAYERMONEY ( MONEY ) VALUES ( " + 1000.00 + " ) WHERE PLAYERUUID = " + player.getUniqueId( ).toString( ).toLowerCase( );
+
+    try {
+
+      UpdateSQL.updateSQL( insertPlayerMoney, CreateConnectionSQL.getConnection( ) );
 
     } catch ( SQLException exc ) {
       //

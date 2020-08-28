@@ -111,7 +111,7 @@ public class SpawnCommand {
 
     try {
 
-      return UpdateSQL.updateSQL(initializeSpawn, CreateConnectionSQL.con);
+      return UpdateSQL.updateSQL(initializeSpawn, CreateConnectionSQL.getConnection());
 
     } catch (SQLException exc) {
 
@@ -129,7 +129,7 @@ public class SpawnCommand {
 
     try {
 
-      ResultSet result = ResultSQL.resultSQL(fetchSpawn, CreateConnectionSQL.con);
+      ResultSet result = ResultSQL.resultSQL(fetchSpawn, CreateConnectionSQL.getConnection());
 
       if (result.next()) {
 

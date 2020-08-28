@@ -38,7 +38,25 @@ messages              :
 
     notEnoughFearzys      : §7 Du besitzt nicht genügend Fearzy's, um den Gegenstand kaufen zu können.
 
-    ownFearzys            : §7 Dein Fearystand beträgt aktuell §e %fearzys §7Fearzy's.
+    ownFearzys            : §7 Dein Fearzystand beträgt aktuell §e%fearzys §7Fearzy's.
+
+    targetFearzys         : §7 Der Fearzystand von dem Spieler %target beträgt §e%fearzys §7Fearzy's.
+
+    sendFearzySuccess     : §7 Du hast dem Spieler %target erfolgreich §e%fearzys §7Fearzy's überwiesen.
+
+    getFearzyFromSend     : §7 Du hast §e%fearzys §7Fearzy's von dem Spieler %sender erhalten.
+
+    setFearzyFromSend     : §7 Deine Fearzy's wurden von dem Spieler %sender auf §e%fearzys §7Fearzy's gesetzt.
+
+    setFearzyToTarget     : §7 Du hast die Fearzy's von dem Spieler %target auf §e%fearzys §7Fearzy's gesetzt.
+
+    noSelfPaying          : §7 Du kannst dir keine Fearzy's selber überweisen.
+
+    syntax-bal            : §4 [SYNTAX] §c /money [<player>]
+
+    syntax-pay            : §4 [SYNTAX] §c /pay <player> <fearzy>
+
+    regex                 : §7 Du darfst nur folgende Zeichen vewenden\U+003A §f'§c,§f'§7, §f'§c0-9§f'.
 
   shop-command          :
 
@@ -152,6 +170,8 @@ messages              :
 
     otherPlayerNoBuild    : §7 Der Spieler %target ist nicht mehr berechtigt zum bauen.
 
+    syntax                : §4 [SYNTAX] §c /build [<player>]
+
   vanish-command        :
 
     nowVanish             : §7 Du befindest dich nun im Unsichtbarkeitsmodus, kein Spieler kann dich mehr sehen.
@@ -247,3 +267,4 @@ messages              :
     exphunter             : §7 Du hast §cmehr Erfahrungslevel §7erhalten.
 
     fireball              : §7 Du hast einen Feuerball abgeschossen.
+
