@@ -194,7 +194,7 @@ messages              :
 
   spawn-command         :
 
-    spawnTeleport         : §7 Du wurdest zum Spawn teleportiert.
+    spawntp               : §7 Du wurdest zum Spawn teleportiert.
 
     spawnNotExists        : §7 Der Spawnpunkt wurde noch nicht gesetzt.
 

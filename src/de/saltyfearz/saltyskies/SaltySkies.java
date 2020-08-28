@@ -42,6 +42,7 @@ public class SaltySkies extends JavaPlugin {
 
     registerConfigs( );
 
+    registerListenerToServer( );
     registerCommandsToServer( );
 
 
@@ -71,7 +72,6 @@ public class SaltySkies extends JavaPlugin {
 
     plManager.registerEvents( new PlayerChatEvent( ), this );
     plManager.registerEvents( new FirstJoinEvent( this ), this );
-    plManager.registerEvents( new PlayerBuildEvent(), this );
   }
 
   public void registerConfigs ( ) {
@@ -88,7 +88,7 @@ public class SaltySkies extends JavaPlugin {
 
     final String createPlayerTable = "PLAYERDATA (PLAYERUUID varchar ( 48 ), PLAYERNAME varchar ( 16 ), IP varchar ( 16 ), PRIMARY KEY ( PLAYERUUID ));";
 
-    final String createPlayerPunishTable = "PLAYERPUNISH ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, IS_BANNED boolean, IS_BANNED_UNTIL bigint, IS_MUTED boolean, IS_MUTED_UNTIL bigint, PRIMARY KEY ( ID ), FOREIGN KEY ( PLAYERUUID ) REFERENCES PLAYERDATA ( PLAYERUUID ));";
+    final String createPlayerPunishTable = "PLAYERPUNISH ( ID int (255) NOT NULL AUTO_INCREMENT, IS_BANNED boolean, IS_BANNED_UNTIL bigint, IS_MUTED boolean, IS_MUTED_UNTIL bigint, PRIMARY KEY ( ID ), FOREIGN KEY ( PLAYERUUID ) REFERENCES PLAYERDATA ( PLAYERUUID ));";
 
     final String createPlayerMoneyTable = "PLAYERMONEY ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, MONEY double, FOREIGN KEY ( PLAYERUUID ) REFERENCES PLAYERDATA ( PLAYERUUID ));";
 
