@@ -1,20 +1,17 @@
 package de.saltyfearz.saltyskies;
 
-import de.minnymin.command.Command;
 import de.minnymin.command.CommandFramework;
 import de.saltyfearz.saltyskies.commands.*;
 import de.saltyfearz.saltyskies.configs.CustomConfigMessager;
 import de.saltyfearz.saltyskies.events.chatevents.PlayerChatEvent;
 import de.saltyfearz.saltyskies.events.joinevents.FirstJoinEvent;
-import de.saltyfearz.saltyskies.events.playerbuildevents.PlayerBuildEvent;
 import de.saltyfearz.saltyskies.handler.chathandler.MessageHandlerDE;
 import de.saltyfearz.saltyskies.mysql.CreateConnectionSQL;
 import de.saltyfearz.saltyskies.mysql.CreateTableSQL;
-import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
 
 import org.bukkit.Bukkit;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -63,6 +60,7 @@ public class SaltySkies extends JavaPlugin {
     cfw.registerCommands( new GiveCommand( this ) );
     cfw.registerCommands( new MoneyCommand( this ) );
     cfw.registerCommands( new BuildCommand( this ) );
+    cfw.registerCommands( new ClearInventoryCommand( this ));
 
   }
 

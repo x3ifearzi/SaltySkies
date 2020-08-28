@@ -268,3 +268,12 @@ messages              :
 
     fireball              : §7 Du hast einen Feuerball abgeschossen.
 
+  clearinv-command      :
+
+    invClearTarget        : §7 Dein Inventar wurde von dem Spieler %sender geleert.
+
+    invClearToTarget      : §7 Du hast das Inventar von dem Spieler %sender erfolgreich geleert.
+
+    invClear              : §7 Du hast dein Inventar erfolgreich geleert.
+
+    syntax                : §4 [SYNTAX] §c /clearinventory [<player>]
