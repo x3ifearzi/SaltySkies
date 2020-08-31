@@ -20,11 +20,15 @@ messages              :
 
     healOther             : §7 Du hast den Spieler %target erfolgreich geheilt.
 
+    syntax                : §4 [SYNTAX] §c /heal [<player>]
+
   feed-command          :
 
     feed                  : §7 Dein Hunger wurde gestillt.
 
     feedOther             : §7 Der Hunger wurde von dem Spieler %target erfolgreich gestillt.
+
+    syntax                : §4 [SYNTAX] §c /feed [<player>]
 
   item-in-hand          :
 

@@ -48,6 +48,8 @@ public class SaltySkies extends JavaPlugin {
   @Override
   public void onDisable ( ) {
 
+    CreateConnectionSQL.disconnect();
+
   }
 
   public void registerCommandsToServer ( ) {
@@ -60,7 +62,8 @@ public class SaltySkies extends JavaPlugin {
     cfw.registerCommands( new GiveCommand( this ) );
     cfw.registerCommands( new MoneyCommand( this ) );
     cfw.registerCommands( new BuildCommand( this ) );
-    cfw.registerCommands( new ClearInventoryCommand( this ));
+    cfw.registerCommands( new ClearInventoryCommand( this ) );
+    cfw.registerCommands( new MedicCommand( this ) );
 
   }
 

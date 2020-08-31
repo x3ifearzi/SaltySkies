@@ -27,12 +27,20 @@ public class CustomEnchantments {
         registerEnchantments( SMELTER );
         registerEnchantments( FIREBALL );
 
+        addConflictsWith();
+
         enchantList.add( TELEPATHY );
         enchantList.add( HEMORRHAGE );
         enchantList.add( EXPLOSION );
         enchantList.add( EXHAUST );
         enchantList.add( EXPHUNTER );
         enchantList.add( SMELTER );
+    }
+
+    public static void addConflictsWith ( ) {
+
+        TELEPATHY.conflictsWith( SMELTER );
+
     }
 
     public static void registerEnchantments ( Enchantment enchantment ) {
