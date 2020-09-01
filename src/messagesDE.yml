@@ -272,6 +272,8 @@ messages              :
 
     fireball              : §7 Du hast einen Feuerball abgeschossen.
 
+    syntax                : §4 [SYNTAX] §c /enchantplus <enchantment> [<level>]
+
   clearinv-command      :
 
     invClearTarget        : §7 Dein Inventar wurde von dem Spieler %sender geleert.
