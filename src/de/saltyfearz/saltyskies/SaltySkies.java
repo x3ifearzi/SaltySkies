@@ -64,6 +64,7 @@ public class SaltySkies extends JavaPlugin {
     cfw.registerCommands( new BuildCommand( this ) );
     cfw.registerCommands( new ClearInventoryCommand( this ) );
     cfw.registerCommands( new MedicCommand( this ) );
+    cfw.registerCommands( new EnchantCommand( this ));
 
   }
 
