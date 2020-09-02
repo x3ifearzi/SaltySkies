@@ -5,6 +5,7 @@ import de.saltyfearz.saltyskies.commands.SpawnCommand;
 import de.saltyfearz.saltyskies.mysql.CreateConnectionSQL;
 import de.saltyfearz.saltyskies.mysql.ResultSQL;
 import de.saltyfearz.saltyskies.mysql.UpdateSQL;
+import de.saltyfearz.saltyskies.utils.ReplaceHolder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -120,6 +121,8 @@ public class FirstJoinEvent implements Listener {
   @EventHandler
   public void onPlayerJoin ( PlayerJoinEvent event ) {
 
-    event.setJoinMessage( plugin.getMsgDE().getMessageInfoDE( "system", "joinmessage" ) );
+    Player target = event.getPlayer();
+
+    event.setJoinMessage( ReplaceHolder.replaceHolderTarget( target, plugin.getMsgDE().getMessageInfoDE( "system", "joinmessage" ) ) );
   }
 }

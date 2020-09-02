@@ -6,6 +6,7 @@ import de.saltyfearz.saltyskies.SaltySkies;
 import de.saltyfearz.saltyskies.mysql.CreateConnectionSQL;
 import de.saltyfearz.saltyskies.mysql.ResultSQL;
 import de.saltyfearz.saltyskies.mysql.UpdateSQL;
+import de.saltyfearz.saltyskies.utils.ReplaceHolder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -36,7 +37,7 @@ public class MoneyCommand {
 
         if ( arg.length == 0 ) {
 
-            player.sendMessage( plugin.getMsgDE( ).getMessageInfoDE( "fearzy-system", "ownFearzys" ) );
+            player.sendMessage( ReplaceHolder.replaceHolderOwnFearzys( getFearzy( player ), plugin.getMsgDE( ).getMessageInfoDE( "fearzy-system", "ownFearzys" ) ) );
 
         } else {
 
@@ -48,7 +49,7 @@ public class MoneyCommand {
                 return;
             }
 
-            player.sendMessage( plugin.getMsgDE( ).getMessageInfoDE( "fearzy-system", "targetFearzys" ) );
+            player.sendMessage( ReplaceHolder.replaceHolderTargetFearzys( getFearzy( target ), target, plugin.getMsgDE( ).getMessageInfoDE( "fearzy-system", "targetFearzys" ) ) );
         }
     }
 
@@ -102,7 +103,7 @@ public class MoneyCommand {
 
         addFearzys( player, Double.parseDouble( arg[ 1 ] ) );
 
-        player.sendMessage( plugin.getMsgDE( ).getMessageSuccessDE( "fearzy-system", "sendFearzySuccess" ) );
+        player.sendMessage( ReplaceHolder.replaceHolderTargetFearzys( Double.parseDouble( arg[ 1 ] ), target, plugin.getMsgDE( ).getMessageSuccessDE( "fearzy-system", "sendFearzySuccess" ) ) );
 
         target.sendMessage( plugin.getMsgDE( ).getMessageInfoDE( "fearzy-system", "getFearzyFromSend" ) );
 

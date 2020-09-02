@@ -3,6 +3,7 @@ package de.saltyfearz.saltyskies.commands;
 import de.minnymin.command.Command;
 import de.minnymin.command.CommandArgs;
 import de.saltyfearz.saltyskies.SaltySkies;
+import de.saltyfearz.saltyskies.utils.ReplaceHolder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -52,11 +53,11 @@ public class BuildCommand {
 
             build.add( target.getUniqueId() );
 
-            target.sendMessage( plugin.getMsgDE().getMessageInfoDE( "build-command", "build" ) );
+            target.sendMessage( ReplaceHolder.replaceHolderTarget( target, plugin.getMsgDE().getMessageInfoDE( "build-command", "build" ) ) );
 
             if ( !player.equals( target ) ) {
 
-                player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "build-command", "otherPlayerBuild" ) );
+                player.sendMessage( ReplaceHolder.replaceHolderTarget( target, plugin.getMsgDE().getMessageInfoDE( "build-command", "otherPlayerBuild" ) ) );
 
             }
 
@@ -68,7 +69,7 @@ public class BuildCommand {
 
             if ( !player.equals( target ) ) {
 
-                player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "build-command", "otherPlayerNoBuild" ) );
+                player.sendMessage( ReplaceHolder.replaceHolderTarget( target, plugin.getMsgDE().getMessageInfoDE( "build-command", "otherPlayerNoBuild" ) ) );
 
             }
         }
