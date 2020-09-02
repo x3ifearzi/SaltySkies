@@ -21,4 +21,10 @@ public class ReplaceHolder {
         return message.replace( "%fearzys", String.valueOf( fearzys ) ).replace( "%target", target.getName() );
 
     }
+
+    public static String replaceHolderSenderFearzys ( final double fearzys, final Player sender, final String message ) {
+
+        return message.replace( "%fearzys", String.valueOf( fearzys ) ).replace( "%sender", sender.getName() );
+
+    }
 }

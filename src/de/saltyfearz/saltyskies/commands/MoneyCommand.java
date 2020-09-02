@@ -105,7 +105,7 @@ public class MoneyCommand {
 
         player.sendMessage( ReplaceHolder.replaceHolderTargetFearzys( Double.parseDouble( arg[ 1 ] ), target, plugin.getMsgDE( ).getMessageSuccessDE( "fearzy-system", "sendFearzySuccess" ) ) );
 
-        target.sendMessage( plugin.getMsgDE( ).getMessageInfoDE( "fearzy-system", "getFearzyFromSend" ) );
+        target.sendMessage( ReplaceHolder.replaceHolderSenderFearzys( Double.parseDouble( arg[ 1 ] ), player, plugin.getMsgDE( ).getMessageInfoDE( "fearzy-system", "getFearzyFromSend" ) ) );
 
     }
 
@@ -134,9 +134,9 @@ public class MoneyCommand {
 
         setFearzys( target, Double.parseDouble( arg[1] ) );
 
-        target.sendMessage( plugin.getMsgDE().getMessageInfoDE( "fearzy-system", "setFearzyFromSend" ) );
+        target.sendMessage( ReplaceHolder.replaceHolderSenderFearzys( Double.parseDouble( arg[ 1 ] ), player, plugin.getMsgDE().getMessageInfoDE( "fearzy-system", "setFearzyFromSend" ) ) );
 
-        player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "fearzy-system", "setFearzyToTarget" ) );
+        player.sendMessage( ReplaceHolder.replaceHolderTargetFearzys( Double.parseDouble( arg[ 1 ] ), player, plugin.getMsgDE().getMessageSuccessDE( "fearzy-system", "setFearzyToTarget" ) ) );
 
 
     }
