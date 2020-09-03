@@ -3,6 +3,7 @@ package de.saltyfearz.saltyskies;
 import de.minnymin.command.CommandFramework;
 import de.saltyfearz.saltyskies.commands.*;
 import de.saltyfearz.saltyskies.configs.CustomConfigMessager;
+import de.saltyfearz.saltyskies.configs.CustomConfigRegions;
 import de.saltyfearz.saltyskies.enchantments.CustomEnchantments;
 import de.saltyfearz.saltyskies.enchantments.ExplosionEvent;
 import de.saltyfearz.saltyskies.enchantments.HemorrhageEvent;
@@ -24,6 +25,8 @@ public class SaltySkies extends JavaPlugin {
   public static SaltySkies instance;
 
   private CustomConfigMessager configMessenger;
+  private CustomConfigRegions configRegions;
+
   private MessageHandlerDE msgDE;
 
   @Override
@@ -41,6 +44,8 @@ public class SaltySkies extends JavaPlugin {
     }
 
     this.configMessenger = new CustomConfigMessager( this );
+    this.configRegions = new CustomConfigRegions( this );
+
     this.msgDE = new MessageHandlerDE( this );
 
     registerConfigs( );
@@ -71,6 +76,7 @@ public class SaltySkies extends JavaPlugin {
     cfw.registerCommands( new ClearInventoryCommand( this ) );
     cfw.registerCommands( new MedicCommand( this ) );
     cfw.registerCommands( new EnchantCommand( this ));
+    cfw.registerCommands( new WorldGuardCommand( this ) );
 
   }
 
@@ -91,6 +97,10 @@ public class SaltySkies extends JavaPlugin {
     configMessenger.generateMessageFile( );
     configMessenger.getMessageFileConfiguration( ).options( ).copyDefaults( true );
     configMessenger.setMessageFile( );
+
+    configRegions.generateRegionsFile();
+    configRegions.getRegionsFileConfiguration().options().copyDefaults( true );
+    configRegions.setRegionsFile();
 
   }
 
@@ -115,6 +125,8 @@ public class SaltySkies extends JavaPlugin {
   public CustomConfigMessager getConfigMessenger ( ) {
     return configMessenger;
   }
+
+  public CustomConfigRegions getConfigRegions ( ) { return configRegions; }
 
   public MessageHandlerDE getMsgDE ( ) {
     return msgDE;
