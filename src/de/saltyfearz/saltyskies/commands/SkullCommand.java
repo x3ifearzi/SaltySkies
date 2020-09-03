@@ -5,6 +5,7 @@ import de.minnymin.command.CommandArgs;
 import de.saltyfearz.saltyskies.SaltySkies;
 import de.saltyfearz.saltyskies.handler.chathandler.MessageHandlerDE;
 import de.saltyfearz.saltyskies.skull.SkullCreator;
+import de.saltyfearz.saltyskies.utils.ReplaceHolder;
 import org.bukkit.entity.Player;
 
 public class SkullCommand {
@@ -16,18 +17,18 @@ public class SkullCommand {
   @Command(name = "skull", aliases = {"head", "kopf"}, description = "§6Gebe dir einen beliebigen Kopf.", usage = "§6/skull [<text>]")
   public void createSkull(CommandArgs args) {
 
-    Player player = args.getPlayer();
+    Player player = args.getPlayer( );
 
-    String[] arg = args.getArgs();
+    String[] arg = args.getArgs( );
 
-    if (player.getInventory()
-              .firstEmpty() == -1) {
-      player.sendMessage(plugin.getMsgDE().getMessageInfoDE( "skull-command", "notEnoughSpaceInv" ));
+    if ( player.getInventory( )
+            .firstEmpty( ) == -1 ) {
+      player.sendMessage( plugin.getMsgDE( ).getMessageInfoDE( "skull-command", "notEnoughSpaceInv" ) );
       return;
     }
 
-      player.getInventory().setItemInMainHand ( SkullCreator.itemWithName ( SkullCreator.createSkull(), arg[0] ));
+    player.getInventory( ).setItemInMainHand( SkullCreator.itemWithName( SkullCreator.createSkull( ), arg[ 0 ] ) );
 
-    player.sendMessage(plugin.getMsgDE().getMessageSuccessDE("skull-command", "successGaveSkull"));
+    player.sendMessage( ReplaceHolder.replaceHolderString( arg[ 0 ], plugin.getMsgDE( ).getMessageSuccessDE( "skull-command", "successGaveSkull" ) ) );
   }
 }

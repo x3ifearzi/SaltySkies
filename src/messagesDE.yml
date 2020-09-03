@@ -278,7 +278,7 @@ messages              :
 
     invClearTarget        : §7 Dein Inventar wurde von dem Spieler %sender geleert.
 
-    invClearToTarget      : §7 Du hast das Inventar von dem Spieler %sender erfolgreich geleert.
+    invClearToTarget      : §7 Du hast das Inventar von dem Spieler %target erfolgreich geleert.
 
     invClear              : §7 Du hast dein Inventar erfolgreich geleert.
 

@@ -3,6 +3,7 @@ package de.saltyfearz.saltyskies.commands;
 import de.minnymin.command.Command;
 import de.minnymin.command.CommandArgs;
 import de.saltyfearz.saltyskies.SaltySkies;
+import de.saltyfearz.saltyskies.utils.ReplaceHolder;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
@@ -50,7 +51,7 @@ public class MedicCommand {
 
             target.sendMessage( plugin.getMsgDE().getMessageInfoDE( "heal-command", "heal" ) );
 
-            player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "heal-command", "healOther" ) );
+            player.sendMessage( ReplaceHolder.replaceHolderTarget( target, plugin.getMsgDE().getMessageSuccessDE( "heal-command", "healOther" ) ) );
 
         }
     }
@@ -90,7 +91,7 @@ public class MedicCommand {
 
             target.sendMessage( plugin.getMsgDE().getMessageInfoDE( "feed-command", "feed" ) );
 
-            player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "feed-command", "feedOther" ) );
+            player.sendMessage( ReplaceHolder.replaceHolderTarget( target, plugin.getMsgDE().getMessageSuccessDE( "feed-command", "feedOther" ) ) );
 
         }
     }

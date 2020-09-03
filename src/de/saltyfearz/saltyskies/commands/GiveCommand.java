@@ -3,6 +3,7 @@ package de.saltyfearz.saltyskies.commands;
 import de.minnymin.command.Command;
 import de.minnymin.command.CommandArgs;
 import de.saltyfearz.saltyskies.SaltySkies;
+import de.saltyfearz.saltyskies.utils.ReplaceHolder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -36,7 +37,7 @@ public class GiveCommand {
 
                 if ( isItemValid( arg[ 0 ].toUpperCase( ) ) ) {
 
-                    player.sendMessage( plugin.getMsgDE( ).getMessageErrorDE( "give-command", "itemNotExists" ) );
+                    player.sendMessage( ReplaceHolder.replaceHolderString( arg[ 0 ], plugin.getMsgDE( ).getMessageErrorDE( "give-command", "itemNotExists" ) ) );
                     return;
 
                 }
@@ -49,7 +50,7 @@ public class GiveCommand {
                 }
 
                 player.getInventory( ).addItem( new ItemStack( material ) );
-                player.sendMessage( plugin.getMsgDE( ).getMessageSuccessDE( "give-command", "itemExists" ) );
+                player.sendMessage( ReplaceHolder.replaceHolderStringInt( arg[ 0 ], "1", plugin.getMsgDE( ).getMessageSuccessDE( "give-command", "itemExists" ) ) );
 
             } else {
 
@@ -73,11 +74,10 @@ public class GiveCommand {
                 iS.setAmount( Integer.parseInt( arg[ 1 ] ) );
 
                 player.getInventory( ).addItem( new ItemStack( material ) );
-                player.sendMessage( plugin.getMsgDE( ).getMessageSuccessDE( "give-command", "itemExists" ) );
+                player.sendMessage( ReplaceHolder.replaceHolderStringInt( arg[ 0 ], arg[ 1 ], plugin.getMsgDE( ).getMessageSuccessDE( "give-command", "itemExists" ) ) );
 
             } else {
 
-                player.sendMessage( plugin.getMsgDE( ).getMessageErrorDE( "regex", "regex" ) );
                 player.sendMessage( plugin.getMsgDE( ).getMessageErrorDE( "give-command", "syntax" ) );
 
             }
@@ -87,7 +87,7 @@ public class GiveCommand {
 
                 if ( isItemValid( arg[ 0 ].toUpperCase( ) ) ) {
 
-                    player.sendMessage( plugin.getMsgDE( ).getMessageErrorDE( "give-command", "itemNotExists" ) );
+                    player.sendMessage( ReplaceHolder.replaceHolderString( arg[ 0 ], plugin.getMsgDE( ).getMessageErrorDE( "give-command", "itemNotExists" ) ) );
                     return;
 
                 }
@@ -107,15 +107,15 @@ public class GiveCommand {
 
                 if ( target.getInventory( ).firstEmpty( ) == -1 ) {
 
-                    player.sendMessage( plugin.getMsgDE( ).getMessageInfoDE( "give-command", "notEnoughSpaceInvTarg" ) );
+                    player.sendMessage( ReplaceHolder.replaceHolderTarget( target, plugin.getMsgDE( ).getMessageInfoDE( "give-command", "notEnoughSpaceInvTarg" ) ) );
                     return;
 
                 }
 
                 target.getInventory( ).addItem( new ItemStack( material ) );
-                target.sendMessage( plugin.getMsgDE( ).getMessageInfoDE( "give-command", "itemExists" ) );
+                target.sendMessage( ReplaceHolder.replaceHolderStringInt( arg[ 0 ], arg[ 1 ], plugin.getMsgDE( ).getMessageInfoDE( "give-command", "itemExists" ) ) );
 
-                player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "give-command", "giveItemToTarget" ));
+                player.sendMessage( ReplaceHolder.replaceHolderStringIntTarget( arg[ 0 ], arg[ 1 ], target, plugin.getMsgDE().getMessageSuccessDE( "give-command", "giveItemToTarget" ) ) );
 
             }
         }

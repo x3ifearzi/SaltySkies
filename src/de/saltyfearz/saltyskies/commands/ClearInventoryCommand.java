@@ -3,6 +3,7 @@ package de.saltyfearz.saltyskies.commands;
 import de.minnymin.command.Command;
 import de.minnymin.command.CommandArgs;
 import de.saltyfearz.saltyskies.SaltySkies;
+import de.saltyfearz.saltyskies.utils.ReplaceHolder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -39,8 +40,8 @@ public class ClearInventoryCommand {
 
             target.getInventory().clear();
 
-            target.sendMessage( plugin.getMsgDE().getMessageInfoDE( "clearinv-command", "invClearTarget" ) );
-            player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "clearinv-command", "invClearToTarget" ) );
+            target.sendMessage( ReplaceHolder.replaceHolderSender( player, plugin.getMsgDE().getMessageInfoDE( "clearinv-command", "invClearTarget" ) ) );
+            player.sendMessage( ReplaceHolder.replaceHolderTarget( target, plugin.getMsgDE().getMessageSuccessDE( "clearinv-command", "invClearToTarget" ) ) );
 
         } else {
 
