@@ -283,3 +283,21 @@ messages              :
     invClear              : §7 Du hast dein Inventar erfolgreich geleert.
 
     syntax                : §4 [SYNTAX] §c /clearinventory [<player>]
+
+  region-command        :
+
+    regionSuccessfully    : §7 Die Region %string wurde erfolgreich erstellt.
+
+    noRegionAvailable     : §7 Die Region konnte nicht erstellt werden, da keine Positionen gesetzt wurden.
+
+    pos1                  : §7 Die erste Position wurde gesetzt. ( X\U+003A %x, Y\U+003A %y, Z\U+003A %z )
+
+    pos2                  : §7 Die zweite Position wurde gesetzt. ( X\U+003A %x, Y\U+003A %y, Z\U+003A %z )
+
+    noBuildAllowed        : §7 Du darfst nicht in der Region von %regionowner Blöcke abbauen.
+
+    noPlaceAllowed        : §7 Du darfst nicht in der Region von %regionowner Blöcke plazieren.
+
+    syntax                : §4 [SYNTAX] §c /region <create> [<text>]
+
+    posSuccessfully       : §a [ERFOLG] §a /region <create> [<text>]

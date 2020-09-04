@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,7 +48,7 @@ public class CustomConfigRegions {
         reloadRegionsFile();
     }
 
-    public void addRegion( final Location loc1, final Location loc2 ) {
+    public void addRegion( final Location loc1, final Location loc2, final Player owner ) {
 
         final int regionID = regionsFileConfiguration.getKeys( false ).size();
 
@@ -61,15 +62,19 @@ public class CustomConfigRegions {
         regionsFileConfiguration.set( regionID + ".pos2.y", loc2.getBlockY() );
         regionsFileConfiguration.set( regionID + ".pos2.z", loc2.getBlockZ() );
 
+        regionsFileConfiguration.set( regionID + ".owner", owner.getUniqueId().toString() );
+
         setRegionsFile();
 
     }
 
     public void registerRegions( ) {
 
+        WorldGuardCommand command = new WorldGuardCommand( plugin );
+
         for ( int i = 0; i < regionsFileConfiguration.getKeys( false ).size(); i++ ) {
 
-            WorldGuardCommand.regions.add( new Cuboid( getLocation( i, "pos1" ), getLocation( i, "pos2" ) ) );
+            command.regions.add( new Cuboid( getLocation( i, "pos1" ), getLocation( i, "pos2" ) ) );
         }
     }
 

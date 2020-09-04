@@ -1,5 +1,6 @@
 package de.saltyfearz.saltyskies.utils;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class ReplaceHolder {
@@ -49,5 +50,24 @@ public class ReplaceHolder {
     public static String replaceHolderStringIntTarget ( final String string, final String amount, final Player target, final String message ) {
 
         return message.replace( "%string", string ).replace( "%int", amount ).replace( "%target", target.getName() );
+
+    }
+
+    public static String replaceHolderLocationXYZ ( final Location location, final String message ) {
+
+        final String x = String.valueOf( location.getX( ) );
+
+        final String y = String.valueOf( location.getY( ) );
+
+        final String z = String.valueOf( location.getZ( ) );
+
+        return message.replace( "%x", x) .replace( "%y", y).replace( "%z", z );
+
+    }
+
+    public static String replaceHolderRegionowner ( final String owner, final String message ) {
+
+        return message.replace( "%regionowner", owner );
+
     }
 }

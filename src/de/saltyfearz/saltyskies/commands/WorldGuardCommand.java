@@ -5,6 +5,7 @@ import de.minnymin.command.CommandArgs;
 import de.saltyfearz.saltyskies.SaltySkies;
 import de.saltyfearz.saltyskies.configs.CustomConfigRegions;
 import de.saltyfearz.saltyskies.regions.Cuboid;
+import de.saltyfearz.saltyskies.utils.ReplaceHolder;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -21,7 +22,7 @@ public class WorldGuardCommand {
 
     final private SaltySkies plugin;
 
-    public static ArrayList< Cuboid > regions = new ArrayList <>();
+    public ArrayList< Cuboid > regions = new ArrayList <>();
 
     public HashMap < Player, Location > pos1 = new HashMap <>();
 
@@ -38,7 +39,7 @@ public class WorldGuardCommand {
 
         if ( arg.length != 2 ) {
 
-            player.sendMessage( "§4ERROR" ); //TODO SYNTAX
+            player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "region-command", "syntax" ) ); //TODO SYNTAX
             return;
 
         }
@@ -51,11 +52,13 @@ public class WorldGuardCommand {
 
                 CustomConfigRegions configRegions = new CustomConfigRegions( plugin );
 
-                configRegions.addRegion( pos1.get( player ), pos2.get( player ) );
+                configRegions.addRegion( pos1.get( player ), pos2.get( player ), player );
+
+                player.sendMessage( ReplaceHolder.replaceHolderString( arg[ 1 ] == null ? "" : arg[ 1 ], plugin.getMsgDE().getMessageSuccessDE( "region-command", "regionSuccessfully" ) ) );
 
             } else {
 
-                player.sendMessage( "§4NOREGION" ); //TODO
+                player.sendMessage( plugin.getMsgDE().getMessageErrorDE( "region-command", "noRegionAvailable" ) );
 
             }
         }
@@ -85,20 +88,25 @@ public class WorldGuardCommand {
 
             if ( event.getAction() == Action.LEFT_CLICK_BLOCK ) {
 
+                event.setCancelled( true );
+
                 pos1.put( player, event.getClickedBlock( ).getLocation( ) );
 
-                player.sendMessage( "§4POS1: " + event.getClickedBlock().getLocation() ); //TODO MESSAGE
+                player.sendMessage( ReplaceHolder.replaceHolderLocationXYZ( event.getClickedBlock( ).getLocation( ), plugin.getMsgDE().getMessageInfoDE( "region-command", "pos1" ) ) );
 
             } else if ( event.getAction() == Action.RIGHT_CLICK_BLOCK ) {
 
                 pos2.put( player, event.getClickedBlock( ).getLocation( ) );
 
-                player.sendMessage( "§4POS2: " + event.getClickedBlock().getLocation() ); //TODO MESSAGE
+                player.sendMessage( ReplaceHolder.replaceHolderLocationXYZ( event.getClickedBlock( ).getLocation( ), plugin.getMsgDE().getMessageInfoDE( "region-command", "pos2" ) ) );
             }
 
             if ( pos1.containsKey( player ) && pos2.containsKey( player ) ) {
 
-                player.sendMessage( "§4POS1 + POS2 ERFOLGREICH" ); //TODO MESSAGE
+                player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "region-command", "posSuccessfully" ) );
+
+
+                plugin.getConfigRegions().registerRegions( );
 
             }
         }
@@ -107,11 +115,12 @@ public class WorldGuardCommand {
     @EventHandler
     public void onBreakInRegion ( BlockBreakEvent event ) {
 
+
         if ( isInRegion( event.getBlock( ).getLocation( ) ) ) {
 
             event.setCancelled( true );
 
-            event.getPlayer().sendMessage( "REGION NO BUILD" ); //TODO MESSAGE
+            event.getPlayer().sendMessage( plugin.getMsgDE().getMessageInfoDE( "region-command", "noBuildAllowed" ) ); //TODO SET OWNER
 
         }
     }
@@ -123,7 +132,8 @@ public class WorldGuardCommand {
 
             event.setCancelled( true );
 
-            event.getPlayer().sendMessage( "REGION NO PLACE" ); //TODO MESSAGE
+            event.getPlayer().sendMessage( plugin.getMsgDE().getMessageInfoDE( "region-command", "noPlaceAllowed" ) ); //TODO SET OWNER
+
 
         }
     }
