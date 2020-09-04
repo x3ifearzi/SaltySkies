@@ -52,36 +52,50 @@ public class CustomConfigRegions {
 
         final int regionID = regionsFileConfiguration.getKeys( false ).size();
 
-        regionsFileConfiguration.set( regionID + ".pos1.world", loc1.getWorld().getName() );
-        regionsFileConfiguration.set( regionID + ".pos1.x", loc1.getBlockX() );
-        regionsFileConfiguration.set( regionID + ".pos1.y", loc1.getBlockY() );
-        regionsFileConfiguration.set( regionID + ".pos1.z", loc1.getBlockZ() );
+        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos1.world", loc1.getWorld().getName() );
+        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos1.x", loc1.getBlockX() );
+        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos1.y", loc1.getBlockY() );
+        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos1.z", loc1.getBlockZ() );
 
-        regionsFileConfiguration.set( regionID + ".pos2.world", loc2.getWorld().getName() );
-        regionsFileConfiguration.set( regionID + ".pos2.x", loc2.getBlockX() );
-        regionsFileConfiguration.set( regionID + ".pos2.y", loc2.getBlockY() );
-        regionsFileConfiguration.set( regionID + ".pos2.z", loc2.getBlockZ() );
+        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos2.world", loc2.getWorld().getName() );
+        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos2.x", loc2.getBlockX() );
+        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos2.y", loc2.getBlockY() );
+        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos2.z", loc2.getBlockZ() );
 
-        regionsFileConfiguration.set( regionID + ".owner", owner.getUniqueId().toString() );
 
         setRegionsFile();
 
     }
 
-    public void registerRegions( ) {
+    public void registerRegions( final Player player ) {
 
         WorldGuardCommand command = new WorldGuardCommand( plugin );
 
         for ( int i = 0; i < regionsFileConfiguration.getKeys( false ).size(); i++ ) {
 
-            command.regions.add( new Cuboid( getLocation( i, "pos1" ), getLocation( i, "pos2" ) ) );
+            command.regions.add( new Cuboid( getLocation( player, "pos1" ), getLocation( player, "pos2" ) ) );
+
         }
     }
 
-    public Location getLocation ( final int regionID, final String name ) {
+    public Location getLocation ( final Player player, final String name ) {
 
-        return new Location( Bukkit.getWorld( Objects.requireNonNull( regionsFileConfiguration.getString( regionID + "." + name + ".world" ) ) ), regionsFileConfiguration.getDouble( regionID + "." + name + ".x"), regionsFileConfiguration.getDouble( regionID + "." + name + ".y"), regionsFileConfiguration.getDouble( regionID + "." + name + ".z") );
+        return new Location( Bukkit.getWorld( Objects.requireNonNull( regionsFileConfiguration.getString( player.getUniqueId().toString() + "." + name + ".world" ) ) ), regionsFileConfiguration.getDouble( player.getUniqueId().toString() + "." + name + ".x"), regionsFileConfiguration.getDouble( player.getUniqueId().toString() + "." + name + ".y"), regionsFileConfiguration.getDouble( player.getUniqueId().toString() + "." + name + ".z") );
 
+    }
+
+    public boolean isInRegion(final Location loc, final Location locA, final Location locB) {
+        double maxX = (Math.max(locA.getX(), locB.getX()));
+        double minX = (Math.min(locA.getX(), locB.getX()));
+
+        double maxY = (Math.max(locA.getY(), locB.getY()));
+        double minY = (Math.min(locA.getY(), locB.getY()));
+
+        if (loc.getX() <= maxX && loc.getX() >= minX) {
+            return loc.getY() <= maxY && loc.getY() >= minY;
+        }
+
+        return false;
     }
 
     public void setRegionsFile() {

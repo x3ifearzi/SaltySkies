@@ -1,7 +1,5 @@
 package de.saltyfearz.saltyskies.mysql;
 
-import static de.saltyfearz.saltyskies.mysql.PlayerSQL.executePlayerSQL;
-
 import de.saltyfearz.saltyskies.SaltySkies;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,10 +16,10 @@ public class CreateConnectionSQL {
   public static void connect () {
 
     //"45.95.52.50", "skypvp", "philtest", "JCtZG3FzYnqcNWyT"
-    String hostAddress = "45.95.52.50";
-    String database    = "vaince";
-    String username    = "vaince_login";
-    String password    = "vaince";
+    String hostAddress = "localhost";
+    String database    = "Vaincee";
+    String username    = "root";
+    String password    = "";
     int portAddress = 3306;
 
 
@@ -51,11 +49,6 @@ public class CreateConnectionSQL {
       exc.printStackTrace();
 
     }
-  }
-
-  public static void startSQLQueryies () throws SQLException {
-    executePlayerSQL();
-
   }
 
   public static Connection getConnection () { return con; }

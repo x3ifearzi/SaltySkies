@@ -105,8 +105,7 @@ public class WorldGuardCommand {
 
                 player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "region-command", "posSuccessfully" ) );
 
-
-                plugin.getConfigRegions().registerRegions( );
+                plugin.getConfigRegions().registerRegions( player );
 
             }
         }
@@ -116,7 +115,7 @@ public class WorldGuardCommand {
     public void onBreakInRegion ( BlockBreakEvent event ) {
 
 
-        if ( isInRegion( event.getBlock( ).getLocation( ) ) ) {
+        if ( plugin.getConfigRegions().isInRegion( event.getBlock().getLocation(), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos1"), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos2" ) ) ) {
 
             event.setCancelled( true );
 
@@ -128,7 +127,7 @@ public class WorldGuardCommand {
     @EventHandler
     public void onPlaceInRegion ( BlockPlaceEvent event ) {
 
-        if ( isInRegion( event.getBlock( ).getLocation() ) ) {
+        if ( plugin.getConfigRegions().isInRegion( event.getBlock().getLocation(), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos1"), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos2" ) ) ) {
 
             event.setCancelled( true );
 
