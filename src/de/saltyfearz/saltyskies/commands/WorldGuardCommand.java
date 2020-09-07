@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -40,7 +41,7 @@ public class WorldGuardCommand implements Listener {
 
         String[] arg = args.getArgs( );
 
-        if ( arg.length != 2 ) {
+        if ( arg.length != 1 ) {
 
             player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "region-command", "syntax" ) ); //TODO SYNTAX
             return;
@@ -67,22 +68,7 @@ public class WorldGuardCommand implements Listener {
         }
     }
 
-    public boolean isInRegion ( Location location ) {
-
-        for ( Cuboid cuboid : regions ) {
-
-            if ( cuboid.contains( location ) ) {
-
-                return true;
-
-            }
-        }
-
-        return false;
-
-    }
-
-    @EventHandler ( priority = EventPriority.HIGHEST )
+    @EventHandler
     public void onDefine ( PlayerInteractEvent event ) {
 
         Player player = event.getPlayer();

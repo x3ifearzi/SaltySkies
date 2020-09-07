@@ -16,10 +16,18 @@ public class CreateConnectionSQL {
   public static void connect () {
 
     //"45.95.52.50", "skypvp", "philtest", "JCtZG3FzYnqcNWyT"
+/*    String hostAddress = "45.95.52.50";
+    String database    = "vaince";
+    String username    = "vaince_login";
+    String password    = "vaince";
+    int portAddress = 3306;
+
+ */
+
     String hostAddress = "localhost";
-    String database    = "Vaincee";
-    String username    = "root";
-    String password    = "";
+    String database = "vaince";
+    String username = "root";
+    String password = "";
     int portAddress = 3306;
 
 

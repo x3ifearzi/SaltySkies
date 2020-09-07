@@ -5,7 +5,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 
-public class EnchantmentWrapper extends Enchantment{
+public class EnchantmentWrapper extends Enchantment {
 
     final private String enchantmentName;
 

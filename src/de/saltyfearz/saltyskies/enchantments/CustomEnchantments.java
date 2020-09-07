@@ -35,6 +35,7 @@ public class CustomEnchantments {
         enchantList.add( EXHAUST );
         enchantList.add( EXPHUNTER );
         enchantList.add( SMELTER );
+        enchantList.add( FIREBALL );
     }
 
     public static void addConflictsWith ( ) {

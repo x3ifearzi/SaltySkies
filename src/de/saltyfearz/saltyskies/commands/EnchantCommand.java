@@ -22,7 +22,7 @@ public class EnchantCommand {
 
     final private SaltySkies plugin;
 
-    List < Enchantment > enchantments = CustomEnchantments.enchantList;
+
 
     List < String > toolsTelepathy_toolsSmelter = new ArrayList <>( );
     List < String > toolsHemorrhage_toolsExhaust_toolsExplosion = new ArrayList <>( );
@@ -57,6 +57,8 @@ public class EnchantCommand {
     }
 
     private void enchant ( final Player player, final String enchantment, String level ) {
+
+        List < Enchantment > enchantments = CustomEnchantments.enchantList;
 
         Enchantment isEnchantment = null;
 

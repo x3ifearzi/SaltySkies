@@ -50,8 +50,6 @@ public class CustomConfigRegions {
 
     public void addRegion( final Location loc1, final Location loc2, final Player owner ) {
 
-        final int regionID = regionsFileConfiguration.getKeys( false ).size();
-
         regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos1.world", loc1.getWorld().getName() );
         regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos1.x", loc1.getBlockX() );
         regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos1.y", loc1.getBlockY() );
