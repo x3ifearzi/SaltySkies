@@ -26,7 +26,7 @@ public class ExplosionEvent implements Listener {
 
         if ( !iS.getEnchantments().containsKey( Enchantment.getByKey( CustomEnchantments.EXPLOSION.getKey( ) ) ) ) return;
 
-        level = iS.getEnchantments().get( "EXPLOSION" );
+        level = iS.getEnchantments().get( ( Enchantment.getByKey( CustomEnchantments.EXPLOSION.getKey( ) ) ) );
 
         if ( Math.random() > ( 0.1 * level ) ) return;
 

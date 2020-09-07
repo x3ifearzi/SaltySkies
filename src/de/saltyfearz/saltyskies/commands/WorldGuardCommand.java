@@ -6,10 +6,13 @@ import de.saltyfearz.saltyskies.SaltySkies;
 import de.saltyfearz.saltyskies.configs.CustomConfigRegions;
 import de.saltyfearz.saltyskies.regions.Cuboid;
 import de.saltyfearz.saltyskies.utils.ReplaceHolder;
+import org.apache.logging.log4j.core.net.Priority;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -18,7 +21,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class WorldGuardCommand {
+public class WorldGuardCommand implements Listener {
 
     final private SaltySkies plugin;
 
@@ -79,7 +82,7 @@ public class WorldGuardCommand {
 
     }
 
-    @EventHandler
+    @EventHandler ( priority = EventPriority.HIGHEST )
     public void onDefine ( PlayerInteractEvent event ) {
 
         Player player = event.getPlayer();
@@ -111,7 +114,7 @@ public class WorldGuardCommand {
         }
     }
 
-    @EventHandler
+    @EventHandler ( priority = EventPriority.HIGHEST )
     public void onBreakInRegion ( BlockBreakEvent event ) {
 
 
@@ -124,7 +127,7 @@ public class WorldGuardCommand {
         }
     }
 
-    @EventHandler
+    @EventHandler ( priority = EventPriority.HIGHEST )
     public void onPlaceInRegion ( BlockPlaceEvent event ) {
 
         if ( plugin.getConfigRegions().isInRegion( event.getBlock().getLocation(), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos1"), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos2" ) ) ) {
