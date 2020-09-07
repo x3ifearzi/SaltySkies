@@ -28,9 +28,9 @@ public class WorldGuardCommand implements Listener {
 
     public ArrayList< Cuboid > regions = new ArrayList <>();
 
-    public HashMap < Player, Location > pos1 = new HashMap <>();
+    public static final HashMap < Player, Location > pos1 = new HashMap <>();
 
-    public HashMap < Player, Location > pos2 = new HashMap <>();
+    public static final HashMap < Player, Location > pos2 = new HashMap <>();
 
     public WorldGuardCommand ( final SaltySkies plugin ) { this.plugin = plugin; }
 
@@ -58,7 +58,7 @@ public class WorldGuardCommand implements Listener {
 
                 configRegions.addRegion( pos1.get( player ), pos2.get( player ), player );
 
-                player.sendMessage( ReplaceHolder.replaceHolderString( arg[ 1 ] == null ? "" : arg[ 1 ], plugin.getMsgDE().getMessageSuccessDE( "region-command", "regionSuccessfully" ) ) );
+                player.sendMessage( ReplaceHolder.replaceHolderString( arg[ 0 ] == null ? "" : arg[ 0 ], plugin.getMsgDE().getMessageSuccessDE( "region-command", "regionSuccessfully" ) ) );
 
             } else {
 
@@ -68,7 +68,7 @@ public class WorldGuardCommand implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler ( priority = EventPriority.HIGHEST )
     public void onDefine ( PlayerInteractEvent event ) {
 
         Player player = event.getPlayer();
@@ -85,7 +85,7 @@ public class WorldGuardCommand implements Listener {
 
             } else if ( event.getAction() == Action.RIGHT_CLICK_BLOCK ) {
 
-                pos2.put( player, event.getClickedBlock( ).getLocation( ) );
+                pos2.put( player, event.getClickedBlock().getLocation() );
 
                 player.sendMessage( ReplaceHolder.replaceHolderLocationXYZ( event.getClickedBlock( ).getLocation( ), plugin.getMsgDE().getMessageInfoDE( "region-command", "pos2" ) ) );
             }
@@ -103,26 +103,28 @@ public class WorldGuardCommand implements Listener {
     @EventHandler ( priority = EventPriority.HIGHEST )
     public void onBreakInRegion ( BlockBreakEvent event ) {
 
-
-        if ( plugin.getConfigRegions().isInRegion( event.getBlock().getLocation(), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos1"), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos2" ) ) ) {
+        if ( !plugin.getConfigRegions().isInRegion( event.getBlock().getLocation(), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos1"), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos2" ) ) ) {
 
             event.setCancelled( true );
 
             event.getPlayer().sendMessage( plugin.getMsgDE().getMessageInfoDE( "region-command", "noBuildAllowed" ) ); //TODO SET OWNER
 
+        } else {
+            event.setCancelled( !BuildCommand.build.contains( event.getPlayer().getUniqueId( ) ) );
         }
     }
 
     @EventHandler ( priority = EventPriority.HIGHEST )
     public void onPlaceInRegion ( BlockPlaceEvent event ) {
 
-        if ( plugin.getConfigRegions().isInRegion( event.getBlock().getLocation(), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos1"), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos2" ) ) ) {
+        if ( !plugin.getConfigRegions().isInRegion( event.getBlock().getLocation(), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos1"), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos2" ) ) ) {
 
             event.setCancelled( true );
 
             event.getPlayer().sendMessage( plugin.getMsgDE().getMessageInfoDE( "region-command", "noPlaceAllowed" ) ); //TODO SET OWNER
 
-
+        } else {
+            event.setCancelled( !BuildCommand.build.contains( event.getPlayer().getUniqueId( ) ) );
         }
     }
 }

@@ -17,9 +17,9 @@ public class CustomConfigRegions {
 
     final private SaltySkies plugin;
 
-    private File regionsFile;
+    private static File regionsFile;
 
-    private FileConfiguration regionsFileConfiguration;
+    private static FileConfiguration regionsFileConfiguration;
 
     public CustomConfigRegions(final SaltySkies plugin) {
         this.plugin = plugin;
@@ -50,12 +50,12 @@ public class CustomConfigRegions {
 
     public void addRegion( final Location loc1, final Location loc2, final Player owner ) {
 
-        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos1.world", loc1.getWorld().getName() );
+        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos1.world", owner.getWorld().getName() );
         regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos1.x", loc1.getBlockX() );
         regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos1.y", loc1.getBlockY() );
         regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos1.z", loc1.getBlockZ() );
 
-        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos2.world", loc2.getWorld().getName() );
+        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos2.world", owner.getWorld().getName() );
         regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos2.x", loc2.getBlockX() );
         regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos2.y", loc2.getBlockY() );
         regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos2.z", loc2.getBlockZ() );
@@ -78,7 +78,7 @@ public class CustomConfigRegions {
 
     public Location getLocation ( final Player player, final String name ) {
 
-        return new Location( Bukkit.getWorld( Objects.requireNonNull( regionsFileConfiguration.getString( player.getUniqueId().toString() + "." + name + ".world" ) ) ), regionsFileConfiguration.getDouble( player.getUniqueId().toString() + "." + name + ".x"), regionsFileConfiguration.getDouble( player.getUniqueId().toString() + "." + name + ".y"), regionsFileConfiguration.getDouble( player.getUniqueId().toString() + "." + name + ".z") );
+        return new Location( Bukkit.getWorld( ( regionsFileConfiguration.getString( player.getUniqueId().toString() + "." + name + ".world" ) ) ), regionsFileConfiguration.getDouble( player.getUniqueId().toString() + "." + name + ".x"), regionsFileConfiguration.getDouble( player.getUniqueId().toString() + "." + name + ".y"), regionsFileConfiguration.getDouble( player.getUniqueId().toString() + "." + name + ".z") );
 
     }
 

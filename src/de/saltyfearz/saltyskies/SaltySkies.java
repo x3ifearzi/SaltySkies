@@ -4,12 +4,10 @@ import de.minnymin.command.CommandFramework;
 import de.saltyfearz.saltyskies.commands.*;
 import de.saltyfearz.saltyskies.configs.CustomConfigMessager;
 import de.saltyfearz.saltyskies.configs.CustomConfigRegions;
-import de.saltyfearz.saltyskies.enchantments.CustomEnchantments;
-import de.saltyfearz.saltyskies.enchantments.ExplosionEvent;
-import de.saltyfearz.saltyskies.enchantments.HemorrhageEvent;
-import de.saltyfearz.saltyskies.enchantments.TelepathyEvent;
+import de.saltyfearz.saltyskies.enchantments.*;
 import de.saltyfearz.saltyskies.events.chatevents.PlayerChatEvent;
 import de.saltyfearz.saltyskies.events.joinevents.FirstJoinEvent;
+import de.saltyfearz.saltyskies.events.playerbuildevents.PlayerBuildEvent;
 import de.saltyfearz.saltyskies.handler.chathandler.MessageHandlerDE;
 import de.saltyfearz.saltyskies.mysql.CreateConnectionSQL;
 import de.saltyfearz.saltyskies.mysql.CreateTableSQL;
@@ -87,6 +85,7 @@ public class SaltySkies extends JavaPlugin {
     plManager.registerEvents( new PlayerChatEvent( ), this );
     plManager.registerEvents( new FirstJoinEvent( this ), this );
     plManager.registerEvents( new WorldGuardCommand( this ), this );
+    plManager.registerEvents( new PlayerBuildEvent(), this);
 
     plManager.registerEvents( new ExplosionEvent( this ), this );
     plManager.registerEvents( new TelepathyEvent( this ), this );
