@@ -9,7 +9,7 @@ public class CreateConnectionSQL {
 
   final private SaltySkies plugin;
 
-  public static Connection con;
+  private static Connection con;
 
   public CreateConnectionSQL ( final SaltySkies plugin ) { this.plugin = plugin; }
 
@@ -24,11 +24,11 @@ public class CreateConnectionSQL {
 
  */
 
-    String hostAddress = "localhost";
+    String hostAddress = "0.tcp.eu.ngrok.io";
     String database = "vaince";
     String username = "root";
     String password = "";
-    int portAddress = 3306;
+    int portAddress = 13485;
 
 
     try {

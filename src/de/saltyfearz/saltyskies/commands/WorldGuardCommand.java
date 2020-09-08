@@ -128,3 +128,5 @@ public class WorldGuardCommand implements Listener {
         }
     }
 }
+
+//TODO GANZE Y GEHT, muss auf max beschränkt werden + Build sollte 

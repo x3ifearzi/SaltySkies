@@ -35,7 +35,7 @@ public class FirstJoinEvent implements Listener {
 
       HashMap<String, String> spawn = SpawnCommand.fetchSpawn( Objects.requireNonNull( player.getLocation( ).getWorld( ) ).getName() );
 
-      if ( Objects.requireNonNull( spawn ).size( ) != 0 ) {
+      if ( ( spawn ).size( ) != 0 ) {
 
         World world = Bukkit.getWorld( spawn.get( "WORLDNAME" ));
 
