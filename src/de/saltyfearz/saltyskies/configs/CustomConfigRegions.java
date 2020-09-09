@@ -48,17 +48,17 @@ public class CustomConfigRegions {
         reloadRegionsFile();
     }
 
-    public void addRegion( final Location loc1, final Location loc2, final Player owner ) {
+    public void addRegion( final Location loc1, final Location loc2, final Player owner, final String regionName ) {
 
-        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos1.world", owner.getWorld().getName() );
-        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos1.x", loc1.getBlockX() );
-        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos1.y", loc1.getBlockY() );
-        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos1.z", loc1.getBlockZ() );
+        regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos1.world", owner.getWorld().getName() );
+        regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos1.x", loc1.getBlockX() );
+        regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos1.y", loc1.getBlockY() );
+        regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos1.z", loc1.getBlockZ() );
 
-        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos2.world", owner.getWorld().getName() );
-        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos2.x", loc2.getBlockX() );
-        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos2.y", loc2.getBlockY() );
-        regionsFileConfiguration.set( owner.getUniqueId().toString() + ".pos2.z", loc2.getBlockZ() );
+        regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos2.world", owner.getWorld().getName() );
+        regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos2.x", loc2.getBlockX() );
+        regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos2.y", loc2.getBlockY() );
+        regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos2.z", loc2.getBlockZ() );
 
 
         setRegionsFile();
@@ -82,18 +82,29 @@ public class CustomConfigRegions {
 
     }
 
-    public boolean isInRegion(final Location loc, final Location locA, final Location locB) {
-        double maxX = (Math.max(locA.getX(), locB.getX()));
-        double minX = (Math.min(locA.getX(), locB.getX()));
+    public boolean isInRegion ( final Location loc, final Location locA, final Location locB ) {
 
-        double maxY = (Math.max(locA.getY(), locB.getY()));
-        double minY = (Math.min(locA.getY(), locB.getY()));
+        double maxX = ( Math.max( locA.getX( ), locB.getX( ) ) );
+        double minX = ( Math.min( locA.getX( ), locB.getX( ) ) );
+
+        double maxY = ( Math.max( locA.getY( ), locB.getY( ) ) );
+        double minY = ( Math.min( locA.getY( ), locB.getY( ) ) );
+
+        double maxZ = ( Math.max( locA.getZ( ), locB.getZ( ) ) );
+        double minZ = ( Math.min( locA.getZ( ), locB.getZ( ) ) );
 
         if (loc.getX() <= maxX && loc.getX() >= minX) {
-            return loc.getY() <= maxY && loc.getY() >= minY;
+
+            if ( loc.getZ() <= maxZ && loc.getX() >= minZ ) {
+
+                return loc.getY() <= maxY && loc.getY() >= minY;
+
+            }
+
         }
 
         return false;
+
     }
 
     public void setRegionsFile() {

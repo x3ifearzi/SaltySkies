@@ -41,7 +41,7 @@ public class WorldGuardCommand implements Listener {
 
         String[] arg = args.getArgs( );
 
-        if ( arg.length != 1 ) {
+        if ( arg.length != 2 ) {
 
             player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "region-command", "syntax" ) ); //TODO SYNTAX
             return;
@@ -56,9 +56,9 @@ public class WorldGuardCommand implements Listener {
 
                 CustomConfigRegions configRegions = new CustomConfigRegions( plugin );
 
-                configRegions.addRegion( pos1.get( player ), pos2.get( player ), player );
+                configRegions.addRegion( pos1.get( player ), pos2.get( player ), player, arg [ 1 ] == null ? "region_" + player.getName() : arg[ 1 ]);
 
-                player.sendMessage( ReplaceHolder.replaceHolderString( arg[ 0 ] == null ? "" : arg[ 0 ], plugin.getMsgDE().getMessageSuccessDE( "region-command", "regionSuccessfully" ) ) );
+                player.sendMessage( ReplaceHolder.replaceHolderString( arg[ 1 ] == null ? "" : arg[ 1 ], plugin.getMsgDE().getMessageSuccessDE( "region-command", "regionSuccessfully" ) ) );
 
             } else {
 
@@ -83,9 +83,11 @@ public class WorldGuardCommand implements Listener {
 
                 player.sendMessage( ReplaceHolder.replaceHolderLocationXYZ( event.getClickedBlock( ).getLocation( ), plugin.getMsgDE().getMessageInfoDE( "region-command", "pos1" ) ) );
 
-            } else if ( event.getAction() == Action.RIGHT_CLICK_BLOCK ) {
+            }
 
-                pos2.put( player, event.getClickedBlock().getLocation() );
+            if ( event.getAction() == Action.RIGHT_CLICK_BLOCK ) {
+
+                pos2.put( player, event.getClickedBlock().getLocation( ) );
 
                 player.sendMessage( ReplaceHolder.replaceHolderLocationXYZ( event.getClickedBlock( ).getLocation( ), plugin.getMsgDE().getMessageInfoDE( "region-command", "pos2" ) ) );
             }
@@ -100,7 +102,7 @@ public class WorldGuardCommand implements Listener {
         }
     }
 
-    @EventHandler ( priority = EventPriority.HIGHEST )
+    @EventHandler ( priority = EventPriority.HIGH )
     public void onBreakInRegion ( BlockBreakEvent event ) {
 
         if ( !plugin.getConfigRegions().isInRegion( event.getBlock().getLocation(), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos1"), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos2" ) ) ) {
@@ -114,7 +116,7 @@ public class WorldGuardCommand implements Listener {
         }
     }
 
-    @EventHandler ( priority = EventPriority.HIGHEST )
+    @EventHandler ( priority = EventPriority.HIGH )
     public void onPlaceInRegion ( BlockPlaceEvent event ) {
 
         if ( !plugin.getConfigRegions().isInRegion( event.getBlock().getLocation(), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos1"), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos2" ) ) ) {
