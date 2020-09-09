@@ -79,7 +79,7 @@ public class CustomConfigRegions {
 
     public Location getLocation ( final Player player, final String name ) {
 
-        return new Location( Bukkit.getWorld( ( regionsFileConfiguration.getString( player.getUniqueId().toString() + "." + name + ".world" ) ) ), regionsFileConfiguration.getDouble( player.getUniqueId().toString() + "." + name + ".x"), regionsFileConfiguration.getDouble( player.getUniqueId().toString() + "." + name + ".y"), regionsFileConfiguration.getDouble( player.getUniqueId().toString() + "." + name + ".z") );
+        return new Location( Bukkit.getWorld( ( regionsFileConfiguration.getString( "*." + player.getUniqueId().toString() + "." + name + ".world" ) ) ), regionsFileConfiguration.getDouble( "*." + player.getUniqueId().toString() + "." + name + ".x"), regionsFileConfiguration.getDouble( "*." + player.getUniqueId().toString() + "." + name + ".y"), regionsFileConfiguration.getDouble( "*." + player.getUniqueId().toString() + "." + name + ".z") );
 
     }
 
@@ -94,15 +94,11 @@ public class CustomConfigRegions {
         double maxZ = ( Math.max( locA.getZ( ), locB.getZ( ) ) );
         double minZ = ( Math.min( locA.getZ( ), locB.getZ( ) ) );
 
-        if (loc.getX() <= maxX && loc.getX() >= minX) {
-
-            if ( loc.getZ() <= maxZ && loc.getX() >= minZ ) {
+        if (loc.getX() <= maxX && loc.getX() >= minX && loc.getZ() <= maxZ && loc.getX() >= minZ ) {
 
                 return loc.getY() <= maxY && loc.getY() >= minY;
 
             }
-
-        }
 
         return false;
 

@@ -12,6 +12,7 @@ import de.saltyfearz.saltyskies.handler.chathandler.MessageHandlerDE;
 import de.saltyfearz.saltyskies.mysql.CreateConnectionSQL;
 import de.saltyfearz.saltyskies.mysql.CreateTableSQL;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import de.saltyfearz.saltyskies.worlds.EmptyWorldChunkGenerator;
@@ -30,7 +31,7 @@ public class SaltySkies extends JavaPlugin {
 
   private MessageHandlerDE msgDE;
 
-  private World skyblockWorld;
+  public World skyblockWorld;
 
   @Override
   public void onEnable ( ) {
@@ -56,14 +57,12 @@ public class SaltySkies extends JavaPlugin {
     registerListenerToServer( );
     registerCommandsToServer( );
 
-    createSkyBlockWorld( skyblockWorld );
+    //createSkyBlockWorld( skyblockWorld );
 
   }
 
   @Override
   public void onDisable ( ) {
-
-    CreateConnectionSQL.disconnect();
 
   }
 
@@ -131,14 +130,16 @@ public class SaltySkies extends JavaPlugin {
 
     final String createPlayerTable = "PLAYERDATA (PLAYERUUID varchar ( 48 ), PLAYERNAME varchar ( 16 ), IP varchar ( 16 ), PRIMARY KEY ( PLAYERUUID ));";
 
-    final String createPlayerPunishTable = "PLAYERPUNISH ( ID int (255) NOT NULL AUTO_INCREMENT, IS_BANNED boolean, IS_BANNED_UNTIL bigint, IS_MUTED boolean, IS_MUTED_UNTIL bigint, PLAYERUUID varchar ( 48 ) FOREIGN KEY REFERENCES PLAYERDATA ( PLAYERUUID ));";
+    final String createPlayerPunishTable = "PLAYERPUNISH ( ID int (255) NOT NULL AUTO_INCREMENT, IS_BANNED boolean, IS_BANNED_UNTIL bigint, IS_MUTED boolean, IS_MUTED_UNTIL bigint, PLAYERUUID varchar ( 48 ), PRIMARY KEY ( ID ), FOREIGN KEY (PLAYERUUID) REFERENCES PLAYERDATA(PLAYERUUID));";
 
-    final String createPlayerMoneyTable = "PLAYERMONEY ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, MONEY double, PLAYERUUID varchar ( 48 ) FOREIGN KEY REFERENCES PLAYERDATA ( PLAYERUUID ));";
+    final String createPlayerMoneyTable = "PLAYERMONEY ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, MONEY double, PLAYERUUID varchar ( 48 ), PRIMARY KEY ( ID ), FOREIGN KEY (PLAYERUUID) REFERENCES PLAYERDATA(PLAYERUUID));";
 
-    CreateTableSQL.createTableSQL( createSpawnTable, CreateConnectionSQL.getConnection() );
-    CreateTableSQL.createTableSQL( createPlayerTable, CreateConnectionSQL.getConnection() );
-    CreateTableSQL.createTableSQL( createPlayerPunishTable, CreateConnectionSQL.getConnection() );
-    CreateTableSQL.createTableSQL( createPlayerMoneyTable, CreateConnectionSQL.getConnection() );
+    Connection con = CreateConnectionSQL.getConnection();
+
+    CreateTableSQL.createTableSQL( createSpawnTable, con );
+    CreateTableSQL.createTableSQL( createPlayerTable, con );
+    CreateTableSQL.createTableSQL( createPlayerPunishTable, con );
+    CreateTableSQL.createTableSQL( createPlayerMoneyTable, con );
 
   }
 

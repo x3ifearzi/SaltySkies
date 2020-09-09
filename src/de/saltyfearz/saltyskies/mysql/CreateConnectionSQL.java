@@ -24,11 +24,11 @@ public class CreateConnectionSQL {
 
  */
 
-    String hostAddress = "0.tcp.eu.ngrok.io";
+    String hostAddress = "2.tcp.eu.ngrok.io";
     String database = "vaince";
     String username = "root";
     String password = "";
-    int portAddress = 13485;
+    int portAddress = 18161;
 
 
     try {
