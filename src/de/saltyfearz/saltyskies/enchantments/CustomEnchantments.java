@@ -16,7 +16,7 @@ public class CustomEnchantments {
     final public static Enchantment SMELTER = new EnchantmentWrapper( "smelter", "SMELTER", 2 );
     final public static Enchantment FIREBALL = new EnchantmentWrapper( "fireball", "FIREBALL", 3 );
 
-    public static final List < Enchantment > enchantList = new ArrayList <>( );
+    final public static List < Enchantment > enchantList = new ArrayList <>( );
 
     public static void register ( ) {
         registerEnchantments( TELEPATHY );
@@ -44,16 +44,19 @@ public class CustomEnchantments {
 
     }
 
-    public static void registerEnchantments ( Enchantment enchantment ) {
-
+    public static void registerEnchantments(Enchantment enchantment) {
         boolean registered = true;
         try {
-            Field f = Enchantment.class.getDeclaredField( "acceptingNew" );
-            f.setAccessible( true );
-            f.set( null, true );
-            Enchantment.registerEnchantment( enchantment );
-        } catch ( Exception e ) {
+            Field f = Enchantment.class.getDeclaredField("acceptingNew");
+            f.setAccessible(true);
+            f.set(null, true);
+            Enchantment.registerEnchantment(enchantment);
+        } catch (Exception e) {
             registered = false;
+        }
+        if (registered) {
+            System.out.println("§7Das Entchantment wurde erfolgreich registriert!");
+            // Enchantment wurde registriert.
         }
     }
 }

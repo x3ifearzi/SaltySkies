@@ -7,6 +7,7 @@ import de.saltyfearz.saltyskies.configs.CustomConfigRegions;
 import de.saltyfearz.saltyskies.regions.Cuboid;
 import de.saltyfearz.saltyskies.utils.ReplaceHolder;
 import org.apache.logging.log4j.core.net.Priority;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -130,5 +131,3 @@ public class WorldGuardCommand implements Listener {
         }
     }
 }
-
-//TODO GANZE Y GEHT, muss auf max beschränkt werden + Build sollte 

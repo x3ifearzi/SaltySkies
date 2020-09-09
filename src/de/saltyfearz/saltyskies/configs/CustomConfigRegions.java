@@ -48,7 +48,9 @@ public class CustomConfigRegions {
         reloadRegionsFile();
     }
 
-    public void addRegion( final Location loc1, final Location loc2, final Player owner, final String regionName ) {
+    public void addRegion( final Location loc1, final Location loc2, final Player owner, String regionName ) {
+
+        regionName = regionName.equals( " " ) ? owner.getName() : regionName;
 
         regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos1.world", owner.getWorld().getName() );
         regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos1.x", loc1.getBlockX() );
@@ -59,7 +61,6 @@ public class CustomConfigRegions {
         regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos2.x", loc2.getBlockX() );
         regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos2.y", loc2.getBlockY() );
         regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos2.z", loc2.getBlockZ() );
-
 
         setRegionsFile();
 

@@ -14,7 +14,10 @@ import de.saltyfearz.saltyskies.mysql.CreateTableSQL;
 
 import java.sql.SQLException;
 
+import de.saltyfearz.saltyskies.worlds.EmptyWorldChunkGenerator;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -26,6 +29,8 @@ public class SaltySkies extends JavaPlugin {
   private CustomConfigRegions configRegions;
 
   private MessageHandlerDE msgDE;
+
+  private World skyblockWorld;
 
   @Override
   public void onEnable ( ) {
@@ -51,6 +56,7 @@ public class SaltySkies extends JavaPlugin {
     registerListenerToServer( );
     registerCommandsToServer( );
 
+    createSkyBlockWorld( skyblockWorld );
 
   }
 
@@ -58,6 +64,20 @@ public class SaltySkies extends JavaPlugin {
   public void onDisable ( ) {
 
     CreateConnectionSQL.disconnect();
+
+  }
+
+  public void createSkyBlockWorld ( World skyblockWorld ) {
+
+    if ( skyblockWorld == null ) {
+
+      WorldCreator wC = new WorldCreator( "Skyblock" );
+
+      wC.generator( new EmptyWorldChunkGenerator() );
+
+      wC.createWorld();
+
+    }
 
   }
 
