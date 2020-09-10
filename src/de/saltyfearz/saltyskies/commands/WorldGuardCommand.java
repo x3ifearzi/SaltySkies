@@ -6,14 +6,11 @@ import de.saltyfearz.saltyskies.SaltySkies;
 import de.saltyfearz.saltyskies.configs.CustomConfigRegions;
 import de.saltyfearz.saltyskies.regions.Cuboid;
 import de.saltyfearz.saltyskies.utils.ReplaceHolder;
-import org.apache.logging.log4j.core.net.Priority;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -106,7 +103,7 @@ public class WorldGuardCommand implements Listener {
     @EventHandler ( priority = EventPriority.HIGH )
     public void onBreakInRegion ( BlockBreakEvent event ) {
 
-        if ( !plugin.getConfigRegions().isInRegion( event.getBlock().getLocation(), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos1"), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos2" ) ) ) {
+        if ( plugin.getConfigRegions( ).isInRegion( event.getBlock( ).getLocation( ), plugin.getConfigRegions( ).getLocation( event.getPlayer( ), "pos1" ), plugin.getConfigRegions( ).getLocation( event.getPlayer( ), "pos2" ) ) ) {
 
             event.setCancelled( true );
 
@@ -120,7 +117,7 @@ public class WorldGuardCommand implements Listener {
     @EventHandler ( priority = EventPriority.HIGH )
     public void onPlaceInRegion ( BlockPlaceEvent event ) {
 
-        if ( !plugin.getConfigRegions().isInRegion( event.getBlock().getLocation(), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos1"), plugin.getConfigRegions().getLocation( event.getPlayer(), "pos2" ) ) ) {
+        if ( plugin.getConfigRegions( ).isInRegion( event.getBlock( ).getLocation( ), plugin.getConfigRegions( ).getLocation( event.getPlayer( ), "pos1" ), plugin.getConfigRegions( ).getLocation( event.getPlayer( ), "pos2" ) ) ) {
 
             event.setCancelled( true );
 

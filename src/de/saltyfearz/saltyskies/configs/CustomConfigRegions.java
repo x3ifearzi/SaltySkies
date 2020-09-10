@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 
 public class CustomConfigRegions {
 
@@ -94,13 +93,7 @@ public class CustomConfigRegions {
         double maxZ = ( Math.max( locA.getZ( ), locB.getZ( ) ) );
         double minZ = ( Math.min( locA.getZ( ), locB.getZ( ) ) );
 
-        if (loc.getX() <= maxX && loc.getX() >= minX && loc.getZ() <= maxZ && loc.getX() >= minZ ) {
-
-                return loc.getY() <= maxY && loc.getY() >= minY;
-
-            }
-
-        return false;
+        return ( ( !( loc.getX( ) <= maxX ) ) || ( !( loc.getX( ) >= minX ) ) || ( !( loc.getZ( ) <= maxZ ) ) || ( !( loc.getZ( ) >= minZ ) ) || ( !( loc.getY( ) <= maxY ) ) || ( !( loc.getY( ) >= minY ) ) );
 
     }
 
