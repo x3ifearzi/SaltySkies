@@ -24,7 +24,7 @@ public class WorldGuardCommand implements Listener {
 
     final private SaltySkies plugin;
 
-    public ArrayList< Cuboid > regions = new ArrayList <>();
+    public static ArrayList< Cuboid > regions = new ArrayList <>();
 
     public static final HashMap < Player, Location > pos1 = new HashMap <>();
 
