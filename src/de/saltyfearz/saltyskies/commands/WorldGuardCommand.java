@@ -102,16 +102,17 @@ public class WorldGuardCommand implements Listener {
 
             if ( pos1.containsKey( player ) && pos2.containsKey( player ) ) {
 
-                player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "region-command", "posSuccessfully" ) );
-
                 if ( plugin.getConfigRegions().getLocation( player ) != null) {
 
                     player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "region-command", "regionAlreadyExists" ) );
 
                     pos1.remove( player );
                     pos2.remove( player );
+                    return;
 
                 }
+
+                player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "region-command", "posSuccessfully" ) );
 
             }
         }
