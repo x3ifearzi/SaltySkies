@@ -26,6 +26,8 @@ public class WorldGuardCommand implements Listener {
 
     public static ArrayList< Cuboid > regions = new ArrayList <>();
 
+    boolean flag = false;
+
     public static final HashMap < Player, Location > pos1 = new HashMap <>();
 
     public static final HashMap < Player, Location > pos2 = new HashMap <>();
@@ -52,9 +54,7 @@ public class WorldGuardCommand implements Listener {
 
                 regions.add( new Cuboid( pos1.get( player ), pos2.get( player ) ) );
 
-                CustomConfigRegions configRegions = new CustomConfigRegions( plugin );
-
-                configRegions.addRegion( pos1.get( player ), pos2.get( player ), player, arg [ 1 ] == null ? "region_" + player.getName() : arg[ 1 ]);
+                CustomConfigRegions.addRegion( pos1.get( player ), pos2.get( player ), player, arg [ 1 ] == null ? "region_" + player.getName() : arg[ 1 ]);
 
                 player.sendMessage( ReplaceHolder.replaceHolderString( arg[ 1 ] == null ? "" : arg[ 1 ], plugin.getMsgDE().getMessageSuccessDE( "region-command", "regionSuccessfully" ) ) );
 
@@ -81,20 +81,37 @@ public class WorldGuardCommand implements Listener {
 
                 player.sendMessage( ReplaceHolder.replaceHolderLocationXYZ( event.getClickedBlock( ).getLocation( ), plugin.getMsgDE().getMessageInfoDE( "region-command", "pos1" ) ) );
 
+                flag = false;
+
             }
 
             if ( event.getAction() == Action.RIGHT_CLICK_BLOCK ) {
 
-                pos2.put( player, event.getClickedBlock().getLocation( ) );
 
-                player.sendMessage( ReplaceHolder.replaceHolderLocationXYZ( event.getClickedBlock( ).getLocation( ), plugin.getMsgDE().getMessageInfoDE( "region-command", "pos2" ) ) );
+
+                if ( !flag ) {
+
+                    pos2.put( player, event.getClickedBlock( ).getLocation( ) );
+
+                    player.sendMessage( ReplaceHolder.replaceHolderLocationXYZ( event.getClickedBlock( ).getLocation( ), plugin.getMsgDE( ).getMessageInfoDE( "region-command", "pos2" ) ) );
+
+                    flag = true;
+                }
+
             }
 
             if ( pos1.containsKey( player ) && pos2.containsKey( player ) ) {
 
                 player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "region-command", "posSuccessfully" ) );
 
-                plugin.getConfigRegions().registerRegions( player );
+                if ( plugin.getConfigRegions().getLocation( player ) != null) {
+
+                    player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "region-command", "regionAlreadyExists" ) );
+
+                    pos1.remove( player );
+                    pos2.remove( player );
+
+                }
 
             }
         }
@@ -103,7 +120,7 @@ public class WorldGuardCommand implements Listener {
     @EventHandler ( priority = EventPriority.HIGH )
     public void onBreakInRegion ( BlockBreakEvent event ) {
 
-        if ( plugin.getConfigRegions( ).isInRegion( event.getBlock( ).getLocation( ), plugin.getConfigRegions( ).getLocation( event.getPlayer( ), "pos1" ), plugin.getConfigRegions( ).getLocation( event.getPlayer( ), "pos2" ) ) ) {
+        if ( plugin.getConfigRegions( ).isInRegion( event.getBlock( ).getLocation( ), plugin.getConfigRegions( ).getLocation( event.getPlayer( ) ).get( 0 ), plugin.getConfigRegions( ).getLocation( event.getPlayer( ) ).get( 1 ) ) ) {
 
             event.setCancelled( true );
 
@@ -117,7 +134,7 @@ public class WorldGuardCommand implements Listener {
     @EventHandler ( priority = EventPriority.HIGH )
     public void onPlaceInRegion ( BlockPlaceEvent event ) {
 
-        if ( plugin.getConfigRegions( ).isInRegion( event.getBlock( ).getLocation( ), plugin.getConfigRegions( ).getLocation( event.getPlayer( ), "pos1" ), plugin.getConfigRegions( ).getLocation( event.getPlayer( ), "pos2" ) ) ) {
+        if ( plugin.getConfigRegions( ).isInRegion( event.getBlock( ).getLocation( ), plugin.getConfigRegions( ).getLocation( event.getPlayer( ) ).get( 0 ), plugin.getConfigRegions( ).getLocation( event.getPlayer( ) ).get( 1 ) ) ) {
 
             event.setCancelled( true );
 

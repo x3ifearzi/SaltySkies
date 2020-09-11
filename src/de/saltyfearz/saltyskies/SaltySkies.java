@@ -134,12 +134,17 @@ public class SaltySkies extends JavaPlugin {
 
     final String createPlayerMoneyTable = "PLAYERMONEY ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, MONEY double, PLAYERUUID varchar ( 48 ), PRIMARY KEY ( ID ), FOREIGN KEY (PLAYERUUID) REFERENCES PLAYERDATA(PLAYERUUID));";
 
+    final String createRegionTable = "REGIONS ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, OWNERUUID varchar ( 48 ), REGIONNAME varchar ( 32 ), WORLDNAME varchar ( 32 ), POSITIONX_1 double, POSITION_Y_1 double, POSITIONZ_1 double, POSITIONX_2 double, POSITIONY_2 double, POSITIONZ_2 double, PRIMARY KEY ( OWNERUUID ) );";
+
+    final String createRegionMemberTable = "REGIONMEMBERS ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, OWNERUUID varchar ( 48 ), MEMBERUUID varchar ( 48 ), PRIMARY KEY ( ID ), FOREIGN KEY ( OWNERUUID ) REFERENCES REGIONS ( OWNERUUID ) );";
+
     Connection con = CreateConnectionSQL.getConnection();
 
     CreateTableSQL.createTableSQL( createSpawnTable, con );
     CreateTableSQL.createTableSQL( createPlayerTable, con );
     CreateTableSQL.createTableSQL( createPlayerPunishTable, con );
     CreateTableSQL.createTableSQL( createPlayerMoneyTable, con );
+    CreateTableSQL.createTableSQL( createRegionTable, con );
 
   }
 

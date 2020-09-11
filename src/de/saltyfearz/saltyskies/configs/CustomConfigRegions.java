@@ -1,84 +1,85 @@
 package de.saltyfearz.saltyskies.configs;
 
+import com.google.common.collect.ArrayListMultimap;
 import de.saltyfearz.saltyskies.SaltySkies;
 import de.saltyfearz.saltyskies.commands.WorldGuardCommand;
+import de.saltyfearz.saltyskies.mysql.CreateConnectionSQL;
+import de.saltyfearz.saltyskies.mysql.ResultSQL;
+import de.saltyfearz.saltyskies.mysql.UpdateSQL;
 import de.saltyfearz.saltyskies.regions.Cuboid;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomConfigRegions {
 
     final private SaltySkies plugin;
 
-    private static File regionsFile;
-
-    private static FileConfiguration regionsFileConfiguration;
-
     public CustomConfigRegions(final SaltySkies plugin) {
         this.plugin = plugin;
     }
 
-    public void generateRegionsFile() {
+    public static void addRegion ( final Location loc1, final Location loc2, final Player owner, String regionName ) {
 
-        regionsFile = new File( Bukkit.getServer().getPluginManager()
-                .getPlugin("SaltySkies")
-                .getDataFolder(), "regions.yml");
+        regionName = regionName.equals( " " ) ? owner.getName() : regionName;
 
-        if (!regionsFile.exists())
-            return;
+
+        final String insertRegion = "INSERT INTO REGIONS ( OWNERUUID, REGIONNAME, WORLDNAME, POSITIONX_1, POSITIONY_1, POSITIONZ_1, POSITIONX_2, POSITIONY_2, POSITIONZ_2) VALUES ('" + owner.getUniqueId().toString() + "', '" + regionName + "', '" + loc1.getX() + "', '" + loc1.getY() + + "', '" + loc1.getZ() + "', '" + loc2.getX() + "', '" + loc2.getY() + "', '" + loc2.getZ() + "');";
 
         try {
 
-            regionsFile.mkdir();
+            UpdateSQL.updateSQL( insertRegion, CreateConnectionSQL.getConnection( ) );
 
-            regionsFile.createNewFile();
-
-        } catch ( IOException exc) {
+        } catch ( SQLException exc ) {
 
             exc.printStackTrace();
 
         }
-        reloadRegionsFile();
-    }
-
-    public void addRegion( final Location loc1, final Location loc2, final Player owner, String regionName ) {
-
-        regionName = regionName.equals( " " ) ? owner.getName() : regionName;
-
-        regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos1.world", owner.getWorld().getName() );
-        regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos1.x", loc1.getBlockX() );
-        regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos1.y", loc1.getBlockY() );
-        regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos1.z", loc1.getBlockZ() );
-
-        regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos2.world", owner.getWorld().getName() );
-        regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos2.x", loc2.getBlockX() );
-        regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos2.y", loc2.getBlockY() );
-        regionsFileConfiguration.set( regionName + "." + owner.getUniqueId().toString() + ".pos2.z", loc2.getBlockZ() );
-
-        setRegionsFile();
 
     }
 
-    public void registerRegions( final Player player ) {
+    public ArrayList<Location> getLocation ( final Player player ) {
 
-        WorldGuardCommand command = new WorldGuardCommand( plugin );
+        final String getRegion = "SELECT * FROM REGIONS WHERE ( " + player.getLocation().getX() + " BETWEEN POSITIONX_1 AND POSITIONX_2 ) AND ( " + player.getLocation().getY() + " BETWEEN POSITIONY_1 AND POSITIONY_2 ) AND ( " + player.getLocation().getZ() + " BETWEEN POSITIONZ_1 AND POSITIONZ_2 ) AND WORLD = '" + player.getWorld().getName() + "';";
 
-        for ( int i = 0; i < regionsFileConfiguration.getKeys( false ).size(); i++ ) {
+        try {
 
-            command.regions.add( new Cuboid( getLocation( player, "pos1" ), getLocation( player, "pos2" ) ) );
+            ResultSet result = ResultSQL.resultSQL( getRegion, CreateConnectionSQL.getConnection( ) );
 
+            final World world = Bukkit.getWorld( result.getString( 0 ) );
+
+            final Double posX_1 = result.getDouble( 1 );
+            final Double posY_1 = result.getDouble( 2 );
+            final Double posZ_1 = result.getDouble( 3 );
+
+            final Double posX_2 = result.getDouble( 4 );
+            final Double posY_2 = result.getDouble( 5 );
+            final Double posZ_2 = result.getDouble( 6 );
+
+            List <Location> locations = new ArrayList<>();
+
+            locations.add( 0, new Location( world, posX_1, posY_1, posZ_1) );
+            locations.add( 1, new Location( world, posX_2, posY_2, posZ_2) );
+
+
+            return locations;
+
+        } catch ( SQLException exc ) {
+
+            exc.printStackTrace();
+
+            return null;
         }
-    }
-
-    public Location getLocation ( final Player player, final String name ) {
-
-        return new Location( Bukkit.getWorld( ( regionsFileConfiguration.getString(     "*." + player.getUniqueId().toString() + "." + name + ".world" ) ) ), regionsFileConfiguration.getDouble( "*." + player.getUniqueId().toString() + "." + name + ".x"), regionsFileConfiguration.getDouble( "*." + player.getUniqueId().toString() + "." + name + ".y"), regionsFileConfiguration.getDouble( "*." + player.getUniqueId().toString() + "." + name + ".z") );
 
     }
 
@@ -96,28 +97,4 @@ public class CustomConfigRegions {
         return ( ( !( loc.getX( ) <= maxX ) ) || ( !( loc.getX( ) >= minX ) ) || ( !( loc.getZ( ) <= maxZ ) ) || ( !( loc.getZ( ) >= minZ ) ) || ( !( loc.getY( ) <= maxY ) ) || ( !( loc.getY( ) >= minY ) ) );
 
     }
-
-    public void setRegionsFile() {
-
-        try {
-
-            regionsFileConfiguration.save(regionsFile);
-
-        } catch (IOException exc) {
-
-            exc.printStackTrace();
-        }
-
-    }
-
-    public void reloadRegionsFile() {
-
-        regionsFileConfiguration = YamlConfiguration.loadConfiguration(regionsFile);
-
-    }
-
-    public FileConfiguration getRegionsFileConfiguration() {
-        return regionsFileConfiguration;
-    }
-
 }
