@@ -118,10 +118,6 @@ public class SaltySkies extends JavaPlugin {
     configMessenger.getMessageFileConfiguration( ).options( ).copyDefaults( true );
     configMessenger.setMessageFile( );
 
-    configRegions.generateRegionsFile();
-    configRegions.getRegionsFileConfiguration().options().copyDefaults( true );
-    configRegions.setRegionsFile();
-
   }
 
   public void executeTableCreations ( ) throws SQLException {
@@ -134,7 +130,7 @@ public class SaltySkies extends JavaPlugin {
 
     final String createPlayerMoneyTable = "PLAYERMONEY ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, MONEY double, PLAYERUUID varchar ( 48 ), PRIMARY KEY ( ID ), FOREIGN KEY (PLAYERUUID) REFERENCES PLAYERDATA(PLAYERUUID));";
 
-    final String createRegionTable = "REGIONS ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, OWNERUUID varchar ( 48 ), REGIONNAME varchar ( 32 ), WORLDNAME varchar ( 32 ), POSITIONX_1 double, POSITION_Y_1 double, POSITIONZ_1 double, POSITIONX_2 double, POSITIONY_2 double, POSITIONZ_2 double, PRIMARY KEY ( OWNERUUID ) );";
+    final String createRegionTable = "REGIONS ( OWNERUUID varchar ( 48 ), REGIONNAME varchar ( 32 ), WORLDNAME varchar ( 32 ), POSITIONX_1 double, POSITIONY_1 double, POSITIONZ_1 double, POSITIONX_2 double, POSITIONY_2 double, POSITIONZ_2 double, PRIMARY KEY ( OWNERUUID ) );";
 
     final String createRegionMemberTable = "REGIONMEMBERS ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, OWNERUUID varchar ( 48 ), MEMBERUUID varchar ( 48 ), PRIMARY KEY ( ID ), FOREIGN KEY ( OWNERUUID ) REFERENCES REGIONS ( OWNERUUID ) );";
 

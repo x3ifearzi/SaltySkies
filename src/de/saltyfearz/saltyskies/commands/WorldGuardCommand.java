@@ -66,7 +66,7 @@ public class WorldGuardCommand implements Listener {
         }
     }
 
-    @EventHandler ( priority = EventPriority.HIGHEST )
+    @EventHandler
     public void onDefine ( PlayerInteractEvent event ) {
 
         Player player = event.getPlayer();
