@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CustomConfigRegions {
 
@@ -34,7 +33,7 @@ public class CustomConfigRegions {
         regionName = regionName.equals( " " ) ? owner.getName() : regionName;
 
 
-        final String insertRegion = "INSERT INTO REGIONS ( OWNERUUID, REGIONNAME, WORLDNAME, POSITIONX_1, POSITIONY_1, POSITIONZ_1, POSITIONX_2, POSITIONY_2, POSITIONZ_2) VALUES ('" + owner.getUniqueId().toString() + "', '" + regionName + "', '" + loc1.getX() + "', '" + loc1.getY() + + "', '" + loc1.getZ() + "', '" + loc2.getX() + "', '" + loc2.getY() + "', '" + loc2.getZ() + "');";
+        final String insertRegion = "INSERT INTO REGIONS ( OWNERUUID, REGIONNAME, WORLDNAME, POSITIONX_1, POSITIONY_1, POSITIONZ_1, POSITIONX_2, POSITIONY_2, POSITIONZ_2 ) VALUES ('" + owner.getUniqueId().toString() + "', '" + regionName + "', '" + loc1.getX() + "', '" + loc1.getY() + + "', '" + loc1.getZ() + "', '" + loc2.getX() + "', '" + loc2.getY() + "', '" + loc2.getZ() + "');";
 
         try {
 
@@ -50,26 +49,26 @@ public class CustomConfigRegions {
 
     public ArrayList<Location> getLocation ( final Player player ) {
 
-        final String getRegion = "SELECT * FROM REGIONS WHERE ( " + player.getLocation().getX() + " BETWEEN POSITIONX_1 AND POSITIONX_2 ) AND ( " + player.getLocation().getY() + " BETWEEN POSITIONY_1 AND POSITIONY_2 ) AND ( " + player.getLocation().getZ() + " BETWEEN POSITIONZ_1 AND POSITIONZ_2 ) AND WORLD = '" + player.getWorld().getName() + "';";
+        final String getRegion = "SELECT WORLDNAME, POSITIONX_1, POSITIONY_1, POSITIONZ_1, POSITIONX_2, POSITIONY_2, POSITIONZ_2 FROM REGIONS WHERE ( " + player.getLocation().getX() + " BETWEEN POSITIONX_1 AND POSITIONX_2 ) AND ( " + player.getLocation().getY() + " BETWEEN POSITIONY_1 AND POSITIONY_2 ) AND ( " + player.getLocation().getZ() + " BETWEEN POSITIONZ_1 AND POSITIONZ_2 ) AND WORLD = '" + player.getWorld().getName() + "';";
 
         try {
 
             ResultSet result = ResultSQL.resultSQL( getRegion, CreateConnectionSQL.getConnection( ) );
 
-            final World world = Bukkit.getWorld( result.getString( 0 ) );
+            final World world = Bukkit.getWorld( result.getString( 2 ) );
 
-            final Double posX_1 = result.getDouble( 1 );
-            final Double posY_1 = result.getDouble( 2 );
-            final Double posZ_1 = result.getDouble( 3 );
+            final Double posX_1 = result.getDouble( 3 );
+            final Double posY_1 = result.getDouble( 4 );
+            final Double posZ_1 = result.getDouble( 5 );
 
-            final Double posX_2 = result.getDouble( 4 );
-            final Double posY_2 = result.getDouble( 5 );
-            final Double posZ_2 = result.getDouble( 6 );
+            final Double posX_2 = result.getDouble( 6 );
+            final Double posY_2 = result.getDouble( 7 );
+            final Double posZ_2 = result.getDouble( 8 );
 
-            List <Location> locations = new ArrayList<>();
+            ArrayList <Location> locations = new ArrayList<>();
 
-            locations.add( 0, new Location( world, posX_1, posY_1, posZ_1) );
-            locations.add( 1, new Location( world, posX_2, posY_2, posZ_2) );
+            locations.add( 0, new Location( world, posX_1, posY_1, posZ_1 ) );
+            locations.add( 1, new Location( world, posX_2, posY_2, posZ_2 ) );
 
 
             return locations;
