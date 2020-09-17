@@ -15,6 +15,7 @@ import de.saltyfearz.saltyskies.mysql.CreateTableSQL;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import de.saltyfearz.saltyskies.utils.MotdModifier;
 import de.saltyfearz.saltyskies.worlds.EmptyWorldChunkGenerator;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -31,7 +32,7 @@ public class SaltySkies extends JavaPlugin {
 
   private MessageHandlerDE msgDE;
 
-  public World skyblockWorld;
+  public static World skyblockWorld;
 
   @Override
   public void onEnable ( ) {
@@ -57,7 +58,7 @@ public class SaltySkies extends JavaPlugin {
     registerListenerToServer( );
     registerCommandsToServer( );
 
-    //createSkyBlockWorld( skyblockWorld );
+    createSkyBlockWorld( skyblockWorld );
 
   }
 
@@ -73,6 +74,8 @@ public class SaltySkies extends JavaPlugin {
       WorldCreator wC = new WorldCreator( "Skyblock" );
 
       wC.generator( new EmptyWorldChunkGenerator() );
+
+      wC.environment( World.Environment.NORMAL );
 
       wC.createWorld();
 
@@ -94,6 +97,7 @@ public class SaltySkies extends JavaPlugin {
     cfw.registerCommands( new MedicCommand( this ) );
     cfw.registerCommands( new EnchantCommand( this ));
     cfw.registerCommands( new WorldGuardCommand( this ) );
+    cfw.registerCommands( new TeleportCommand( this ));
 
   }
 
@@ -110,6 +114,8 @@ public class SaltySkies extends JavaPlugin {
     plManager.registerEvents( new TelepathyEvent( this ), this );
     plManager.registerEvents( new HemorrhageEvent( this ), this );
     plManager.registerEvents( new ExhaustEvent( this ), this );
+
+    plManager.registerEvents( new MotdModifier( ), this );
   }
 
   public void registerConfigs ( ) {
@@ -130,7 +136,7 @@ public class SaltySkies extends JavaPlugin {
 
     final String createPlayerMoneyTable = "PLAYERMONEY ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, MONEY double, PLAYERUUID varchar ( 48 ), PRIMARY KEY ( ID ), FOREIGN KEY (PLAYERUUID) REFERENCES PLAYERDATA(PLAYERUUID));";
 
-    final String createRegionTable = "REGIONS ( OWNERUUID varchar ( 48 ), REGIONNAME varchar ( 32 ), WORLDNAME varchar ( 32 ), POSITIONX_1 double, POSITIONY_1 double, POSITIONZ_1 double, POSITIONX_2 double, POSITIONY_2 double, POSITIONZ_2 double, PRIMARY KEY ( OWNERUUID ) );";
+    final String createRegionTable = "REGIONS ( ID int ( 255 ) AUTO_INCREMENT, OWNERUUID varchar ( 48 ), REGIONNAME varchar ( 32 ), WORLDNAME varchar ( 32 ), POSITIONX_1 double, POSITIONY_1 double, POSITIONZ_1 double, POSITIONX_2 double, POSITIONY_2 double, POSITIONZ_2 double, PRIMARY KEY ( ID ) );";
 
     final String createRegionMemberTable = "REGIONMEMBERS ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, OWNERUUID varchar ( 48 ), MEMBERUUID varchar ( 48 ), PRIMARY KEY ( ID ), FOREIGN KEY ( OWNERUUID ) REFERENCES REGIONS ( OWNERUUID ) );";
 

@@ -73,7 +73,7 @@ public class IslandTools {
 
         Location loc = new Location( worldNormal, posX, posY, posZ );
 
-        WorldEditPlugin wEPl = ( WorldEditPlugin ) Bukkit.getPluginManager( ).getPlugin( "WorldEdit" );
+/*        WorldEditPlugin wEPl = ( WorldEditPlugin ) Bukkit.getPluginManager( ).getPlugin( "WorldEdit" ); //TODO
 
         File schematic = new File( "plugins/WorldEdit/schematics/SkyBlockNormal.schem" );
 
@@ -99,7 +99,7 @@ public class IslandTools {
 
             exc.printStackTrace( );
 
-        }
+        }*/
 
         Block blockToChange = worldNormal.getBlockAt( posX + 2, posY, posZ );
 
@@ -141,7 +141,7 @@ public class IslandTools {
 
     }
 
-    public void deleteIsland ( final int centerX, final int centerZ ) {
+/*    public void deleteIsland ( final int centerX, final int centerZ ) { //TODO
 
         for ( int x = centerX - ( Island.getIslandSize( ) / 2 ); x <= centerX + ( Island.getIslandSize( ) / 2 ); x++ ) {
 
@@ -159,5 +159,5 @@ public class IslandTools {
                 }
             }
         }
-    }
+    }*/
 }
