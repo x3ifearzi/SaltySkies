@@ -132,6 +132,8 @@ public class SaltySkies extends JavaPlugin {
 
     final String createPlayerTable = "PLAYERDATA (PLAYERUUID varchar ( 48 ), PLAYERNAME varchar ( 16 ), IP varchar ( 16 ), PRIMARY KEY ( PLAYERUUID ));";
 
+    final String createPlayerRankTable = "PLAYERRANKS ( PLAYERUUID varchar ( 48 ), RANK varchar ( 32 ), FOREIGN KEY ( PLAYERUUID ) REFERENCES PLAYERDATA ( PLAYERUUID ));";
+
     final String createPlayerPunishTable = "PLAYERPUNISH ( ID int (255) NOT NULL AUTO_INCREMENT, IS_BANNED boolean, IS_BANNED_UNTIL bigint, IS_MUTED boolean, IS_MUTED_UNTIL bigint, PLAYERUUID varchar ( 48 ), PRIMARY KEY ( ID ), FOREIGN KEY (PLAYERUUID) REFERENCES PLAYERDATA(PLAYERUUID));";
 
     final String createPlayerMoneyTable = "PLAYERMONEY ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, MONEY double, PLAYERUUID varchar ( 48 ), PRIMARY KEY ( ID ), FOREIGN KEY (PLAYERUUID) REFERENCES PLAYERDATA(PLAYERUUID));";
@@ -144,6 +146,7 @@ public class SaltySkies extends JavaPlugin {
 
     CreateTableSQL.createTableSQL( createSpawnTable, con );
     CreateTableSQL.createTableSQL( createPlayerTable, con );
+    CreateTableSQL.createTableSQL( createPlayerRankTable, con );
     CreateTableSQL.createTableSQL( createPlayerPunishTable, con );
     CreateTableSQL.createTableSQL( createPlayerMoneyTable, con );
     CreateTableSQL.createTableSQL( createRegionTable, con );
