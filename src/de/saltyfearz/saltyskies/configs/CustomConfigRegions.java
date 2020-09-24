@@ -33,7 +33,7 @@ public class CustomConfigRegions {
         regionName = regionName.equals( " " ) ? owner.getName() : regionName;
 
 
-        final String insertRegion = "INSERT INTO REGIONS ( OWNERUUID, REGIONNAME, WORLDNAME, POSITIONX_1, POSITIONY_1, POSITIONZ_1, POSITIONX_2, POSITIONY_2, POSITIONZ_2 ) VALUES ('" + owner.getUniqueId().toString() + "', '" + regionName + "', '" + loc1.getX() + "', '" + loc1.getY() + + "', '" + loc1.getZ() + "', '" + loc2.getX() + "', '" + loc2.getY() + "', '" + loc2.getZ() + "');";
+        final String insertRegion = "INSERT INTO REGIONS ( OWNERUUID, REGIONNAME, WORLDNAME, POSITIONX_1, POSITIONY_1, POSITIONZ_1, POSITIONX_2, POSITIONY_2, POSITIONZ_2 ) VALUES ('" + owner.getUniqueId().toString() + "', '" + regionName + "', '" + loc1.getX() + "', '" + loc1.getY() + "', '" + loc1.getZ() + "', '" + loc2.getX() + "', '" + loc2.getY() + "', '" + loc2.getZ() + "');";
 
         try {
 

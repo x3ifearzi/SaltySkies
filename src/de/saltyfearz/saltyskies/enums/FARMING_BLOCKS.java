@@ -1,0 +1,21 @@
+package de.saltyfearz.saltyskies.enums;
+
+public enum FARMING_BLOCKS {
+
+    CARROTS,
+    POTATOES,
+    WHEAT,
+    WHEAT_SEEDS,
+    BEETROOTS,
+    BEETROOT_SEEDS,
+    MELON,
+    PUMPKIN,
+    MELON_SEEDS,
+    PUMPKIN_SEEDS,
+    NETHER_WART,
+    PUMPKIN_STEM,
+    MELON_STEM,
+    ATTACHED_MELON_STEM,
+    ATTACHED_PUMPKIN_STEM
+
+}
