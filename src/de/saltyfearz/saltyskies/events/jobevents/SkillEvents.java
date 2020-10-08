@@ -2,9 +2,8 @@ package de.saltyfearz.saltyskies.events.jobevents;
 
 import de.saltyfearz.saltyskies.SaltySkies;
 import de.saltyfearz.saltyskies.enums.MINING_BLOCKS;
-import de.saltyfearz.saltyskies.handler.chathandler.MessageHandlerDE;
-import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,13 +14,15 @@ import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
+import java.util.Objects;
+import java.util.Random;
 
 public class SkillEvents implements Listener {
 
     final private SaltySkies plugin;
+
+    final ItemStack apple = new ItemStack( Material.APPLE );
 
     public SkillEvents( final SaltySkies plugin ) { this.plugin = plugin; }
 
@@ -73,6 +74,16 @@ public class SkillEvents implements Listener {
 
     @EventHandler
     public void leafDelay( final LeavesDecayEvent event ) {
+
+        event.setCancelled( true );
+
+        if ( Math.random() > 0.05 ) {
+
+            Objects.requireNonNull( event.getBlock( ).getLocation( ).getWorld( ) ).dropItem( event.getBlock( ).getLocation( ), apple);
+
+        }
+
+        event.getBlock().setType( Material.AIR );
 
     }
 
