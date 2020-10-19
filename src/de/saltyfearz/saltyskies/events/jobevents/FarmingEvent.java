@@ -80,8 +80,13 @@ public class FarmingEvent {
 
                 dropItemsAtBlock( block, location, inMainHand );
 
-                player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "job-command", "earnedXP" ) );
+                player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "job-command", "earnedXP" ) );
+
+            } else {
+
+                player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "job-command", "needHoe" ) );
             }
+
         } else {
 
             event.setCancelled( true );

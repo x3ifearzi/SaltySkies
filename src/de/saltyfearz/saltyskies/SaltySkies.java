@@ -8,6 +8,8 @@ import de.saltyfearz.saltyskies.enchantments.*;
 import de.saltyfearz.saltyskies.events.chatevents.PlayerChatEvent;
 import de.saltyfearz.saltyskies.events.jobevents.FarmingEvent;
 import de.saltyfearz.saltyskies.events.jobevents.MiningEvent;
+import de.saltyfearz.saltyskies.events.jobevents.SkillEvents;
+import de.saltyfearz.saltyskies.events.jobevents.WoodcuttingEvent;
 import de.saltyfearz.saltyskies.events.joinevents.FirstJoinEvent;
 import de.saltyfearz.saltyskies.events.playerbuildevents.PlayerBuildEvent;
 import de.saltyfearz.saltyskies.handler.chathandler.MessageHandlerDE;
@@ -36,6 +38,7 @@ public class SaltySkies extends JavaPlugin {
 
   private FarmingEvent farmingEvent;
   private MiningEvent miningEvent;
+  private WoodcuttingEvent woodcuttingEvent;
 
   public static World skyblockWorld;
 
@@ -121,6 +124,8 @@ public class SaltySkies extends JavaPlugin {
     plManager.registerEvents( new ExhaustEvent( this ), this );
 
     plManager.registerEvents( new MotdModifier( ), this );
+
+    plManager.registerEvents( new SkillEvents( this ), this );
   }
 
   public void registerConfigs ( ) {
@@ -172,5 +177,7 @@ public class SaltySkies extends JavaPlugin {
   public FarmingEvent getFarmingEvent ( ) { return farmingEvent; }
 
   public MiningEvent getMiningEvent ( ) { return miningEvent; }
+
+  public WoodcuttingEvent getWoodcuttingEvent ( ) { return woodcuttingEvent; }
 
 }
