@@ -1,21 +1,14 @@
 package de.saltyfearz.saltyskies.configs;
 
-import com.google.common.collect.ArrayListMultimap;
 import de.saltyfearz.saltyskies.SaltySkies;
-import de.saltyfearz.saltyskies.commands.WorldGuardCommand;
 import de.saltyfearz.saltyskies.mysql.CreateConnectionSQL;
 import de.saltyfearz.saltyskies.mysql.ResultSQL;
 import de.saltyfearz.saltyskies.mysql.UpdateSQL;
-import de.saltyfearz.saltyskies.regions.Cuboid;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import java.io.File;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -57,13 +50,13 @@ public class CustomConfigRegions {
 
             final World world = Bukkit.getWorld( result.getString( 2 ) );
 
-            final Double posX_1 = result.getDouble( 3 );
-            final Double posY_1 = result.getDouble( 4 );
-            final Double posZ_1 = result.getDouble( 5 );
+            final double posX_1 = result.getDouble( 3 );
+            final double posY_1 = result.getDouble( 4 );
+            final double posZ_1 = result.getDouble( 5 );
 
-            final Double posX_2 = result.getDouble( 6 );
-            final Double posY_2 = result.getDouble( 7 );
-            final Double posZ_2 = result.getDouble( 8 );
+            final double posX_2 = result.getDouble( 6 );
+            final double posY_2 = result.getDouble( 7 );
+            final double posZ_2 = result.getDouble( 8 );
 
             ArrayList <Location> locations = new ArrayList<>();
 
