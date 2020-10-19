@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CustomEnchantments {
 
-    final public static Enchantment TELEPATHY = new EnchantmentWrapper( "telepathy", "TELEPATY", 1 );
+    final public static Enchantment TELEPATHY = new EnchantmentWrapper( "telepathy", "TELEPATHY", 1 );
     final public static Enchantment HEMORRHAGE = new EnchantmentWrapper( "hemorrhage", "HEMORRHAGE", 5 );
     final public static Enchantment EXPLOSION = new EnchantmentWrapper( "explosion", "EXPLOSION", 3 );
     final public static Enchantment EXHAUST = new EnchantmentWrapper( "exhaust", "EXHAUST", 2 );
@@ -44,19 +44,29 @@ public class CustomEnchantments {
 
     }
 
-    public static void registerEnchantments(Enchantment enchantment) {
+    public static void registerEnchantments( final Enchantment enchantment ) {
+
         boolean registered = true;
+
         try {
-            Field f = Enchantment.class.getDeclaredField("acceptingNew");
-            f.setAccessible(true);
-            f.set(null, true);
+
+            Field f = Enchantment.class.getDeclaredField( "acceptingNew" );
+
+            f.setAccessible( true );
+            f.set( null, true );
+
             Enchantment.registerEnchantment(enchantment);
-        } catch (Exception e) {
+
+        } catch ( Exception exc ) {
+
             registered = false;
+
         }
-        if (registered) {
-            System.out.println("§7Das Entchantment wurde erfolgreich registriert!");
-            // Enchantment wurde registriert.
+
+        if ( registered ) {
+
+            System.out.println( "§7Das Entchantment wurde erfolgreich registriert!" );
+
         }
     }
 }

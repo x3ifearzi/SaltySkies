@@ -5,6 +5,8 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
+
 public class EnchantmentWrapper extends Enchantment {
 
     final private String enchantmentName;
@@ -42,12 +44,12 @@ public class EnchantmentWrapper extends Enchantment {
 
     @Override
     public boolean isTreasure () {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isCursed () {
-        return true;
+        return false;
     }
 
     @Override
@@ -57,7 +59,7 @@ public class EnchantmentWrapper extends Enchantment {
 
     @Override
     public boolean canEnchantItem ( ItemStack itemStack) {
-        return true;
+        return false;
     }
 
 }
