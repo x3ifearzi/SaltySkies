@@ -22,8 +22,6 @@ public class EnchantCommand {
 
     final private SaltySkies plugin;
 
-
-
     List < String > toolsTelepathy_toolsSmelter = new ArrayList <>( );
     List < String > toolsHemorrhage_toolsExhaust_toolsExplosion = new ArrayList <>( );
     List < String > toolsExphunter = new ArrayList <>( );
@@ -31,12 +29,12 @@ public class EnchantCommand {
 
     public EnchantCommand ( final SaltySkies plugin ) { this.plugin = plugin; }
 
-    @Command( name = "enchant+", aliases = "enchantplus", description = "§6Verzaubere deine Gegenstände.", usage = "§6/enchant+ <enchantment> [<level>]", permission = "SaltySkies.enchant.plus")
+    @Command( name = "enchantplus", aliases = "eplus", description = "§6Verzaubere deine Gegenstände.", usage = "§6/enchant+ <enchantment> [<level>]", permission = "SaltySkies.enchant.plus")
     public void enchant ( CommandArgs args ) {
 
-        Player player = args.getPlayer( );
+        final Player player = args.getPlayer( );
 
-        String[] arg = args.getArgs( );
+        final String[] arg = args.getArgs( );
 
         if ( arg.length < 1 || arg.length > 2) {
 
@@ -68,7 +66,7 @@ public class EnchantCommand {
 
         }
 
-        if ( enchantment == null ) return;
+        if ( isEnchantment == null ) return;
         //TODO
 
         if ( isEnchantment == CustomEnchantments.TELEPATHY ) {
