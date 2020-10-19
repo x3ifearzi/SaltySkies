@@ -67,7 +67,6 @@ public class EnchantCommand {
         }
 
         if ( isEnchantment == null ) return;
-        //TODO
 
         if ( isEnchantment == CustomEnchantments.TELEPATHY ) {
 
