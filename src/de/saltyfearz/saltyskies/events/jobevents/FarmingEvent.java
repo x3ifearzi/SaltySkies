@@ -82,6 +82,12 @@ public class FarmingEvent {
 
                 player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "job-command", "earnedXP" ) );
             }
+        } else {
+
+            event.setCancelled( true );
+
+            player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "job-command", "needAxeSeed" ) );
+
         }
     }
 

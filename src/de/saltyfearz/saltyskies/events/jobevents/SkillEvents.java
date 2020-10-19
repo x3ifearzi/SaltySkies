@@ -39,11 +39,11 @@ public class SkillEvents implements Listener {
 
         if ( Arrays.stream( MINING_BLOCKS.values() ).anyMatch( mining_blocks -> mining_blocks.toString().equalsIgnoreCase( block.getType( ).name( ) ) ) ) {
 
-
+            plugin.getFarmingEvent().farmBreak( event );
 
         } else if ( Arrays.stream( MINING_BLOCKS.values() ).anyMatch( mining_blocks -> mining_blocks.toString().equalsIgnoreCase( block.getType( ).name( ) ) ) ) {
 
-
+            plugin.getMiningEvent().miningBreak( event );
 
         } else if ( Arrays.stream( MINING_BLOCKS.values() ).anyMatch( mining_blocks -> mining_blocks.toString().equalsIgnoreCase( block.getType( ).name( ) ) ) ) {
 

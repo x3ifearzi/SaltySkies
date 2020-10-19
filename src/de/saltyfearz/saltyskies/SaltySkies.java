@@ -6,6 +6,8 @@ import de.saltyfearz.saltyskies.configs.CustomConfigMessager;
 import de.saltyfearz.saltyskies.configs.CustomConfigRegions;
 import de.saltyfearz.saltyskies.enchantments.*;
 import de.saltyfearz.saltyskies.events.chatevents.PlayerChatEvent;
+import de.saltyfearz.saltyskies.events.jobevents.FarmingEvent;
+import de.saltyfearz.saltyskies.events.jobevents.MiningEvent;
 import de.saltyfearz.saltyskies.events.joinevents.FirstJoinEvent;
 import de.saltyfearz.saltyskies.events.playerbuildevents.PlayerBuildEvent;
 import de.saltyfearz.saltyskies.handler.chathandler.MessageHandlerDE;
@@ -31,6 +33,9 @@ public class SaltySkies extends JavaPlugin {
   private CustomConfigRegions configRegions;
 
   private MessageHandlerDE msgDE;
+
+  private FarmingEvent farmingEvent;
+  private MiningEvent miningEvent;
 
   public static World skyblockWorld;
 
@@ -163,4 +168,9 @@ public class SaltySkies extends JavaPlugin {
   public MessageHandlerDE getMsgDE ( ) {
     return msgDE;
   }
+
+  public FarmingEvent getFarmingEvent ( ) { return farmingEvent; }
+
+  public MiningEvent getMiningEvent ( ) { return miningEvent; }
+
 }
