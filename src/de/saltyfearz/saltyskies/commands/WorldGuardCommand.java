@@ -118,6 +118,14 @@ public class WorldGuardCommand implements Listener {
         }
     }
 
+    public void onDefine ( final Player player ) {
+
+        pos1.put( player, player.getLocation().add( 50, 255, 50 ) );
+
+        pos2.put( player, player.getLocation().subtract( 50, 255, 50 ) );
+
+    }
+
     @EventHandler ( priority = EventPriority.HIGH )
     public void onBreakInRegion ( BlockBreakEvent event ) {
 

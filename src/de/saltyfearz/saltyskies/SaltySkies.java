@@ -18,12 +18,20 @@ import de.saltyfearz.saltyskies.mysql.CreateTableSQL;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Objects;
 
+import de.saltyfearz.saltyskies.mysql.ResultSQL;
+import de.saltyfearz.saltyskies.mysql.UpdateSQL;
+import de.saltyfearz.saltyskies.skyblock.IslandLogic;
+import de.saltyfearz.saltyskies.skyblock.IslandTools;
 import de.saltyfearz.saltyskies.utils.MotdModifier;
 import de.saltyfearz.saltyskies.worlds.EmptyWorldChunkGenerator;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
+import org.bukkit.block.Block;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -40,7 +48,11 @@ public class SaltySkies extends JavaPlugin {
   private MiningEvent miningEvent;
   private WoodcuttingEvent woodcuttingEvent;
 
+  private WorldGuardCommand wG = new WorldGuardCommand( this );
+
   public static World skyblockWorld;
+
+  public HashMap < String, IslandLogic > playerIslands = new HashMap <>( );
 
   @Override
   public void onEnable ( ) {
@@ -66,7 +78,15 @@ public class SaltySkies extends JavaPlugin {
     registerListenerToServer( );
     registerCommandsToServer( );
 
-    createSkyBlockWorld( skyblockWorld );
+    try {
+
+      createSkyBlockWorld( skyblockWorld );
+
+    } catch ( SQLException exc ) {
+
+      exc.printStackTrace( );
+
+    }
 
   }
 
@@ -75,19 +95,52 @@ public class SaltySkies extends JavaPlugin {
 
   }
 
-  public void createSkyBlockWorld ( World skyblockWorld ) {
+  public void createSkyBlockWorld ( World skyblockWorld ) throws SQLException {
 
     if ( skyblockWorld == null ) {
 
       WorldCreator wC = new WorldCreator( "Skyblock" );
 
-      wC.generator( new EmptyWorldChunkGenerator() );
+      wC.generator( new EmptyWorldChunkGenerator( ) );
 
       wC.environment( World.Environment.NORMAL );
 
-      wC.createWorld();
+      wC.createWorld( );
+
+      this.playerIslands = new HashMap <>( );
+
+      skyblockWorld = this.getServer( ).getWorld( "Skyblock" );
+
+      if ( skyblockWorld != null ) {
+
+        if ( skyblockWorld.getBlockAt( 0, 64 - 1, 0 ).getType( ) == Material.AIR ) {
+
+          for ( int i = -1; i < 2; i++ ) {
+
+            for ( int j = -1; j < 2; j++ ) {
+
+              Block blockToSet = skyblockWorld.getBlockAt( i, 64, j );
+
+              blockToSet.setType( Material.STONE );
+
+            }
+
+          }
+
+        }
+
+        if ( ResultSQL.resultSQL( "SELECT * FROM SPAWN WHERE WorldName = '" + skyblockWorld.getName( ) + "';", CreateConnectionSQL.getConnection( ) ) == null ) {
+
+          UpdateSQL.updateSQL( "INSERT INTO SPAWN (WORLDNAME, POSITIONX, POSITIONY, POSITIONZ, POSITIONPITCH, POSITIONYAW) VALUES ('Skyblock', 0, 65, 0, 90, 0)", CreateConnectionSQL.getConnection( ) );
+
+          UpdateSQL.updateSQL( "INSERT INTO REGIONS (OWNERUUID, REGIONNAME, WORLDNAME, POSITIONX_1, POSITIONY_1, POSITIONZ_1, POSITIONX_2, POSITIONY_2, POSITIONZ_2) VALUES ('" + Objects.requireNonNull( this.getServer( ).getPlayer( "x3IFeaRzI" ) ).getUniqueId( ).toString( ) + "', 'SPAWN', 'Skyblock', -50, 0, -50, 50, 255, 50 );", CreateConnectionSQL.getConnection( ) );
+
+
+        }
+      }
 
     }
+
 
   }
 
@@ -103,9 +156,9 @@ public class SaltySkies extends JavaPlugin {
     cfw.registerCommands( new BuildCommand( this ) );
     cfw.registerCommands( new ClearInventoryCommand( this ) );
     cfw.registerCommands( new MedicCommand( this ) );
-    cfw.registerCommands( new EnchantCommand( this ));
+    cfw.registerCommands( new EnchantCommand( this ) );
     cfw.registerCommands( new WorldGuardCommand( this ) );
-    cfw.registerCommands( new TeleportCommand( this ));
+    cfw.registerCommands( new TeleportCommand( this ) );
 
   }
 
@@ -116,7 +169,7 @@ public class SaltySkies extends JavaPlugin {
     plManager.registerEvents( new PlayerChatEvent( ), this );
     plManager.registerEvents( new FirstJoinEvent( this ), this );
     plManager.registerEvents( new WorldGuardCommand( this ), this );
-    plManager.registerEvents( new PlayerBuildEvent(), this);
+    plManager.registerEvents( new PlayerBuildEvent( ), this );
 
     plManager.registerEvents( new ExplosionEvent( this ), this );
     plManager.registerEvents( new TelepathyEvent( this ), this );
@@ -152,7 +205,7 @@ public class SaltySkies extends JavaPlugin {
 
     final String createRegionMemberTable = "REGIONMEMBERS ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, OWNERUUID varchar ( 48 ), MEMBERUUID varchar ( 48 ), PRIMARY KEY ( ID ), FOREIGN KEY ( OWNERUUID ) REFERENCES REGIONS ( OWNERUUID ) );";
 
-    Connection con = CreateConnectionSQL.getConnection();
+    Connection con = CreateConnectionSQL.getConnection( );
 
     CreateTableSQL.createTableSQL( createSpawnTable, con );
     CreateTableSQL.createTableSQL( createPlayerTable, con );
