@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class CustomConfigRegions {
 
@@ -86,7 +87,8 @@ public class CustomConfigRegions {
         double maxZ = ( Math.max( locA.getZ( ), locB.getZ( ) ) );
         double minZ = ( Math.min( locA.getZ( ), locB.getZ( ) ) );
 
-        return ( ( !( loc.getX( ) <= maxX ) ) || ( !( loc.getX( ) >= minX ) ) || ( !( loc.getZ( ) <= maxZ ) ) || ( !( loc.getZ( ) >= minZ ) ) || ( !( loc.getY( ) <= maxY ) ) || ( !( loc.getY( ) >= minY ) ) );
+
+        return ( ( !( loc.getX( ) >= minX ) ) && ( ( loc.getX( ) <= maxX ) ) && ( !( loc.getZ( ) <= maxZ ) ) && ( !( loc.getY( ) <= maxY ) ) || ( !( loc.getY( ) >= minY ) ) );
 
     }
 }
