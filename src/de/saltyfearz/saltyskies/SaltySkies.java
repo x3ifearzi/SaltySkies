@@ -13,6 +13,7 @@ import de.saltyfearz.saltyskies.events.jobevents.WoodcuttingEvent;
 import de.saltyfearz.saltyskies.events.joinevents.FirstJoinEvent;
 import de.saltyfearz.saltyskies.events.playerbuildevents.PlayerBuildEvent;
 import de.saltyfearz.saltyskies.handler.chathandler.MessageHandlerDE;
+import de.saltyfearz.saltyskies.items.InventoryLayoutItems;
 import de.saltyfearz.saltyskies.mysql.CreateConnectionSQL;
 import de.saltyfearz.saltyskies.mysql.CreateTableSQL;
 
@@ -26,6 +27,7 @@ import de.saltyfearz.saltyskies.mysql.UpdateSQL;
 import de.saltyfearz.saltyskies.skyblock.IslandLogic;
 import de.saltyfearz.saltyskies.skyblock.IslandTools;
 import de.saltyfearz.saltyskies.utils.MotdModifier;
+import de.saltyfearz.saltyskies.versioncontroller.VersionController;
 import de.saltyfearz.saltyskies.worlds.EmptyWorldChunkGenerator;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -41,6 +43,10 @@ public class SaltySkies extends JavaPlugin {
 
   private CustomConfigMessager configMessenger;
   private CustomConfigRegions configRegions;
+
+  private VersionController vc;
+
+  private InventoryLayoutItems iLI;
 
   private MessageHandlerDE msgDE;
 
@@ -70,6 +76,10 @@ public class SaltySkies extends JavaPlugin {
 
     this.configMessenger = new CustomConfigMessager( this );
     this.configRegions = new CustomConfigRegions( this );
+
+    this.vc = new VersionController();
+
+    this.iLI = new InventoryLayoutItems( this );
 
     this.msgDE = new MessageHandlerDE( this );
 
@@ -148,6 +158,8 @@ public class SaltySkies extends JavaPlugin {
 
     CommandFramework cfw = new CommandFramework( this );
 
+    InventoryLayoutItems iLI = new InventoryLayoutItems( this );
+
     cfw.registerCommands( new TimeCommand( this ) );
     cfw.registerCommands( new SpawnCommand( this ) );
     cfw.registerCommands( new SkullCommand( this ) );
@@ -225,6 +237,14 @@ public class SaltySkies extends JavaPlugin {
 
   public MessageHandlerDE getMsgDE ( ) {
     return msgDE;
+  }
+
+  public VersionController getVc ( ) {
+    return VersionController.getInstance();
+  }
+
+  public InventoryLayoutItems getiLI ( ) {
+    return iLI;
   }
 
   public FarmingEvent getFarmingEvent ( ) { return farmingEvent; }
