@@ -87,6 +87,26 @@ public class v_1_16_2 implements differentVersionSystem {
     }
 
     @Override
+    public ItemStack itemWithFlags( final Material material, final String displayName ) {
+
+        final ItemStack iS = new ItemStack( material );
+
+        final ItemMeta iM = iS.getItemMeta();
+
+        if ( iM == null ) return null;
+
+        addItemFlags( iM );
+
+        iM.setDisplayName( displayName );
+
+        iS.setItemMeta( iM );
+
+        return iS;
+
+
+    }
+
+    @Override
     public void addItemFlags( final ItemMeta iM ) {
 
         iM.addItemFlags( ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_UNBREAKABLE);

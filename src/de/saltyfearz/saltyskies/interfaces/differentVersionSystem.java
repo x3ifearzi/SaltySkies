@@ -14,6 +14,8 @@ public interface differentVersionSystem {
 
     public ItemStack item( final Material material, final String displayName );
 
+    public ItemStack itemWithFlags( final Material material, final String displayName );
+
 
     public void addItemFlags( final ItemMeta iM );
 
