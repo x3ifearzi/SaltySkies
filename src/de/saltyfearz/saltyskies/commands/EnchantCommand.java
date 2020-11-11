@@ -25,7 +25,7 @@ public class EnchantCommand {
     List < String > toolsTelepathy_toolsSmelter = new ArrayList <>( );
     List < String > toolsHemorrhage_toolsExhaust_toolsExplosion = new ArrayList <>( );
     List < String > toolsExphunter = new ArrayList <>( );
-    // TODO List < String > toolsFireball = new ArrayList <>( );
+    List < String > toolsFireball = new ArrayList <>( );
 
     public EnchantCommand ( final SaltySkies plugin ) { this.plugin = plugin; }
 
@@ -152,11 +152,11 @@ public class EnchantCommand {
 
         final String lore = "§7" + loreName + " " + level;
 
-        player.getInventory().getItemInMainHand().addEnchantment( enchantment, intLevel );
-
         ItemStack iS = player.getInventory().getItemInMainHand();
 
         ItemMeta iM = iS.getItemMeta();
+
+        iS.addEnchantment( enchantment, intLevel );
 
         if ( iM == null ) return;
 
@@ -170,7 +170,9 @@ public class EnchantCommand {
             iM.getLore().add( lore );
         }
 
-        player.getInventory().getItemInMainHand().setItemMeta( iM );
+        iS.setItemMeta( iM );
+
+        player.getInventory().setItemInMainHand(iS);
 
     }
 
