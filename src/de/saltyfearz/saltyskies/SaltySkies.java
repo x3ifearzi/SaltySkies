@@ -158,8 +158,6 @@ public class SaltySkies extends JavaPlugin {
 
     CommandFramework cfw = new CommandFramework( this );
 
-    InventoryLayoutItems iLI = new InventoryLayoutItems( this );
-
     cfw.registerCommands( new TimeCommand( this ) );
     cfw.registerCommands( new SpawnCommand( this ) );
     cfw.registerCommands( new SkullCommand( this ) );
@@ -171,6 +169,7 @@ public class SaltySkies extends JavaPlugin {
     cfw.registerCommands( new EnchantCommand( this ) );
     cfw.registerCommands( new WorldGuardCommand( this ) );
     cfw.registerCommands( new TeleportCommand( this ) );
+    cfw.registerCommands( new PunishCommand( this ) );
 
   }
 

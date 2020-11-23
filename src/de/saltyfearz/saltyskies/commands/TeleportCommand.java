@@ -7,10 +7,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TeleportCommand {
 
     final private SaltySkies plugin;
+
+    public static HashMap <Player, ArrayList<Player>> requests = new HashMap <>( );
 
     public TeleportCommand( final SaltySkies plugin ) { this.plugin = plugin; }
 
@@ -26,7 +29,7 @@ public class TeleportCommand {
                     if (requests.containsKey(player)) {
                         requests.get(target).add(player);
                     } else {
-                        ArrayList <Player> req = new ArrayList<Player>();
+                        ArrayList <Player> req = new ArrayList <>( );
                         req.add(player);
                         requests.put(target, req);
                     }

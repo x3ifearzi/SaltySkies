@@ -1,0 +1,13 @@
+teleport-command:
+  sendTpa: Es wurde eine Teleportanfrage an %target versendet.
+  sendTpaTarget: Der Spieler %player möchte sich zu dir teleportieren.
+  sendTpaTargetAccept: Akzeptieren? [/tpa accept] %player
+  sendTpaTargetDeny: Ablehnen? [/tpa deny] %player
+  sendTpaNotToYourself: Du kannst keine Teleportierungsanfragen an dich selber stellen.
+  sendTpaPlayerNotFound: Der Spieler %target konnte nicht gefunden werden.
+  sendTpaSuccessfullyAccepted: Du hast die Teleportierungsanfrage von %player angenommen.
+  sendTpaSuccessfullyAcceptedTarget: Der Spieler %target hat deine Teleportierungsanfrage angenommen.
+  sendTpaSuccessfullyDenied: Du hast die Teleportierungsanfrage von %player abgelehnt.
+  sendTpaSuccessfullyDeniedTarget: Der Spieler %target hat deine Teleportierungsanfrage abgelehnt.
+  sendTpaNotSended: Der Spieler %target hat dir keine Teleportierungsanfrage geschickt.
+

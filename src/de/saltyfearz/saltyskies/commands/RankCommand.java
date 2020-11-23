@@ -18,6 +18,6 @@ public class RankCommand {
 
         String[] arg = args.getArgs( );
 
-        
+        PLAYERUUID varchar ( 48 ), RANK varchar ( 32 )
     }
 }
