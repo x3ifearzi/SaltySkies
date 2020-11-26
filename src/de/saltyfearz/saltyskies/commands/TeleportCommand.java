@@ -16,7 +16,7 @@ public class TeleportCommand {
     public static HashMap <Player, ArrayList<Player>> requests = new HashMap <>( );
 
     public TeleportCommand( final SaltySkies plugin ) { this.plugin = plugin; }
-
+/*
     @Command( name = "tpa", description = "§6Stelle eine Teleportierungsanfrage an andere Spieler.", usage = "§6/tpa <player>", permission = "SaltySkies.tpa")
     public void teleportToThem( CommandArgs args ) {
         Player player = args.getPlayer();
@@ -129,5 +129,5 @@ public class TeleportCommand {
                 }
             }
         }
-    }
+    }*/
 }

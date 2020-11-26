@@ -15,21 +15,26 @@ public class CreateConnectionSQL {
 
   public static void connect () {
 
-    //"45.95.52.50", "skypvp", "philtest", "JCtZG3FzYnqcNWyT"
-/*    String hostAddress = "45.95.52.50";
+ /*"45.95.52.50", "skypvp", "philtest", "JCtZG3FzYnqcNWyT"
+    String hostAddress = "45.95.52.50";
     String database    = "vaince";
     String username    = "vaince_login";
     String password    = "vaince";
     int portAddress = 3306;
-
- */
-
-    String hostAddress = "2.tcp.eu.ngrok.io";
+*/
+    String hostAddress = "localhost";
     String database = "vaince";
     String username = "root";
     String password = "";
-    int portAddress = 17122;
+    int portAddress = 3306;
 
+ /*
+    String hostAddress = "localhost";
+    String database = "u15729-1147_Vaince";
+    String username = "x3IFeaRzI";
+    String password = "1INJV6yA";
+    int portAddress = 3306;
+*/
 
     try {
 
@@ -60,7 +65,4 @@ public class CreateConnectionSQL {
   }
 
   public static Connection getConnection () { return con; }
-
-  public static boolean isConnected () { return ( con != null ); }
-
 }

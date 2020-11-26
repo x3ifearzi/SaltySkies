@@ -76,7 +76,7 @@ public class IslandLogic {
 
         //TODO ISLANDNAME
 
-        String sql = "INSERT INTO Island (OWNERUUID, ISLANDNAME, POSITIONX, POSITIONZ) VALUES ('" + this.uuidOwner + "', " + islandName + "', " + this.positionX + ", " + this.positionZ + ");";
+        String sql = "INSERT INTO ISLAND (OWNERUUID, ISLANDNAME, POSITIamONX, POSITIONZ) VALUES ('" + this.uuidOwner + "', " + islandName + "', " + this.positionX + ", " + this.positionZ + ");";
 
         UpdateSQL.updateSQL( sql, CreateConnectionSQL.getConnection() );
 
@@ -109,7 +109,7 @@ public class IslandLogic {
 
     private Coordinates getLastIsland ( ) throws SQLException {
 
-        final String sql = "SELECT ISLANDID, OWNERUUID, POSITIONX, POSITIONZ FROM Island ORDER BY ID DESC LIMIT 1;";
+        final String sql = "SELECT ISLANDID, OWNERUUID, POSITIONX, POSITIONZ FROM ISLAND ORDER BY ID DESC LIMIT 1;";
 
         ResultSet result = ResultSQL.resultSQL( sql, CreateConnectionSQL.getConnection( ) );
 

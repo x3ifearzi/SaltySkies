@@ -43,7 +43,7 @@ public class CustomConfigRegions {
 
     public ArrayList<Location> getLocation ( final Player player ) {
 
-        final String getRegion = "SELECT WORLDNAME, POSITIONX_1, POSITIONY_1, POSITIONZ_1, POSITIONX_2, POSITIONY_2, POSITIONZ_2 FROM REGIONS WHERE ( " + player.getLocation().getX() + " BETWEEN POSITIONX_1 AND POSITIONX_2 ) AND ( " + player.getLocation().getY() + " BETWEEN POSITIONY_1 AND POSITIONY_2 ) AND ( " + player.getLocation().getZ() + " BETWEEN POSITIONZ_1 AND POSITIONZ_2 ) AND WORLD = '" + player.getWorld().getName() + "';";
+        final String getRegion = "SELECT WORLDNAME, POSITIONX_1, POSITIONY_1, POSITIONZ_1, POSITIONX_2, POSITIONY_2, POSITIONZ_2 FROM REGIONS WHERE ( " + player.getLocation().getX() + " BETWEEN POSITIONX_1 AND POSITIONX_2 ) AND ( " + player.getLocation().getY() + " BETWEEN POSITIONY_1 AND POSITIONY_2 ) AND ( " + player.getLocation().getZ() + " BETWEEN POSITIONZ_1 AND POSITIONZ_2 ) AND WORLDNAME = '" + player.getWorld().getName() + "';";
 
         try {
 
@@ -63,7 +63,6 @@ public class CustomConfigRegions {
 
             locations.add( 0, new Location( world, posX_1, posY_1, posZ_1 ) );
             locations.add( 1, new Location( world, posX_2, posY_2, posZ_2 ) );
-
 
             return locations;
 

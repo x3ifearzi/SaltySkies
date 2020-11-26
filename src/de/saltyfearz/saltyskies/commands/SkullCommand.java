@@ -27,7 +27,7 @@ public class SkullCommand {
       return;
     }
 
-    player.getInventory( ).setItemInMainHand( SkullCreator.itemWithName( SkullCreator.createSkull( ), arg[ 0 ] ) );
+    player.getInventory( ).setItemInMainHand( SkullCreator.itemWithName( SkullCreator.createSkull( ), arg[ 0 ] == null ? player.getDisplayName() : arg[ 0 ] ) );
 
     player.sendMessage( ReplaceHolder.replaceHolderString( arg[ 0 ], plugin.getMsgDE( ).getMessageSuccessDE( "skull-command", "successGaveSkull" ) ) );
   }
