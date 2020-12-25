@@ -10,11 +10,11 @@ import org.bukkit.inventory.Inventory;
 
 public class PunishCommand {
 
-    final private SaltySkies plugin;
+    private final SaltySkies plugin;
 
     private InventoryLayoutItems invL = null;
 
-    final private int[] viewPunishLayout = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 16, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28, 30, 31, 32, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43};
+    private final int[] viewPunishLayout = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 16, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28, 30, 31, 32, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43};
 
     public PunishCommand( final SaltySkies plugin ) { this.plugin = plugin; }
 
@@ -78,8 +78,6 @@ public class PunishCommand {
                 inv.setItem( value, invL.GRAY_STAINED_GLASS_PANE );
 
             }
-
-            input = input.equals( "" ) || !input.matches( "^[a-zA-Z,. ]*" ) ? input = "§eGrund" : input;
 
             inv.setItem( 20, invL.PAPER_REASON );
             inv.setItem( 22, invL.NETHERSTAR_EXECUTE_PUNISH );
