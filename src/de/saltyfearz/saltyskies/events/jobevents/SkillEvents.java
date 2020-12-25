@@ -1,22 +1,25 @@
 package de.saltyfearz.saltyskies.events.jobevents;
 
 import de.saltyfearz.saltyskies.SaltySkies;
+import de.saltyfearz.saltyskies.commands.BuildCommand;
+import de.saltyfearz.saltyskies.configs.CustomConfigRegions;
+import de.saltyfearz.saltyskies.enums.FARMING_BLOCKS;
+import de.saltyfearz.saltyskies.enums.LUMBERJACK_BLOCKS;
 import de.saltyfearz.saltyskies.enums.MINING_BLOCKS;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.Random;
 
 public class SkillEvents implements Listener {
 
@@ -26,8 +29,9 @@ public class SkillEvents implements Listener {
 
     public SkillEvents( final SaltySkies plugin ) { this.plugin = plugin; }
 
-    @EventHandler
+    @EventHandler (priority = EventPriority.HIGHEST)
     public void blockInteractions( final BlockBreakEvent event ) {
+
 
         final Block block = event.getBlock();
 
@@ -37,7 +41,19 @@ public class SkillEvents implements Listener {
 
         event.setCancelled( true );
 
-        if ( Arrays.stream( MINING_BLOCKS.values() ).anyMatch( mining_blocks -> mining_blocks.toString().equalsIgnoreCase( block.getType( ).name( ) ) ) ) {
+        if (CustomConfigRegions.isInRegion(player, block) && !player.hasPermission("SaltySkies.region.*")) {
+
+            event.setCancelled(true);
+
+            player.sendMessage(plugin.getMsgDE().getMessageInfoDE("region-command", "noBuildAllowed")); //TODO SET OWNER
+
+            return;
+
+        }
+
+        if ( !BuildCommand.build.contains( player.getUniqueId( ) ) ) return;
+
+        if ( Arrays.stream( FARMING_BLOCKS.values() ).anyMatch(farming_blocks -> farming_blocks.toString().equalsIgnoreCase( block.getType( ).name( ) ) ) ) {
 
             plugin.getFarmingEvent().farmBreak( event );
 
@@ -45,7 +61,7 @@ public class SkillEvents implements Listener {
 
             plugin.getMiningEvent().miningBreak( event );
 
-        } else if ( Arrays.stream( MINING_BLOCKS.values() ).anyMatch( mining_blocks -> mining_blocks.toString().equalsIgnoreCase( block.getType( ).name( ) ) ) ) {
+        } else if ( Arrays.stream( LUMBERJACK_BLOCKS.values() ).anyMatch(lumberjack_blocks -> lumberjack_blocks.toString().equalsIgnoreCase( block.getType( ).name( ) ) ) ) {
 
             plugin.getWoodcuttingEvent().logBreak( event );
 
@@ -55,19 +71,21 @@ public class SkillEvents implements Listener {
     @EventHandler
     public void cancelTreeStripping( final PlayerInteractEvent event ) {
 
-        if ( ! ( event.getAction() == Action.RIGHT_CLICK_BLOCK ) ) return;
+        final ItemStack inMainHand = event.getPlayer().getInventory().getItemInMainHand();
+
+        if (!BuildCommand.build.contains(event.getPlayer().getUniqueId( ))) return;
+
+        if ( ! ( event.getAction() == Action.RIGHT_CLICK_BLOCK ) || !inMainHand.getType().name().endsWith( "_AXE" ) || !Objects.equals(event.getHand(), EquipmentSlot.HAND)) return;
 
         final Block block = event.getClickedBlock( );
 
-        final ItemStack inMainHand = event.getPlayer().getInventory().getItemInMainHand();
-
         if ( block == null ) return;
 
-        if ( block.getType().name().endsWith( "_LOG" ) && inMainHand.getType().name().endsWith( "_AXE" )) return;
+        if ( block.getType().name().endsWith( "_LOG" ) ) return;
 
         event.setCancelled( true );
 
-        event.getPlayer().sendMessage( plugin.getMsgDE().getMessageInfoDE( "job-command", "canNotStripping" ) );
+        event.getPlayer().sendMessage( plugin.getMsgDE().getMessageInfoDE( "job-system", "canNotStripping" ) );
 
     }
 

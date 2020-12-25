@@ -1,0 +1,1093 @@
+shop:
+  items:
+    Erde:
+      item: DIRT
+      item_subID: 0
+      item_buy_price: 30.0
+      item_sell_price: 5.0
+      item_displayname: §6Erde
+    Podzol:
+      item: PODZOL
+      item_subID: 0
+      item_buy_price: 32.5
+      item_sell_price: 5.41
+      item_displayname: §6Podzol
+    Grobe_Erde:
+      item: COARSE_DIRT
+      item_subID: 0
+      item_buy_price: 35.75
+      item_sell_price: 5.95
+      item_displayname: §6Grobe Erde
+    Grasblock:
+      item: GRASS_BLOCK
+      item_subID: 0
+      item_buy_price: 40.0
+      item_sell_price: 6.65
+      item_displayname: §6Grasblock
+    Myzel:
+      item: MYCELIUM
+      item_subID: 0
+      item_buy_price: 50.50
+      item_sell_price: 8.41
+      item_displayname: §6Myzel
+    Sand:
+      item: SAND
+      item_subID: 0
+      item_buy_price: 19.50
+      item_sell_price: 3.25
+      item_displayname: §6Sand
+    Sandstein:
+      item: SANDSTONE
+      item_subID: 0
+      item_buy_price: 56.50
+      item_sell_price: 9.40
+      item_displayname: §6Sandstein
+    Sandsteintreppe:
+      item: SANDSTONE_STAIRS
+      item_subID: 0
+      item_buy_price: 74.50
+      item_sell_price: 12.40
+      item_displayname: §6Sandsteintreppe
+    Sandsteinstufe:
+      item: SANDSTONE_SLAB
+      item_subID: 0
+      item_buy_price: 74.50
+      item_sell_price: 12.40
+      item_displayname: §6Sandsteinstufe
+    Roter_Sand:
+      item: RED_SAND
+      item_subID: 0
+      item_buy_price: 22.00
+      item_sell_price: 3.67
+      item_displayname: §6Roter Sand
+    Roter_Sandstein:
+      item: RED_SANDSTONE
+      item_subID: 0
+      item_buy_price: 79.00
+      item_sell_price: 11.50
+      item_displayname: §6Roter Sandstein
+    Rote_Sandsteintreppe:
+      item: RED_SANDSTONE_STAIRS
+      item_subID: 0
+      item_buy_price: 89.00
+      item_sell_price: 13.85
+      item_displayname: §6Rote Sandsteintreppe
+    Rote_Sandsteinstufe:
+      item: RED_SANDSTONE_SLAB
+      item_subID: 0
+      item_buy_price: 60.00
+      item_sell_price: 10.00
+      item_displayname: §6Rote Sandsteinstufe
+    Enderportalrahmen:
+      item: END_PORTAL_FRAME
+      item_subID: 0
+      item_buy_price: 750.00
+      item_sell_price: 150.00
+      item_displayname: §6Enderportalrahmen
+    Bedrock:
+      item: BEDROCK
+      item_subID: 0
+      item_buy_price: 1150.00
+      item_sell_price: 175.00
+      item_displayname: §6Bedrock
+    Barriere:
+      item: BARRIER
+      item_subID: 0
+      item_buy_price: 1350.00
+      item_sell_price: 180.50
+      item_displayname: §6Barriere
+    Drachenei:
+      item: DRAGON_EGG
+      item_subID: 0
+      item_buy_price: 950.00
+      item_sell_price: 159.00
+      item_displayname: §6Drachenei
+    XP-Flaschen:
+      item: EXPERIENCE_BOTTLE
+      item_subID: 0
+      item_buy_price: 35.00
+      item_sell_price: 5.85
+      item_displayname: §6XP-Flaschen
+    Leuchtfeuer:
+      item: BEACON
+      item_subID: 0
+      item_buy_price: 550.00
+      item_sell_price: 91.67
+      item_displayname: §6Leuchtfeuer
+    Netherstern:
+      item: NETHER_STAR
+      item_subID: 0
+      item_buy_price: 125.00
+      item_sell_price: 20.80
+      item_displayname: §6Netherstern
+    Bruchstein:
+      item: COBBLESTONE
+      item_subID: 0
+      item_buy_price: 5.00
+      item_sell_price: 0.80
+      item_displayname: §6Bruchstein
+    Stein:
+      item: STONE
+      item_subID: 0
+      item_buy_price: 7.00
+      item_sell_price: 1.15
+      item_displayname: §6Stein
+    Bemooste_Steinziegel:
+      item: MOSSY_STONE_BRICKS
+      item_subID: 0
+      item_buy_price: 29.00
+      item_sell_price: 4.80
+      item_displayname: §6Bemooste Steinziegel
+    Gemeißelte_Steinziegel:
+      item: CHISELED_STONE_BRICKS
+      item_subID: 0
+      item_buy_price: 27.00
+      item_sell_price: 4.50
+      item_displayname: §6Gemeißelte Steinziegel
+    Steinziegel:
+      item: STONE_BRICKS
+      item_subID: 0
+      item_buy_price: 20.00
+      item_sell_price: 3.33
+      item_displayname: §6Steinziegel
+    Rissige_Steinziegel:
+      item: CRACKED_STONE_BRICKS
+      item_subID: 0
+      item_buy_price: 24.00
+      item_sell_price: 4.00
+      item_displayname: §6Rissige Steinziegel
+    Bemooster_Bruchstein:
+      item: MOSSY_COBBLESTONE
+      item_subID: 0
+      item_buy_price: 9.00
+      item_sell_price: 1.50
+      item_displayname: §6Bemooster Bruchstein
+    Bemooste_Bruchsteinmauer:
+      item: MOSSY_COBBLESTONE_WALL
+      item_subID: 0
+      item_buy_price: 14.00
+      item_sell_price: 2.34
+      item_displayname: §6Bemooste Bruchsteinmauer
+    Bruchsteinmauer:
+      item: COBBLESTONE_WALL
+      item_subID: 0
+      item_buy_price: 12.00
+      item_sell_price: 2.00
+      item_displayname: §6Bruchsteinmauer
+    Golderz:
+      item: GOLD_ORE
+      item_subID: 0
+      item_buy_price: 16.00
+      item_sell_price: 2.70
+      item_displayname: §6Golderz
+    Eisenerz:
+      item: IRON_ORE
+      item_subID: 0
+      item_buy_price: 14.00
+      item_sell_price: 2.34
+      item_displayname: §6Eisenerz
+    Diamanterz:
+      item: DIAMOND_ORE
+      item_subID: 0
+      item_buy_price: 25.00
+      item_sell_price: 4.15
+      item_displayname: §6Diamanterz
+    Smaragterz:
+      item: EMERALD_ORE
+      item_subID: 0
+      item_buy_price: 30.00
+      item_sell_price: 2.00
+      item_displayname: §6Smaragterz
+    Steinkohle:
+      item: COAL_ORE
+      item_subID: 0
+      item_buy_price: 9.00
+      item_sell_price: 1.50
+      item_displayname: §6Steinkohle
+    Redstoneerz:
+      item: REDSTONE_ORE
+      item_subID: 0
+      item_buy_price: 13.00
+      item_sell_price: 2.15
+      item_displayname: §6Redstoneerz
+    Lapiserz:
+      item: LAPIS_ORE
+      item_subID: 0
+      item_buy_price: 12.00
+      item_sell_price: 2.00
+      item_displayname: §6Lapiserz
+    Nether_Golderz:
+      item: NETHER_GOLD_ORE
+      item_subID: 0
+      item_buy_price: 8.00
+      item_sell_price: 1.15
+      item_displayname: §6Nether Golderz
+    Antiker_Schrott:
+      item: ANCIENT_DEBRIS
+      item_subID: 0
+      item_buy_price: 75.00
+      item_sell_price: 12.50
+      item_displayname: §6Antiker Schrott
+    Netherritebarren:
+      item: NETHERITE_INGOT
+      item_subID: 0
+      item_buy_price: 315.00
+      item_sell_price: 52.50
+      item_displayname: §6Netherritebarren
+    Goldbarren:
+      item: GOLD_INGOT
+      item_subID: 0
+      item_buy_price: 14.00
+      item_sell_price: 2.34
+      item_displayname: §6Goldbarren
+    Goldnugget:
+      item: GOLD_NUGGET
+      item_subID: 0
+      item_buy_price: 1.50
+      item_sell_price: 0.25
+      item_displayname: §6Goldnugget
+    Eisenbarren:
+      item: IRON_INGOT
+      item_subID: 0
+      item_buy_price: 12.00
+      item_sell_price: 2.00
+      item_displayname: §6Eisenbarren
+    Diamant:
+      item: DIAMOND
+      item_subID: 0
+      item_buy_price: 23.00
+      item_sell_price: 3.84
+      item_displayname: §6Diamant
+    Smaragt:
+      item: EMERALD
+      item_subID: 0
+      item_buy_price: 28.00
+      item_sell_price: 4.50
+      item_displayname: §6Smaragt
+    Kohle:
+      item: COAL
+      item_subID: 0
+      item_buy_price: 6.00
+      item_sell_price: 1.00
+      item_displayname: §6Kohle
+    Redstone:
+      item: REDSTONE
+      item_subID: 0
+      item_buy_price: 10.00
+      item_sell_price: 1.67
+      item_displayname: §6Redstone
+    Lapis:
+      item: LAPIS_LAZULI
+      item_subID: 0
+      item_buy_price: 8.00
+      item_sell_price: 1.33
+      item_displayname: §6Lapis
+    Fichtenholz:
+      item: SPRUCE_LOG
+      item_subID: 0
+      item_buy_price: 6.00
+      item_sell_price: 1.00
+      item_displayname: §6Fichtenholz
+    Schwarzeichenholz:
+      item: DARK_OAK_LOG
+      item_subID: 0
+      item_buy_price: 7.00
+      item_sell_price: 1.15
+      item_displayname: §6Schwarzeichenholz
+    Birkenholz:
+      item: BIRCH_LOG
+      item_subID: 0
+      item_buy_price: 5.00
+      item_sell_price: 0.80
+      item_displayname: §6Birkenholz
+    Jungelholz:
+      item: JUNGLE_LOG
+      item_subID: 0
+      item_buy_price: 7.00
+      item_sell_price: 1.15
+      item_displayname: §6Jungelholz
+    Eichenholz:
+      item: OAK_LOG
+      item_subID: 0
+      item_buy_price: 5.00
+      item_sell_price: 0.80
+      item_displayname: §6Eichenholz
+    Akazienholz:
+      item: ACACIA_LOG
+      item_subID: 0
+      item_buy_price: 6.00
+      item_sell_price: 1.00
+      item_displayname: §6Akazienholz
+    Birkenholzbretter:
+      item: BIRCH_WOOD
+      item_subID: 0
+      item_buy_price: 2.00
+      item_sell_price: 0.35
+      item_displayname: §6Birkenholzbretter
+    Jungelholzbretter:
+      item: JUNGLE_WOOD
+      item_subID: 0
+      item_buy_price: 2.00
+      item_sell_price: 0.35
+      item_displayname: §6Jungelholzbretter
+    Eichenholzbretter:
+      item: OAK_WOOD
+      item_subID: 0
+      item_buy_price: 2.00
+      item_sell_price: 0.35
+      item_displayname: §6Eichenholzbretter
+    Akazienholzbretter:
+      item: ACACIA_WOOD
+      item_subID: 0
+      item_buy_price: 2.00
+      item_sell_price: 0.35
+      item_displayname: §6Akazienholzbretter
+    Fichtenholzbretter:
+      item: SPRUCE_WOOD
+      item_subID: 0
+      item_buy_price: 2.00
+      item_sell_price: 0.35
+      item_displayname: §6Fichtenholzbretter
+    Schwarzeichenholzbretter:
+      item: DARK_OAK_WOOD
+      item_subID: 0
+      item_buy_price: 2.00
+      item_sell_price: 0.35
+      item_displayname: §6Schwarzeichenholzbretter
+    Lederhelm:
+      item: LEATHER_HELMET
+      item_subID: 0
+      item_buy_price: 17.00
+      item_sell_price: 2.83
+      item_displayname: §6Lederhelm
+    Goldhelm:
+      item: GOLDEN_HELMET
+      item_subID: 0
+      item_buy_price: 27.00
+      item_sell_price: 4.50
+      item_displayname: §6Goldhelm
+    Kettenhelm:
+      item: CHAINMAIL_HELMET
+      item_subID: 0
+      item_buy_price: 55.00
+      item_sell_price: 9.17
+      item_displayname: §6Kettenhelm
+    Eisenhelm:
+      item: IRON_HELMET
+      item_subID: 0
+      item_buy_price: 34.00
+      item_sell_price: 5.67
+      item_displayname: §6Eisenhelm
+    Diamantenhelm:
+      item: DIAMOND_HELMET
+      item_subID: 0
+      item_buy_price: 40.00
+      item_sell_price: 6.65
+      item_displayname: §6Diamantenhelm
+    Lederbrustplatte:
+      item: leather_chestplate
+      item_subID: 0
+      item_buy_price: 20.00
+      item_sell_price: 3.33
+      item_displayname: §6Lederbrustplatte
+    Goldbrustplatte:
+      item: golden_chestplate
+      item_subID: 0
+      item_buy_price: 44.00
+      item_sell_price: 7.33
+      item_displayname: §6Goldbrustplatte
+    Kettenbrustplatte:
+      item: chainmail_chestplate
+      item_subID: 0
+      item_buy_price: 80.00
+      item_sell_price: 13.33
+      item_displayname: §6Kettenbrustplatte
+    Eisenbrustplatte:
+      item: iron_chestplate
+      item_subID: 0
+      item_buy_price: 54.00
+      item_sell_price: 9.00
+      item_displayname: §6Eisenbrustplatte
+    Diamantenbrustplatte:
+      item: diamond_chestplate
+      item_subID: 0
+      item_buy_price: 70.00
+      item_sell_price: 11.66
+      item_displayname: §6Diamantenbrustplatte
+    Lederhose:
+      item: leather_leggings
+      item_subID: 0
+      item_buy_price: 19.00
+      item_sell_price: 3.17
+      item_displayname: §6Lederhose
+    Goldhose:
+      item: golden_leggings
+      item_subID: 0
+      item_buy_price: 43.00
+      item_sell_price: 7.16
+      item_displayname: §6Goldhose
+    Kettenhose:
+      item: chainmail_leggings
+      item_subID: 0
+      item_buy_price: 78.00
+      item_sell_price: 13.00
+      item_displayname: §6Kettenhose
+    Eisenhose:
+      item: iron_leggings
+      item_subID: 0
+      item_buy_price: 50.00
+      item_sell_price: 8.33
+      item_displayname: §6Eisenhose
+    Diamantenhose:
+      item: diamond_leggings
+      item_subID: 0
+      item_buy_price: 68.00
+      item_sell_price: 11.33
+      item_displayname: §6Diamantenhose
+    Lederschuhe:
+      item: leather_boots
+      item_subID: 0
+      item_buy_price: 15.00
+      item_sell_price: 2.50
+      item_displayname: §6Lederschuhe
+    Goldschuhe:
+      item: golden_boots
+      item_subID: 0
+      item_buy_price: 25.00
+      item_sell_price: 4.15
+      item_displayname: §6Goldschuhe
+    Kettenschuhe:
+      item: chainmail_boots
+      item_subID: 0
+      item_buy_price: 52.00
+      item_sell_price: 8.66
+      item_displayname: §6Kettenschuhe
+    Eisenschuhe:
+      item: iron_boots
+      item_subID: 0
+      item_buy_price: 30.00
+      item_sell_price: 5.00
+      item_displayname: §6Eisenschuhe
+    Diamantenschuhe:
+      item: diamond_boots
+      item_subID: 0
+      item_buy_price: 37.50
+      item_sell_price: 6.25
+      item_displayname: §6Diamantenschuhe
+    Netherrack:
+      item: netherrack
+      item_subID: 0
+      item_buy_price: 2.50
+      item_sell_price: 0.25
+      item_displayname: §6Netherrack
+    Seelensand:
+      item: soul_sand
+      item_subID: 0
+      item_buy_price: 4.00
+      item_sell_price: 0.67
+      item_displayname: §6Seelensand
+    Glowstone:
+      item: glowstone
+      item_subID: 0
+      item_buy_price: 12.50
+      item_sell_price: 2.09
+      item_displayname: §6Glowstone
+    Glowstonestaub:
+      item: glowstone_dust
+      item_subID: 0
+      item_buy_price: 3.50
+      item_sell_price: 0.58
+      item_displayname: §6Glowstonestaub
+    Quartzerz:
+      item: NETHER_QUARTZ_ORE
+      item_subID: 0
+      item_buy_price: 23.00
+      item_sell_price: 3.84
+      item_displayname: §6Quartzerz
+    Quartz:
+      item: quartz
+      item_subID: 0
+      item_buy_price: 12.50
+      item_sell_price: 2.09
+      item_displayname: §6Quartz
+    Feuerball:
+      item: fire_charge
+      item_subID: 0
+      item_buy_price: 37.50
+      item_sell_price: 6.25
+      item_displayname: §6Feuerball
+    Lohenrute:
+      item: blaze_rod
+      item_subID: 0
+      item_buy_price: 16.00
+      item_sell_price: 2.70
+      item_displayname: §6Lohenrute
+    Netherziegelbarren:
+      item: nether_bricks
+      item_subID: 0
+      item_buy_price: 4.00
+      item_sell_price: 0.67
+      item_displayname: §6Netherziegelbarren
+    Netherziegel:
+      item: nether_brick
+      item_subID: 0
+      item_buy_price: 12.00
+      item_sell_price: 2.00
+      item_displayname: §6Netherziegel
+    Netherziegeltreppe:
+      item: nether_brick_stairs
+      item_subID: 0
+      item_buy_price: 16.00
+      item_sell_price: 2.70
+      item_displayname: §6Netherziegeltreppe
+    Netherziegelstufe:
+      item: nether_brick_slab
+      item_subID: 6
+      item_buy_price: 8.00
+      item_sell_price: 1.15
+      item_displayname: §6Netherziegelstufe
+    Netherziegelzaun:
+      item: nether_brick_fence
+      item_subID: 0
+      item_buy_price: 14.00
+      item_sell_price: 2.34
+      item_displayname: §6Netherziegelzaun
+    Feuerresistenz_§e3:00:
+      item: potion
+      item_subID: 8227
+      item_buy_price: 38.00
+      item_sell_price: 4.66
+      item_displayname: §6Feuerresistenz §e3:00
+    Feuerresistenz_§e8:00:
+      item: potion
+      item_subID: 8259
+      item_buy_price: 55.00
+      item_sell_price: 9.17
+      item_displayname: §6Feuerresistenz §e8:00
+    Eimer:
+      item: bucket
+      item_subID: 0
+      item_buy_price: 21.00
+      item_sell_price: 3.50
+      item_displayname: §6Eimer
+    Wassereimer:
+      item: water_bucket
+      item_subID: 0
+      item_buy_price: 24.00
+      item_sell_price: 3.50
+      item_displayname: §6Wassereimer
+    Lavaeimer:
+      item: lava_bucket
+      item_subID: 0
+      item_buy_price: 26.50
+      item_sell_price: 3.75
+      item_displayname: §6Lavaeimer
+    Milcheimer:
+      item: milk_bucket
+      item_subID: 0
+      item_buy_price: 21.00
+      item_sell_price: 3.50
+      item_displayname: §6Milcheimer
+    Schleimball:
+      item: slime_ball
+      item_subID: 0
+      item_buy_price: 80.50
+      item_sell_price: 13.40
+      item_displayname: §6Schleimball
+    Schallplatten:
+      item: record_11
+      item_subID: 0
+      item_buy_price: 0.00
+      item_sell_price: 0.00
+      item_displayname: §6Schallplatten
+    Enderauge:
+      item: ender_eye
+      item_subID: 0
+      item_buy_price: 26.50
+      item_sell_price: 4.40
+      item_displayname: §6Enderauge
+    Verzaubertes_Bücher:
+      item: enchanted_book
+      item_subID: 0
+      item_buy_price: 0.00
+      item_sell_price: 0.00
+      item_displayname: §6Verzauberte Bücher
+    Truhe:
+      item: chests
+      item_subID: 0
+      item_buy_price: 10.00
+      item_sell_price: 1.67
+      item_displayname: §6Truhe
+    Werkbank:
+      item: crafting_table
+      item_subID: 0
+      item_buy_price: 4.00
+      item_sell_price: 0.67
+      item_displayname: §6Werkbank
+    Ofen:
+      item: furnace
+      item_subID: 0
+      item_buy_price: 5.00
+      item_sell_price: 0.80
+      item_displayname: §6Ofen
+    Endertruhe:
+      item: ender_chest
+      item_subID: 0
+      item_buy_price: 185.00
+      item_sell_price: 12.00
+      item_displayname: §6Endertruhe
+    Plattenspieler:
+      item: jukebox
+      item_subID: 0
+      item_buy_price: 35.00
+      item_sell_price: 5.85
+      item_displayname: §6Plattenspieler
+    Amboss:
+      item: anvil
+      item_subID: 0
+      item_buy_price: 65.00
+      item_sell_price: 11.50
+      item_displayname: §6Amboss
+    Verzauberungstisch:
+      item: enchanted_table
+      item_subID: 0
+      item_buy_price: 52.00
+      item_sell_price: 7.50
+      item_displayname: §6Verzauberungstisch
+    Blumentopf:
+      item: flower_pot
+      item_subID: 0
+      item_buy_price: 12.00
+      item_sell_price: 2.00
+      item_displayname: §6Blumentopf
+    Leiter:
+      item: ladder
+      item_subID: 0
+      item_buy_price: 5.00
+      item_sell_price: 0.80
+      item_displayname: §6Leiter
+    Rüstungsständer:
+      item: armor_stand
+      item_subID: 0
+      item_buy_price: 15.00
+      item_sell_price: 2.50
+      item_displayname: §6Rüstungsständer
+    Rahmen:
+      item: item_frame
+      item_subID: 0
+      item_buy_price: 16.00
+      item_sell_price: 2.70
+      item_displayname: §6Rahmen
+    Bett:
+      item: bed
+      item_subID: 0
+      item_buy_price: 7.00
+      item_sell_price: 1.15
+      item_displayname: §6Bett
+    Gemälde:
+      item: painting
+      item_subID: 0
+      item_buy_price: 9.00
+      item_sell_price: 1.50
+      item_displayname: §6Gemälde
+    Schild:
+      item: sign
+      item_subID: 0
+      item_buy_price: 3.00
+      item_sell_price: 0.50
+      item_displayname: §6Schild
+    Brauner_Pilz:
+      item: brown_mushroom
+      item_subID: 0
+      item_buy_price: 2.50
+      item_sell_price: 0.15
+      item_displayname: §6Brauner Pilz
+    Roter_Pilz:
+      item: red_mushroom
+      item_subID: 0
+      item_buy_price: 2.50
+      item_sell_price: 0.15
+      item_displayname: §6Roter Pilz
+    Kürbiskerne:
+      item: pumpkin_seeds
+      item_subID: 0
+      item_buy_price: 5.00
+      item_sell_price: 0.80
+      item_displayname: §6Kürbiskerne
+    Kürbis:
+      item: pumpkin
+      item_subID: 0
+      item_buy_price: 5.00
+      item_sell_price: 0.80
+      item_displayname: §6Kürbis
+    Melonenkerne:
+      item: melon_seeds
+      item_subID: 0
+      item_buy_price: 1.00
+      item_sell_price: 0.08
+      item_displayname: §6Melonenkerne
+    Melonenscheiben:
+      item: melon_slice
+      item_subID: 0
+      item_buy_price: 0.50
+      item_sell_price: 0.08
+      item_displayname: §6Melonenscheiben
+    Melone:
+      item: melon
+      item_subID: 0
+      item_buy_price: 4.00
+      item_sell_price: 0.67
+      item_displayname: §6Melone
+    Weizensamen:
+      item: wheat_seeds
+      item_subID: 0
+      item_buy_price: 0.25
+      item_sell_price: 0.03
+      item_displayname: §6Weizensamen
+    Weizen:
+      item: wheat
+      item_subID: 0
+      item_buy_price: 1.00
+      item_sell_price: 0.15
+      item_displayname: §6Weizen
+    Strohballen:
+      item: hay_block
+      item_subID: 0
+      item_buy_price: 8.00
+      item_sell_price: 1.00
+      item_displayname: §6Strohballen
+    Kaktus:
+      item: cactus
+      item_subID: 0
+      item_buy_price: 2.00
+      item_sell_price: 0.35
+      item_displayname: §6Kaktus
+    Zuckerrohr:
+      item: SUGAR_CANE
+      item_subID: 0
+      item_buy_price: 3.00
+      item_sell_price: 0.50
+      item_displayname: §6Zuckerrohr
+    Kakaobohnen:
+      item: COCOA_BEANS
+      item_subID: 0
+      item_buy_price: 1.00
+      item_sell_price: 0.15
+      item_displayname: §6Kakaobohnen
+    Endstein:
+      item: end_stone
+      item_subID: 0
+      item_buy_price: 12.50
+      item_sell_price: 2.09
+      item_displayname: §6Endstein
+    Bücherregal:
+      item: bookshelf
+      item_subID: 0
+      item_buy_price: 24.50
+      item_sell_price: 4.00
+      item_displayname: §6Bücherregal
+    Andesite:
+      item: stone
+      item_subID: 5
+      item_buy_price: 5.00
+      item_sell_price: 0.80
+      item_displayname: §6Andesite
+    Diorit:
+      item: stone
+      item_subID: 3
+      item_buy_price: 5.00
+      item_sell_price: 0.80
+      item_displayname: §6Diorit
+    Obsidian:
+      item: obsidian
+      item_subID: 0
+      item_buy_price: 25.00
+      item_sell_price: 4.15
+      item_displayname: §6Obsidian
+    Gebrannter_Ton:
+      item: hardened_clay
+      item_subID: 0
+      item_buy_price: 12.00
+      item_sell_price: 2.00
+      item_displayname: §6Gebrannter Ton
+    Polierter_Andesite:
+      item: stone
+      item_subID: 6
+      item_buy_price: 8.00
+      item_sell_price: 1.33
+      item_displayname: §6Polierter Andesite
+    Polierter_Diorit:
+      item: stone
+      item_subID: 4
+      item_buy_price: 8.00
+      item_sell_price: 1.33
+      item_displayname: §6Polierter Diorit
+    Dunkler_Prismarin:
+      item: prismarine
+      item_subID: 2
+      item_buy_price: 15.00
+      item_sell_price: 2.50
+      item_displayname: §6Dunkler Prismarin
+    Seelaterne:
+      item: sea_lantern
+      item_subID: 0
+      item_buy_price: 25.00
+      item_sell_price: 4.15
+      item_displayname: §6Seelaterne
+    Ziegelstein:
+      item: brick_block
+      item_subID: 0
+      item_buy_price: 12.00
+      item_sell_price: 2.00
+      item_displayname: §6Ziegelstein
+    Polierter_Granit:
+      item: stone
+      item_subID: 2
+      item_buy_price: 8.00
+      item_sell_price: 1.33
+      item_displayname: §6Polierter Granit
+    Prismarin:
+      item: prismarine
+      item_subID: 0
+      item_buy_price: 6.00
+      item_sell_price: 1.00
+      item_displayname: §6Prismarin
+    Prismarinziegel:
+      item: prismarine
+      item_subID: 3
+      item_buy_price: 10.00
+      item_sell_price: 1.67
+      item_displayname: §6Prismarinziegel
+    Ton:
+      item: clay
+      item_subID: 0
+      item_buy_price: 2.00
+      item_sell_price: 0.35
+      item_displayname: §6Ton
+    Granit:
+      item: granite
+      item_subID: 0
+      item_buy_price: 6.00
+      item_sell_price: 1.00
+      item_displayname: §6Granit
+    Holzspitzhacke:
+      item: Wooden_Pickaxe
+      item_subID: 0
+      item_buy_price: 6.00
+      item_sell_price: 1.00
+      item_displayname: §6Holzspitzhacke
+    Steinspitzhacke:
+      item: Stone_Pickaxe
+      item_subID: 0
+      item_buy_price: 21.00
+      item_sell_price: 3.50
+      item_displayname: §6Steinspitzhacke
+    Goldspitzhacke:
+      item: Golden_Pickaxe
+      item_subID: 0
+      item_buy_price: 15.00
+      item_sell_price: 2.50
+      item_displayname: §6Goldspitzhacke
+    Eisenspitzhacke:
+      item: Iron_Pickaxe
+      item_subID: 0
+      item_buy_price: 19.00
+      item_sell_price: 3.17
+      item_displayname: §6Eisenspitzhacke
+    Diamantspitzhacke:
+      item: Diamond_Pickaxe
+      item_subID: 0
+      item_buy_price: 38.00
+      item_sell_price: 4.66
+      item_displayname: §6Diamantspitzhacke
+    Holzaxt:
+      item: Wooden_Axe
+      item_subID: 0
+      item_buy_price: 5.00
+      item_sell_price: 0.80
+      item_displayname: §6Holzaxt
+    Steinaxt:
+      item: Stone_Axe
+      item_subID: 0
+      item_buy_price: 15.00
+      item_sell_price: 2.50
+      item_displayname: §6Steinaxt
+    Goldaxt:
+      item: Golden_Axe
+      item_subID: 0
+      item_buy_price: 15.00
+      item_sell_price: 2.50
+      item_displayname: §6Goldaxt
+    Eisenaxt:
+      item: Iron_Axe
+      item_subID: 0
+      item_buy_price: 18.00
+      item_sell_price: 3.00
+      item_displayname: §6Eisenaxt
+    Diamantaxt:
+      item: Diamond_Axe
+      item_subID: 0
+      item_buy_price: 37.00
+      item_sell_price: 6.17
+      item_displayname: §6Diamantaxt
+    Holzschaufel:
+      item: Wooden_Shovel
+      item_subID: 0
+      item_buy_price: 5.00
+      item_sell_price: 0.80
+      item_displayname: §6Holzschaufel
+    Steinschaufel:
+      item: Stone_Shovel
+      item_subID: 0
+      item_buy_price: 17.00
+      item_sell_price: 2.83
+      item_displayname: §6Steinschaufel
+    Goldschaufel:
+      item: Golden_Shovel
+      item_subID: 0
+      item_buy_price: 12.00
+      item_sell_price: 2.00
+      item_displayname: §6Goldschaufel
+    Eisenschaufel:
+      item: Iron_Shovel
+      item_subID: 0
+      item_buy_price: 15.00
+      item_sell_price: 2.50
+      item_displayname: §6Eisenschaufel
+    Diamantschaufel:
+      item: Diamond_Shovel
+      item_subID: 0
+      item_buy_price: 29.00
+      item_sell_price: 4.80
+      item_displayname: §6Diamantschaufel
+    Holzhacke:
+      item: Wooden_Hoe
+      item_subID: 0
+      item_buy_price: 5.00
+      item_sell_price: 0.80
+      item_displayname: §6Holzhacke
+    Steinhacke:
+      item: Stone_Hoe
+      item_subID: 0
+      item_buy_price: 14.00
+      item_sell_price: 1.67
+      item_displayname: §6Steinhacke
+    Goldhacke:
+      item: Golden_Hoe
+      item_subID: 0
+      item_buy_price: 24.00
+      item_sell_price: 1.80
+      item_displayname: §6Goldhacke
+    Eisenhacke:
+      item: Iron_Hoe
+      item_subID: 0
+      item_buy_price: 28.00
+      item_sell_price: 2.83
+      item_displayname: §6Eisenhacke
+    Diamanthacke:
+      item: Diamond_Hoe
+      item_subID: 0
+      item_buy_price: 42.00
+      item_sell_price: 3.67
+      item_displayname: §6Diamanthacke
+    Apfel:
+      item: Apple
+      item_subID: 0
+      item_buy_price: 9.00
+      item_sell_price: 1.50
+      item_displayname: §6Apfel
+    Goldener_Apfel:
+      item: Golden_Apple
+      item_subID: 0
+      item_buy_price: 45.00
+      item_sell_price: 7.50
+      item_displayname: §6Goldener Apfel
+    Super_Golender_Apfel:
+      item: Golden_Apple
+      item_subID: 0
+      item_buy_price: 350.00
+      item_sell_price: 58.33
+      item_displayname: §6Super Goldener Apfel
+    Steak:
+      item: Cooked_Beef
+      item_subID: 0
+      item_buy_price: 4.50
+      item_sell_price: 0.75
+      item_displayname: §6Steak
+    Kartoffel:
+      item: Potato
+      item_subID: 0
+      item_buy_price: 3.00
+      item_sell_price: 0.50
+      item_displayname: §6Kartoffel
+    Karotte:
+      item: Carrot
+      item_subID: 0
+      item_buy_price: 2.00
+      item_sell_price: 0.35
+      item_displayname: §6Karotte
+    Kuchen:
+      item: Cake
+      item_subID: 0
+      item_buy_price: 12.00
+      item_sell_price: 2.00
+      item_displayname: §6Kuchen
+    Gebratenes_Schweinefleisch:
+      item: Porkchop
+      item_subID: 0
+      item_buy_price: 3.00
+      item_sell_price: 0.50
+      item_displayname: §6Gebratenes Schweinefleisch
+    Kohleblock:
+      item: Coal_Block
+      item_subID: 0
+      item_buy_price: 200.00
+      item_sell_price: 0.00
+      item_displayname: §6Kohleblock
+    Eisenblock:
+      item: Iron_Block
+      item_subID: 0
+      item_buy_price: 300.00
+      item_sell_price: 0.00
+      item_displayname: §6Eisenblock
+    Goldblock:
+      item: Gold_Block
+      item_subID: 0
+      item_buy_price: 350.00
+      item_sell_price: 0.00
+      item_displayname: §6Goldblock
+    Diamantblock:
+      item: Diamond_Block
+      item_subID: 0
+      item_buy_price: 400.00
+      item_sell_price: 0.00
+      item_displayname: §6Diamantblock
+    Smaragtblock:
+      item: Emerald_Block
+      item_subID: 0
+      item_buy_price: 500.00
+      item_sell_price: 0.00
+      item_displayname: §6Smaragtblock
+    Lapisblock:
+      item: Lapis_Block
+      item_subID: 0
+      item_buy_price: 200.00
+      item_sell_price: 0.00
+      item_displayname: §6Lapislblock
+    Redstoneblock:
+      item: Redstone_Block
+      item_subID: 0
+      item_buy_price: 200.00
+      item_sell_price: 0.00
+      item_displayname: §6Redstoneblock
+    Barriere_:
+      item: Barrier
+      item_subID: 0
+      item_buy_price: 0.00
+      item_sell_price: 0.00
+      item_displayname: §4§lCOOMING SOON
+  items_lore:
+    - §7Hier klicken um %items%
+    - §7
+    - §7 §aKaufen    §8<§3Linksklick §8> §6%item_buy_price%  Tokens
+    - §7 §cVerkaufen §8<§3Rechtsklick§8> §6%item_sell_price% Tokens

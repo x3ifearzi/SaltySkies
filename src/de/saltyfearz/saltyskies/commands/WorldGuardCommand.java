@@ -8,25 +8,27 @@ import de.saltyfearz.saltyskies.regions.Cuboid;
 import de.saltyfearz.saltyskies.utils.ReplaceHolder;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class WorldGuardCommand implements Listener {
 
     final private SaltySkies plugin;
 
     public static ArrayList< Cuboid > regions = new ArrayList <>();
-
-    boolean flag = false;
 
     public static final HashMap < Player, Location > pos1 = new HashMap <>();
 
@@ -43,7 +45,7 @@ public class WorldGuardCommand implements Listener {
 
         if ( arg.length != 2 ) {
 
-            player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "region-command", "syntax" ) ); //TODO SYNTAX
+            player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "region-command", "syntax" ) );
             return;
 
         }
@@ -71,48 +73,45 @@ public class WorldGuardCommand implements Listener {
 
         Player player = event.getPlayer();
 
-        if ( player.getInventory().getItemInMainHand().getType() == Material.WOODEN_AXE ) {
+        if ( player.getInventory().getItemInMainHand().getType() == Material.WOODEN_AXE && Objects.equals(event.getHand(), EquipmentSlot.HAND)) {
 
-            if ( event.getAction() == Action.LEFT_CLICK_BLOCK ) {
+            if (player.hasPermission("SaltySkies.region.create")) {
 
-                event.setCancelled( true );
+                event.setCancelled(true);
 
-                pos1.put( player, event.getClickedBlock( ).getLocation( ) );
+                if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
 
-                player.sendMessage( ReplaceHolder.replaceHolderLocationXYZ( event.getClickedBlock( ).getLocation( ), plugin.getMsgDE().getMessageInfoDE( "region-command", "pos1" ) ) );
+                    pos1.put(player, Objects.requireNonNull(event.getClickedBlock()).getLocation());
 
-                flag = false;
+                    player.sendMessage(ReplaceHolder.replaceHolderLocationXYZ(event.getClickedBlock().getLocation(), plugin.getMsgDE().getMessageInfoDE("region-command", "pos1")));
 
-            }
+                } else if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 
-            if ( event.getAction() == Action.RIGHT_CLICK_BLOCK ) {
+                    pos2.put(player, Objects.requireNonNull(event.getClickedBlock()).getLocation());
 
-
-
-                if ( !flag ) {
-
-                    pos2.put( player, event.getClickedBlock( ).getLocation( ) );
-
-                    player.sendMessage( ReplaceHolder.replaceHolderLocationXYZ( event.getClickedBlock( ).getLocation( ), plugin.getMsgDE( ).getMessageInfoDE( "region-command", "pos2" ) ) );
-
-                    flag = true;
-                }
-
-            }
-
-            if ( pos1.containsKey( player ) && pos2.containsKey( player ) ) {
-
-                if ( plugin.getConfigRegions().getLocation( player ) != null) {
-
-                    player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "region-command", "regionAlreadyExists" ) );
-
-                    pos1.remove( player );
-                    pos2.remove( player );
-                    return;
+                    player.sendMessage(ReplaceHolder.replaceHolderLocationXYZ(event.getClickedBlock().getLocation(), plugin.getMsgDE().getMessageInfoDE("region-command", "pos2")));
 
                 }
 
-                player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "region-command", "posSuccessfully" ) );
+                checkLocations(event, player);
+            }
+        }
+    }
+
+    private void checkLocations( final PlayerInteractEvent event, final Player player ) {
+
+        if ( pos1.containsKey( player ) && pos2.containsKey( player ) ) {
+
+            if ( CustomConfigRegions.isInRegion( player, event.getClickedBlock() )) {
+
+                player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "region-command", "regionAlreadyExists" ) );
+
+                pos1.remove( player );
+                pos2.remove( player );
+
+            } else {
+
+                player.sendMessage(plugin.getMsgDE().getMessageSuccessDE("region-command", "posSuccessfully"));
 
             }
         }
@@ -124,33 +123,5 @@ public class WorldGuardCommand implements Listener {
 
         pos2.put( player, player.getLocation().subtract( 50, 255, 50 ) );
 
-    }
-
-    @EventHandler ( priority = EventPriority.HIGH )
-    public void onBreakInRegion ( BlockBreakEvent event ) {
-
-        if ( plugin.getConfigRegions( ).isInRegion( event.getBlock( ).getLocation( ), plugin.getConfigRegions( ).getLocation( event.getPlayer( ) ).get( 0 ), plugin.getConfigRegions( ).getLocation( event.getPlayer( ) ).get( 1 ) ) ) {
-
-            event.setCancelled( true );
-
-            event.getPlayer().sendMessage( plugin.getMsgDE().getMessageInfoDE( "region-command", "noBuildAllowed" ) ); //TODO SET OWNER
-
-        } else {
-            event.setCancelled( !BuildCommand.build.contains( event.getPlayer().getUniqueId( ) ) );
-        }
-    }
-
-    @EventHandler ( priority = EventPriority.HIGH )
-    public void onPlaceInRegion ( BlockPlaceEvent event ) {
-
-        if ( plugin.getConfigRegions( ).isInRegion( event.getBlock( ).getLocation( ), plugin.getConfigRegions( ).getLocation( event.getPlayer( ) ).get( 0 ), plugin.getConfigRegions( ).getLocation( event.getPlayer( ) ).get( 1 ) ) ) {
-
-            event.setCancelled( true );
-
-            event.getPlayer().sendMessage( plugin.getMsgDE().getMessageInfoDE( "region-command", "noPlaceAllowed" ) ); //TODO SET OWNER
-
-        } else {
-            event.setCancelled( !BuildCommand.build.contains( event.getPlayer().getUniqueId( ) ) );
-        }
     }
 }

@@ -52,7 +52,7 @@ public class FirstJoinEvent implements Listener {
 
         Bukkit.getServer().getWorld( "Skyblock" ).getBlockAt( 0, 64, 0 ).setType( Material.BEDROCK );
 
-        player.teleport( new Location ( Bukkit.getServer().getWorld( "Skyblock" ), 0, 64, 0, 90F, 12F) );
+        player.teleport( new Location ( Bukkit.getServer().getWorld( "Skyblock" ), 0, 65, 0, 0F, 0F) );
       }
 
 

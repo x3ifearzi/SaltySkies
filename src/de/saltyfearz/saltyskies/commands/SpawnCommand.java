@@ -55,15 +55,14 @@ public class SpawnCommand {
     HashMap<String, String> spawn = fetchSpawn(player.getWorld()
                                                      .getName());
 
-    if (spawn == null) {
+    if (spawn.size() == 0) {
 
       player.sendMessage(plugin.getMsgDE().getMessageErrorDE( "spawn-command", "spawnNotExists"));
       return;
 
     }
 
-    World world = Bukkit.getServer()
-                        .getWorld(spawn.get("WORLDNAME"));
+    World world = Bukkit.getServer().getWorld(spawn.get("WORLDNAME"));
     double x    = Double.parseDouble(spawn.get("POSITIONX"));
     double y    = Double.parseDouble(spawn.get("POSITIONY"));
     double z    = Double.parseDouble(spawn.get("POSITIONZ"));

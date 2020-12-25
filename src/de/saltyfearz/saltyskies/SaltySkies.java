@@ -12,27 +12,22 @@ import de.saltyfearz.saltyskies.events.jobevents.SkillEvents;
 import de.saltyfearz.saltyskies.events.jobevents.WoodcuttingEvent;
 import de.saltyfearz.saltyskies.events.joinevents.FirstJoinEvent;
 import de.saltyfearz.saltyskies.events.playerbuildevents.PlayerBuildEvent;
+import de.saltyfearz.saltyskies.events.playerbuildevents.WorldGuardEvents;
 import de.saltyfearz.saltyskies.handler.chathandler.MessageHandlerDE;
 import de.saltyfearz.saltyskies.items.InventoryLayoutItems;
-import de.saltyfearz.saltyskies.mysql.CreateConnectionSQL;
-import de.saltyfearz.saltyskies.mysql.CreateTableSQL;
+import de.saltyfearz.saltyskies.mysql.*;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 
-import de.saltyfearz.saltyskies.mysql.ResultSQL;
-import de.saltyfearz.saltyskies.mysql.UpdateSQL;
 import de.saltyfearz.saltyskies.skyblock.IslandLogic;
 import de.saltyfearz.saltyskies.skyblock.IslandTools;
 import de.saltyfearz.saltyskies.utils.MotdModifier;
 import de.saltyfearz.saltyskies.versioncontroller.VersionController;
 import de.saltyfearz.saltyskies.worlds.EmptyWorldChunkGenerator;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -42,9 +37,6 @@ public class SaltySkies extends JavaPlugin {
   public static SaltySkies instance;
 
   private CustomConfigMessager configMessenger;
-  private CustomConfigRegions configRegions;
-
-  private VersionController vc;
 
   private InventoryLayoutItems iLI;
 
@@ -54,7 +46,7 @@ public class SaltySkies extends JavaPlugin {
   private MiningEvent miningEvent;
   private WoodcuttingEvent woodcuttingEvent;
 
-  private WorldGuardCommand wG = new WorldGuardCommand( this );
+  public static Map<UUID, HashMap<Location, Location>> userRegions = new LinkedHashMap<>();
 
   public static World skyblockWorld;
 
@@ -70,14 +62,17 @@ public class SaltySkies extends JavaPlugin {
 
     try {
       executeTableCreations( );
+
+      MoneySQL.executePlayerSQL();
     } catch ( SQLException exc ) {
       exc.printStackTrace( );
     }
 
     this.configMessenger = new CustomConfigMessager( this );
-    this.configRegions = new CustomConfigRegions( this );
 
-    this.vc = new VersionController();
+    this.farmingEvent = new FarmingEvent( this );
+    this.miningEvent = new MiningEvent( this );
+    this.woodcuttingEvent = new WoodcuttingEvent( this );
 
     this.iLI = new InventoryLayoutItems( this );
 
@@ -98,6 +93,7 @@ public class SaltySkies extends JavaPlugin {
 
     }
 
+    userRegions.putAll(getUserRegions());
   }
 
   @Override
@@ -105,7 +101,56 @@ public class SaltySkies extends JavaPlugin {
 
   }
 
-  public void createSkyBlockWorld ( World skyblockWorld ) throws SQLException {
+  private Map<UUID, HashMap<Location, Location>> getUserRegions() {
+
+    userRegions.clear();
+
+    try {
+      final String query = "SELECT OWNERUUID, WORLDNAME, POSITIONX_1, POSITIONY_1, POSITIONZ_1, POSITIONX_2, POSITIONY_2, POSITIONZ_2 FROM REGIONS;";
+
+      double posX_1, posY_1, posZ_1, posX_2, posY_2, posZ_2;
+
+      Location locA, locB;
+
+      World worldName;
+
+      UUID ownerUUID;
+
+      HashMap<Location, Location> locationMap = new HashMap<>();
+
+      ResultSet results = ResultSQL.resultSQL(query, CreateConnectionSQL.getConnection());
+
+      while ( results.next() ) {
+
+        ownerUUID = UUID.fromString(results.getString(1));
+
+        worldName = Bukkit.getServer().getWorld(results.getString(2));
+
+        posX_1 = results.getDouble(3);
+        posY_1 = results.getDouble(4);
+        posZ_1 = results.getDouble(5);
+        posX_2 = results.getDouble(6);
+        posY_2 = results.getDouble(7);
+        posZ_2 = results.getDouble(8);
+
+        locA = new Location(worldName, posX_1, posY_1, posZ_1);
+        locB = new Location(worldName, posX_2, posY_2, posZ_2);
+
+        locationMap.put(locA, locB);
+
+        userRegions.put(ownerUUID, locationMap);
+      }
+
+      return userRegions;
+
+    } catch ( SQLException exc ) {
+
+      return userRegions;
+
+    }
+  }
+
+  private void createSkyBlockWorld ( World skyblockWorld ) throws SQLException {
 
     if ( skyblockWorld == null ) {
 
@@ -141,10 +186,8 @@ public class SaltySkies extends JavaPlugin {
 
         if ( ResultSQL.resultSQL( "SELECT * FROM SPAWN WHERE WorldName = '" + skyblockWorld.getName( ) + "';", CreateConnectionSQL.getConnection( ) ) == null ) {
 
-          UpdateSQL.updateSQL( "INSERT INTO SPAWN (WORLDNAME, POSITIONX, POSITIONY, POSITIONZ, POSITIONPITCH, POSITIONYAW) VALUES ('Skyblock', 0, 65, 0, 90, 0)", CreateConnectionSQL.getConnection( ) );
-
+          UpdateSQL.updateSQL( "INSERT INTO SPAWN (WORLDNAME, POSITIONX, POSITIONY, POSITIONZ, POSITIONPITCH, POSITIONYAW) VALUES ('Skyblock', 0.5, 65, 0.5, 0, 0)", CreateConnectionSQL.getConnection( ) );
           UpdateSQL.updateSQL( "INSERT INTO REGIONS (OWNERUUID, REGIONNAME, WORLDNAME, POSITIONX_1, POSITIONY_1, POSITIONZ_1, POSITIONX_2, POSITIONY_2, POSITIONZ_2) VALUES ('" + Objects.requireNonNull( this.getServer( ).getPlayer( "x3IFeaRzI" ) ).getUniqueId( ).toString( ) + "', 'SPAWN', 'Skyblock', -50, 0, -50, 50, 255, 50 );", CreateConnectionSQL.getConnection( ) );
-
 
         }
       }
@@ -154,7 +197,7 @@ public class SaltySkies extends JavaPlugin {
 
   }
 
-  public void registerCommandsToServer ( ) {
+  private void registerCommandsToServer ( ) {
 
     CommandFramework cfw = new CommandFramework( this );
 
@@ -173,14 +216,15 @@ public class SaltySkies extends JavaPlugin {
 
   }
 
-  public void registerListenerToServer ( ) {
+  private void registerListenerToServer ( ) {
 
     PluginManager plManager = Bukkit.getPluginManager( );
 
+    plManager.registerEvents( new PlayerBuildEvent( ), this );
+    plManager.registerEvents( new WorldGuardEvents( this, userRegions), this);
     plManager.registerEvents( new PlayerChatEvent( ), this );
     plManager.registerEvents( new FirstJoinEvent( this ), this );
     plManager.registerEvents( new WorldGuardCommand( this ), this );
-    plManager.registerEvents( new PlayerBuildEvent( ), this );
 
     plManager.registerEvents( new ExplosionEvent( this ), this );
     plManager.registerEvents( new TelepathyEvent( this ), this );
@@ -192,7 +236,7 @@ public class SaltySkies extends JavaPlugin {
     plManager.registerEvents( new SkillEvents( this ), this );
   }
 
-  public void registerConfigs ( ) {
+  private void registerConfigs ( ) {
 
     configMessenger.generateMessageFile( );
     configMessenger.getMessageFileConfiguration( ).options( ).copyDefaults( true );
@@ -200,9 +244,9 @@ public class SaltySkies extends JavaPlugin {
 
   }
 
-  public void executeTableCreations ( ) throws SQLException {
+  private void executeTableCreations ( ) throws SQLException {
 
-    final String createSpawnTable = "SPAWN (WORLDNAME varchar ( 32 ), POSITIONX varchar ( 20 ), POSITIONY varchar ( 3 ), POSITIONZ varchar ( 20 ), POSITIONPITCH varchar ( 10 ), POSITIONYAW varchar ( 10 ), PRIMARY KEY ( WORLDNAME ))";
+    final String createSpawnTable = "SPAWN (WORLDNAME varchar ( 32 ), POSITIONX varchar ( 20 ), POSITIONY varchar ( 20 ), POSITIONZ varchar ( 20 ), POSITIONPITCH varchar ( 20 ), POSITIONYAW varchar ( 20 ), PRIMARY KEY ( WORLDNAME ))";
 
     final String createPlayerTable = "PLAYERDATA (PLAYERUUID varchar ( 48 ), PLAYERNAME varchar ( 16 ), IP varchar ( 16 ), PRIMARY KEY ( PLAYERUUID ));";
 
@@ -232,14 +276,8 @@ public class SaltySkies extends JavaPlugin {
     return configMessenger;
   }
 
-  public CustomConfigRegions getConfigRegions ( ) { return configRegions; }
-
   public MessageHandlerDE getMsgDE ( ) {
     return msgDE;
-  }
-
-  public VersionController getVc ( ) {
-    return VersionController.getInstance();
   }
 
   public InventoryLayoutItems getiLI ( ) {

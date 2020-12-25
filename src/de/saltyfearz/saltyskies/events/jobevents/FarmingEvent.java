@@ -7,13 +7,9 @@ import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
-
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Objects;
 
 public class FarmingEvent {
@@ -25,7 +21,6 @@ public class FarmingEvent {
 
     public FarmingEvent( final SaltySkies plugin ) { this.plugin = plugin; }
 
-    @EventHandler
     public void farmBreak( final BlockBreakEvent event ) {
 
         final Player player = event.getPlayer();
@@ -44,9 +39,7 @@ public class FarmingEvent {
 
         if ( stemList.iterator().next().equals( block.getType() ) ) {
 
-            event.setCancelled( true );
-
-            player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "job-command", "cropNotDestroyable" ) );
+            player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "job-system", "cropNotDestroyable" ) );
             return;
 
         }
@@ -65,7 +58,7 @@ public class FarmingEvent {
 
                 if ( ageable.getAge() != ageable.getMaximumAge() ) {
 
-                    player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "job-command", "cropNotReadyYet" ) );
+                    player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "job-system", "cropNotReadyYet" ) );
                     return;
 
                 }
@@ -80,18 +73,16 @@ public class FarmingEvent {
 
                 dropItemsAtBlock( block, location, inMainHand );
 
-                player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "job-command", "earnedXP" ) );
+                player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "job-system", "earnedXP" ) );
 
             } else {
 
-                player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "job-command", "needHoe" ) );
+                player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "job-system", "needHoe" ) );
             }
 
         } else {
 
-            event.setCancelled( true );
-
-            player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "job-command", "needAxeSeed" ) );
+            player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "job-system", "needAxeSeed" ) );
 
         }
     }

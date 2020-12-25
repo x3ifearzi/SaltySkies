@@ -1,6 +1,7 @@
 package de.saltyfearz.saltyskies.events.jobevents;
 
 import de.saltyfearz.saltyskies.SaltySkies;
+import de.saltyfearz.saltyskies.utils.ReplaceHolder;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -26,11 +27,9 @@ public class MiningEvent {
 
         final ItemStack inMainHand = event.getPlayer().getInventory().getItemInMainHand();
 
-        if ( inMainHand.getType().name().endsWith( "_PICKAXE" ) ) {
+        if ( !inMainHand.getType().name().endsWith( "_PICKAXE" ) ) {
 
-            event.setCancelled( true );
-
-            player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "job-command", "needPickaxe" ) );
+            player.sendMessage(ReplaceHolder.replaceHolderStringBlock(plugin.getMsgDE().getMessage("job-system", "needPickaxe"), "§c" + block.getBlockData().getMaterial().name() + "§7" ));
             return;
 
         }
@@ -39,14 +38,13 @@ public class MiningEvent {
 
         afterBreakEvent( player, inMainHand, block, Color.fromRGB( 125, 84, 125 ), location);
 
-        event.setCancelled( true );
     }
 
     private void afterBreakEvent( final Player player, final ItemStack inMainHand, final Block block, final Color color, final Location location ) {
 
         block.getDrops(inMainHand).forEach( drop -> { player.getInventory().addItem( drop ); });
 
-        player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "job-command", "earnedXP" ) );
+        player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "job-system", "earnedXP" ) );
 
         //BlockMetaData blockMetaData = new BlockMetaData(location.getWorld(), location.getX(), location.getY(), location.getZ(), block.getType());
         //plugin.blockMetaData.put(blockMetaData, System.currentTimeMillis());

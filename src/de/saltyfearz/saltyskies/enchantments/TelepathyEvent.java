@@ -2,10 +2,8 @@ package de.saltyfearz.saltyskies.enchantments;
 
 import de.saltyfearz.saltyskies.SaltySkies;
 import de.saltyfearz.saltyskies.enums.PICKAXES;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Container;
-import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,7 +11,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 public class TelepathyEvent implements Listener {
 
@@ -24,7 +21,7 @@ public class TelepathyEvent implements Listener {
     @EventHandler
     public void onTelepathy( BlockBreakEvent event ) {
 
-        List list = new ArrayList();
+        List<Object> list = new ArrayList<>();
 
         list.add(Collections.singletonList( Arrays.toString( PICKAXES.values( ) ) ));
 

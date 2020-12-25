@@ -9,8 +9,6 @@ public class ResultSQL {
 
   public static ResultSet resultSQL (final String query, final Connection con ) throws SQLException {
 
-    final ResultSet result;
-
     PreparedStatement pS = con.prepareStatement( query );
 
     return pS.executeQuery();

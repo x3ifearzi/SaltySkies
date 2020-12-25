@@ -53,6 +53,12 @@ public class ReplaceHolder {
 
     }
 
+    public static String replaceHolderStringBlock ( final String message, final String block ) {
+
+        return message.replace( "%minerblock", block);
+
+    }
+
     public static String replaceHolderLocationXYZ ( final Location location, final String message ) {
 
         final String x = String.valueOf( location.getX( ) );
