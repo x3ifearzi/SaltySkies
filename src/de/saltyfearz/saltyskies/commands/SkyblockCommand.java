@@ -17,7 +17,7 @@ public class SkyblockCommand {
 
     public SkyblockCommand ( final SaltySkies plugin ) { this.plugin = plugin; }
 
-    @Command ( name = "island", aliases = { "is", "sb", "skyblock" }, description = "§4Skyblock by x3IFeaRzI.", usage = "§6/Skyblock <help>", permission = "SaltySkies.skyblock.player" )
+    @Command ( name = "island", aliases = { "is", "sb", "skyblock" }, description = "§4Skyblock by x3IFeaRzI.", usage = "§6/Skyblock <help>" )
     public void skyblock ( CommandArgs args ) throws SQLException {
 
         final Player player = args.getPlayer( );
@@ -36,6 +36,11 @@ public class SkyblockCommand {
 
             } else if ( arg[0].equalsIgnoreCase( "create" ) || arg[0].equalsIgnoreCase( "erstellen" ) ) {
 
+                if (plugin.playerIslands.get( player.getUniqueId().toString() ) != null ) {
+
+                    player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "island-command", "alreadyIslandExists" ) );
+                    return;
+                }
                 IslandLogic island = new IslandLogic( plugin, player.getUniqueId().toString() );
 
                 IslandTools iTools = new IslandTools( plugin );
@@ -44,25 +49,29 @@ public class SkyblockCommand {
 
                 player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "island-command", "islandSavedSuccessfully" ) );
 
-                iTools.generateIsland( island.getPositionX(), island.getPositionZ() );
+                iTools.generateIsland( island.getPositionX(), island.getPositionZ(), player, island );
 
                 player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "island-command", "islandLoadedSuccessfully" ) );
 
-                WorldGuardCommand wG = new WorldGuardCommand( plugin );
-
-                wG.onDefine( player );
-
-                CustomConfigRegions.addRegion( WorldGuardCommand.pos1.get( player ), WorldGuardCommand.pos2.get( player ), player, player.getDisplayName() );
-
-                player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "island-command", "islandRegionCreatedSuccessfully" ) );
-
-                island.teleportToIsland( player );
-
                 island.saveIsland( );
 
-                
+                island.tpHome( player );
+
             } else if ( arg[0].equalsIgnoreCase( "home" ) || arg[0].equalsIgnoreCase( "h" ) || arg[0].equalsIgnoreCase( "zuhause" ) ) {
 
+                IslandLogic island = new IslandLogic( plugin, player.getUniqueId().toString() );
+                island.load();
+
+                if ( island.getIslandName() != null ) {
+
+                    island.tpHome(player);
+                    player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "island-command", "islandTpSuccessfully" ) );
+
+                } else {
+
+                    player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "island-command", "noIslandExists" ) );
+
+                }
 
             } else if ( arg[0].equalsIgnoreCase( "info" ) || arg[0].equalsIgnoreCase( "infos" ) )  {
 
@@ -102,5 +111,24 @@ public class SkyblockCommand {
 
     public void createIsland( final Player player, final String islandName ) {
 
+        IslandLogic newIsland = new IslandLogic( plugin, player.getUniqueId().toString() );
+        IslandTools iTools = new IslandTools( plugin );
+
+        newIsland.load();
+        newIsland.create( islandName );
+
+        player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "island-command", "isSavedIntoDatabase" ) );
+        iTools.generateIsland( newIsland.getPositionX(), newIsland.getPositionZ(), player, newIsland );
+        player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "island-command", "islandLoadedSuccessfully" ) );
+
+
+        plugin.getWG().onDefine( player, newIsland );
+
+        CustomConfigRegions.addRegion( WorldGuardCommand.pos1.get( player ), WorldGuardCommand.pos2.get( player ), player, islandName);
+
+        player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "island-command", "isRegLoadSuccessfully" ) );
+
+        newIsland.tpHome( player );
+        newIsland.saveIsland();
     }
 }

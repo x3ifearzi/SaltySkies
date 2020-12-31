@@ -39,9 +39,7 @@ public class SkillEvents implements Listener {
 
         if ( player.isSneaking() ) return;
 
-        event.setCancelled( true );
-
-        if (CustomConfigRegions.isInRegion(player, block) && !player.hasPermission("SaltySkies.region.*")) {
+        if ( !CustomConfigRegions.isInRegion(player, block) && !player.hasPermission("SaltySkies.region.*") ) {
 
             event.setCancelled(true);
 
@@ -55,14 +53,17 @@ public class SkillEvents implements Listener {
 
         if ( Arrays.stream( FARMING_BLOCKS.values() ).anyMatch(farming_blocks -> farming_blocks.toString().equalsIgnoreCase( block.getType( ).name( ) ) ) ) {
 
+            event.setCancelled( true );
             plugin.getFarmingEvent().farmBreak( event );
 
         } else if ( Arrays.stream( MINING_BLOCKS.values() ).anyMatch( mining_blocks -> mining_blocks.toString().equalsIgnoreCase( block.getType( ).name( ) ) ) ) {
 
+            event.setCancelled( true );
             plugin.getMiningEvent().miningBreak( event );
 
         } else if ( Arrays.stream( LUMBERJACK_BLOCKS.values() ).anyMatch(lumberjack_blocks -> lumberjack_blocks.toString().equalsIgnoreCase( block.getType( ).name( ) ) ) ) {
 
+            event.setCancelled( true );
             plugin.getWoodcuttingEvent().logBreak( event );
 
         }

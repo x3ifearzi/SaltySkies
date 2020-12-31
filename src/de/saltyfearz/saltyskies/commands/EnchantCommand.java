@@ -10,6 +10,7 @@ import de.saltyfearz.saltyskies.enums.SHOVELS;
 import de.saltyfearz.saltyskies.enums.SWORDS;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -78,7 +79,7 @@ public class EnchantCommand {
 
         } else if ( isEnchantment == CustomEnchantments.HEMORRHAGE ) {
 
-            if ( player.getInventory( ).getItemInMainHand( ).getType( ).name( ).equals( toolsHemorrhage_toolsExhaust_toolsExplosion.iterator( ).next( ) ) ) {
+            if ( toolsHemorrhage_toolsExhaust_toolsExplosion.stream().iterator().next().contains( player.getInventory( ).getItemInMainHand( ).getType( ).name( ) ) ) {
 
                 addEnchantment( player, isEnchantment, "Hemorrhage", level( level, "5" ) );
 
@@ -152,11 +153,11 @@ public class EnchantCommand {
 
         final String lore = "§7" + loreName + " " + level;
 
+        player.getInventory().getItemInMainHand().addUnsafeEnchantment( enchantment, intLevel);
+
         ItemStack iS = player.getInventory().getItemInMainHand();
 
         ItemMeta iM = iS.getItemMeta();
-
-        iS.addEnchantment( enchantment, intLevel );
 
         if ( iM == null ) return;
 
@@ -168,6 +169,7 @@ public class EnchantCommand {
 
             iM.setLore( iM.getLore() );
             iM.getLore().add( lore );
+
         }
 
         iS.setItemMeta( iM );

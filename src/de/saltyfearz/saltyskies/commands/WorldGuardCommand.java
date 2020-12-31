@@ -5,6 +5,10 @@ import de.minnymin.command.CommandArgs;
 import de.saltyfearz.saltyskies.SaltySkies;
 import de.saltyfearz.saltyskies.configs.CustomConfigRegions;
 import de.saltyfearz.saltyskies.regions.Cuboid;
+import de.saltyfearz.saltyskies.skyblock.Coordinates;
+import de.saltyfearz.saltyskies.skyblock.Island;
+import de.saltyfearz.saltyskies.skyblock.IslandLogic;
+import de.saltyfearz.saltyskies.skyblock.IslandTools;
 import de.saltyfearz.saltyskies.utils.ReplaceHolder;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -117,11 +121,11 @@ public class WorldGuardCommand implements Listener {
         }
     }
 
-    public void onDefine ( final Player player ) {
+    public void onDefine ( final Player player, final IslandLogic island ) {
 
-        pos1.put( player, player.getLocation().add( 50, 255, 50 ) );
+        pos1.put( player, player.getLocation().add( island.getPositionX() + 50, 255, island.getPositionZ() + 50 ) );
 
-        pos2.put( player, player.getLocation().subtract( 50, 255, 50 ) );
+        pos2.put( player, player.getLocation().subtract( island.getPositionX() + 50, 255, island.getPositionZ() + 50 ) );
 
     }
 }

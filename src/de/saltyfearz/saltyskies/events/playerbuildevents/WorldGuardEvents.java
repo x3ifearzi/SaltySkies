@@ -2,6 +2,7 @@ package de.saltyfearz.saltyskies.events.playerbuildevents;
 
 import de.saltyfearz.saltyskies.SaltySkies;
 import de.saltyfearz.saltyskies.commands.BuildCommand;
+import de.saltyfearz.saltyskies.commands.WorldGuardCommand;
 import de.saltyfearz.saltyskies.configs.CustomConfigRegions;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -21,12 +22,9 @@ public class WorldGuardEvents implements Listener {
 
     private final SaltySkies plugin;
 
-    private Map<UUID, HashMap<Location, Location>> userRegions;
-
     public WorldGuardEvents( final SaltySkies plugin, Map<UUID, HashMap<Location, Location>> userRegions  ) {
 
         this.plugin = plugin;
-        this.userRegions = userRegions;
 
     }
 
@@ -36,9 +34,7 @@ public class WorldGuardEvents implements Listener {
         final Block block   = event.getBlock();
         final Player player = event.getPlayer();
 
-        if (player.hasPermission("SaltySkied.region.*")) return;
-
-        if (CustomConfigRegions.isInRegion(player, block)) {
+        if ( !CustomConfigRegions.isInRegion( player, block ) && !player.hasPermission("SaltySkies.region.*")) {
 
             event.setCancelled( true );
 

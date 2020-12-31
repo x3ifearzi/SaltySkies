@@ -1,6 +1,7 @@
 package de.saltyfearz.saltyskies.configs;
 
 import de.saltyfearz.saltyskies.SaltySkies;
+import de.saltyfearz.saltyskies.commands.WorldGuardCommand;
 import de.saltyfearz.saltyskies.mysql.CreateConnectionSQL;
 import de.saltyfearz.saltyskies.mysql.ResultSQL;
 import de.saltyfearz.saltyskies.mysql.UpdateSQL;
@@ -13,6 +14,9 @@ import org.bukkit.entity.Player;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.UUID;
 
 public class CustomConfigRegions {
 
@@ -35,40 +39,46 @@ public class CustomConfigRegions {
 
     }
 
-    public static ArrayList<Location> getLocation(final Player player, final Block eventBlock) {
+    public static HashMap<Player, ArrayList<Location>> getLocation(final Player player, final Block eventBlock) {
 
-        if (eventBlock == null ) return new ArrayList<>();
+        if (eventBlock == null ) return new HashMap<>();
 
-            final String getRegion = "SELECT `WORLDNAME`,`POSITIONX_1`,`POSITIONY_1`,`POSITIONZ_1`,`POSITIONX_2`,`POSITIONY_2`,`POSITIONZ_2` FROM `REGIONS` WHERE `POSITIONX_1` >= " + eventBlock.getX() + " AND `POSITIONX_2` <= " + eventBlock.getX() + " AND `POSITIONZ_1` >= " + eventBlock.getZ() + " AND `POSITIONZ_2` <= " + eventBlock.getZ() + " AND WORLDNAME = '" + player.getWorld().getName() + "';";
+            final String getRegion = "SELECT `REGIONNAME`,`WORLDNAME`,`POSITIONX_1`,`POSITIONY_1`,`POSITIONZ_1`,`POSITIONX_2`,`POSITIONY_2`,`POSITIONZ_2` FROM `REGIONS` WHERE `POSITIONX_1` >= " + eventBlock.getX() + " AND `POSITIONX_2` <= " + eventBlock.getX() + " AND `POSITIONZ_1` >= " + eventBlock.getZ() + " AND `POSITIONZ_2` <= " + eventBlock.getZ() + " AND WORLDNAME = '" + player.getWorld().getName() + "';";
 
         try {
 
             ResultSet result = ResultSQL.resultSQL( getRegion, CreateConnectionSQL.getConnection( ) );
 
             if (result.next()) {
-                final World world = Bukkit.getServer().getWorld(result.getString(1));
+                final World world = Bukkit.getServer().getWorld(result.getString(2));
 
-                final double posX_1 = result.getDouble(2);
-                final double posY_1 = result.getDouble(3);
-                final double posZ_1 = result.getDouble(4);
+                final double posX_1 = result.getDouble(3);
+                final double posY_1 = result.getDouble(4);
+                final double posZ_1 = result.getDouble(5);
 
-                final double posX_2 = result.getDouble(5);
-                final double posY_2 = result.getDouble(6);
-                final double posZ_2 = result.getDouble(7);
+                final double posX_2 = result.getDouble(6);
+                final double posY_2 = result.getDouble(7);
+                final double posZ_2 = result.getDouble(8);
 
                 ArrayList<Location> locations = new ArrayList<>();
 
                 locations.add(0, new Location(world, posX_1, posY_1, posZ_1));
                 locations.add(1, new Location(world, posX_2, posY_2, posZ_2));
 
-                return locations;
+                final Player ownerOfRegion = Bukkit.getPlayer(result.getString(1));
+
+                HashMap<Player, ArrayList<Location>> getLocation = new HashMap<>();
+
+                getLocation.put( ownerOfRegion, locations);
+
+                return getLocation;
             } else {
-                return null;
+                return new HashMap<>();
             }
         } catch ( SQLException exc ) {
 
             exc.printStackTrace();
-            return null;
+            return new HashMap<>();
 
         }
 
@@ -76,10 +86,16 @@ public class CustomConfigRegions {
 
     public static boolean isInRegion(final Player player, final Block block) {
 
-        final ArrayList<Location> locations = CustomConfigRegions.getLocation(player, block);
+        final ArrayList<Location> locations = Objects.requireNonNull(CustomConfigRegions.getLocation(player, block)).get(player);
         final Location loc  = block.getLocation();
 
         if (locations != null) {
+
+            if (Objects.requireNonNull(CustomConfigRegions.getLocation(player, block)).containsKey( player )) {
+
+                return true;
+
+            }
 
             final Location locA = locations.get(0);
             final Location locB = locations.get(1);

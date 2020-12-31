@@ -1,6 +1,7 @@
 package de.saltyfearz.saltyskies.enchantments;
 
 import de.saltyfearz.saltyskies.SaltySkies;
+import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -24,15 +25,17 @@ public class HemorrhageEvent implements Listener {
 
         final ItemStack iS = player.getInventory().getItemInMainHand();
 
-        final int level = iS.getEnchantments().values().iterator().next();
-
         if ( ! iS.getEnchantments().containsKey( Enchantment.getByKey( CustomEnchantments.HEMORRHAGE.getKey( ) ) )) return;
+
+        final int level = iS.getEnchantments().values().iterator().next();
 
         if ( Math.random() > 0.05 * level ) return;
 
         final LivingEntity victim = ( LivingEntity ) event.getEntity();
 
         player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "enchant-command", "hemorrhage" ) );
+
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> victim.damage(2), 20, level);
 
         if ( victim instanceof Player ) victim.sendMessage( plugin.getMsgDE().getMessageInfoDE( "enchant-command", "getHemorrhage" ) );
 

@@ -54,12 +54,12 @@ public class EnchantmentWrapper extends Enchantment {
 
     @Override
     public boolean conflictsWith ( Enchantment enchantment) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean canEnchantItem ( ItemStack itemStack) {
-        return false;
+        return true;
     }
 
 }

@@ -108,9 +108,13 @@ public class SpawnCommand {
             + "', PositionX = '" + posX + "', PositionY = '"
             + posY + "', PositionZ = '" + posZ + "', PositionPitch = '" + posPitch + "', PositionYaw = '" + posYaw + "'";
 
+    final String initializeRegion = "INSERT INTO REGIONS ( OWNERUUID, REGIONNAME, WORLDNAME, POSITIONX_1, POSITIONY_1, POSITIONZ_1, POSITIONX_2, POSITIONY_2, POSITIONZ_2 ) VALUES ('skyblock-spawn', 'Skyblock-Spawn', 'Skyblock', " +
+            ( ( Double.parseDouble( posX ) + 50 ) / 2 ) + ", " + 255 + ", " + ( ( Double.parseDouble( posZ ) + 50 ) / 2 ) + ", " + ( ( Double.parseDouble( posX ) + 50 ) / 2 ) * -1 + ", " + 0 + ", " + ( ( Double.parseDouble( posX ) + 50 ) / 2 ) * -1 + ");";
     try {
 
-      return UpdateSQL.updateSQL(initializeSpawn, CreateConnectionSQL.getConnection());
+      UpdateSQL.updateSQL( initializeRegion, CreateConnectionSQL.getConnection() );
+
+      return UpdateSQL.updateSQL( initializeSpawn, CreateConnectionSQL.getConnection() );
 
     } catch (SQLException exc) {
 

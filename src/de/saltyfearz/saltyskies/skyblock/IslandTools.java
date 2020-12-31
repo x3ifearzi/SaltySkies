@@ -1,19 +1,17 @@
 package de.saltyfearz.saltyskies.skyblock;
 
 import de.saltyfearz.saltyskies.SaltySkies;
+import de.saltyfearz.saltyskies.commands.WorldGuardCommand;
+import de.saltyfearz.saltyskies.configs.CustomConfigRegions;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class IslandTools {
@@ -26,7 +24,7 @@ public class IslandTools {
 
         Coordinates coords = new Coordinates( posX, posZ );
 
-        final int placeBetweenIslands = 400;
+        final int placeBetweenIslands = 150;
 
         if ( posX < posZ ) {
 
@@ -65,41 +63,13 @@ public class IslandTools {
 
     }
 
-    public void generateIsland ( final int posX, final int posZ ) {
+    public void generateIsland ( final int posX, final int posZ, final Player player, final IslandLogic island ) {
 
         int posY = 64;
 
         org.bukkit.World worldNormal = Bukkit.getServer( ).getWorld( "Skyblock" );
 
         Location loc = new Location( worldNormal, posX, posY, posZ );
-
-/*        WorldEditPlugin wEPl = ( WorldEditPlugin ) Bukkit.getPluginManager( ).getPlugin( "WorldEdit" ); //TODO
-
-        File schematic = new File( "plugins/WorldEdit/schematics/SkyBlockNormal.schem" );
-
-        ClipboardFormat format = ClipboardFormats.findByFile( schematic );
-
-        World world = BukkitAdapter.adapt( worldNormal );
-
-        Clipboard clipboard = null;
-
-        try {
-
-            ClipboardReader reader = format.getReader( new FileInputStream( schematic ) );
-
-            clipboard = reader.read( );
-
-            EditSession editSession = wEPl.getWorldEdit( ).getEditSessionFactory( ).getEditSession( world, -1 );
-
-            Operation operation = new ClipboardHolder( clipboard ).createPaste( editSession ).to( BlockVector3.at( posX, posY, posZ ) ).ignoreAirBlocks( true ).build( );
-
-            Operations.complete( operation );
-
-        } catch ( IOException | WorldEditException exc ) {
-
-            exc.printStackTrace( );
-
-        }*/
 
         Block blockToChange = worldNormal.getBlockAt( posX + 2, posY, posZ );
 
@@ -138,6 +108,14 @@ public class IslandTools {
         blockToChange = worldNormal.getBlockAt( posX, posY - 1, posZ );
 
         blockToChange.setType( Material.GLOWSTONE );
+
+        WorldGuardCommand wG = new WorldGuardCommand( plugin );
+
+        wG.onDefine( player, island );
+
+        CustomConfigRegions.addRegion( WorldGuardCommand.pos1.get( player ), WorldGuardCommand.pos2.get( player ), player, player.getDisplayName() );
+
+        player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "island-command", "islandRegionCreatedSuccessfully" ) );
 
     }
 
