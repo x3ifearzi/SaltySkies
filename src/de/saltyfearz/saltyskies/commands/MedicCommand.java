@@ -32,7 +32,7 @@ public class MedicCommand {
 
         if ( arg.length == 0 ) {
 
-            player.setHealth( Objects.requireNonNull( player.getAttribute( Attribute.GENERIC_MAX_HEALTH ) ).getDefaultValue() );
+            player.setHealth( player.getMaxHealth() );
 
             player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "heal-command", "heal" ) );
 
@@ -87,7 +87,7 @@ public class MedicCommand {
 
             }
 
-            target.setHealth( 20 );
+            target.setFoodLevel( 20 );
 
             target.sendMessage( plugin.getMsgDE().getMessageInfoDE( "feed-command", "feed" ) );
 

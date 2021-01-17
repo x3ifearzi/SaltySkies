@@ -34,7 +34,7 @@ messages:
     noSelfPaying: §7 Du kannst dir keine Fearzy's selber überweisen.
     syntax-bal: §4 [SYNTAX] §c /money [<player>]
     syntax-pay: §4 [SYNTAX] §c /pay <player> <fearzy>
-    regex: §7 Du darfst nur folgende Zeichen vewenden\U+003A §f'§c,§f'§7, §f'§c0-9§f'.
+    regex: §7 Du darfst nur folgende Zeichen vewenden [§f'§c.§f'§7, §f'§c0-9§f'].
   shop-command:
     successItemSold: §7 Du hast einen Gegenstand erfolgreich verkauft.
     successItemBought: §7 Du hast einen Gegenstand erfolgreich gekauft.

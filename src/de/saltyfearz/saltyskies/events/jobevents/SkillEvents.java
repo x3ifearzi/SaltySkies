@@ -37,8 +37,6 @@ public class SkillEvents implements Listener {
 
         final Player player = event.getPlayer();
 
-        if ( player.isSneaking() ) return;
-
         if ( !CustomConfigRegions.isInRegion(player, block) && !player.hasPermission("SaltySkies.region.*") ) {
 
             event.setCancelled(true);
@@ -50,6 +48,8 @@ public class SkillEvents implements Listener {
         }
 
         if ( !BuildCommand.build.contains( player.getUniqueId( ) ) ) return;
+
+        if ( player.isSneaking() ) return;
 
         if ( Arrays.stream( FARMING_BLOCKS.values() ).anyMatch(farming_blocks -> farming_blocks.toString().equalsIgnoreCase( block.getType( ).name( ) ) ) ) {
 

@@ -17,7 +17,7 @@ public class MoneySQL {
 
   public static void executePlayerSQL () throws SQLException {
 
-    final String createMoneyTable = "PLAYERMONEY ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, MONEY double, PRIMARY KEY ( ID ), FOREIGN KEY ( PLAYERUUID ) REFERENCES PLAYERDATA ( PLAYERUUID ));";
+    final String createMoneyTable = "PLAYERMONEY ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, MONEY double, PLAYERUUID varchar( 48 ), PRIMARY KEY ( ID ));";
 
     CreateTableSQL.createTableSQL(createMoneyTable, con);
 

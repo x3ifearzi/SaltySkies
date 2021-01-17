@@ -2,7 +2,6 @@ package de.saltyfearz.saltyskies.events.playerbuildevents;
 
 import de.saltyfearz.saltyskies.SaltySkies;
 import de.saltyfearz.saltyskies.commands.BuildCommand;
-import de.saltyfearz.saltyskies.commands.WorldGuardCommand;
 import de.saltyfearz.saltyskies.configs.CustomConfigRegions;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -11,10 +10,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 

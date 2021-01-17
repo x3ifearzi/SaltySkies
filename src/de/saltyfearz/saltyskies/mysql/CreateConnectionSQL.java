@@ -15,10 +15,16 @@ public class CreateConnectionSQL {
 
   public static void connect () {
 
-    String hostAddress = "localhost";
+/*    String hostAddress = "localhost";
     String database = "vaince";
     String username = "root";
     String password = "";
+    int portAddress = 3306;*/
+
+    String hostAddress = "sql7.freemysqlhosting.net";
+    String database = "sql7386750";
+    String username = "sql7386750";
+    String password = "Zx84VPLZ2N";
     int portAddress = 3306;
 
     try {

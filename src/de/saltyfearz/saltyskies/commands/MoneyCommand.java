@@ -10,6 +10,7 @@ import de.saltyfearz.saltyskies.utils.ReplaceHolder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MoneyCommand {
@@ -85,7 +86,7 @@ public class MoneyCommand {
 
         }
 
-        if ( !arg[ 1 ].matches( "^[0-9]*$[,][0-9][0-9]" ) ) {
+        if ( !arg[ 1 ].matches( "^[0-9]*[.]?[0-9]*$" ) ) {
 
             player.sendMessage( plugin.getMsgDE( ).getMessageErrorDE( "fearzy-system", "regex" ) );
             return;
@@ -101,7 +102,7 @@ public class MoneyCommand {
 
         removeFearzys( player, Double.parseDouble( arg[ 1 ] ) );
 
-        addFearzys( player, Double.parseDouble( arg[ 1 ] ) );
+        addFearzys( target, Double.parseDouble( arg[ 1 ] ) );
 
         player.sendMessage( ReplaceHolder.replaceHolderTargetFearzys( Double.parseDouble( arg[ 1 ] ), target, plugin.getMsgDE( ).getMessageSuccessDE( "fearzy-system", "sendFearzySuccess" ) ) );
 
@@ -143,15 +144,18 @@ public class MoneyCommand {
 
     public double getFearzy ( final Player player ) {
 
-        final String getBalance = "SELECT MONEY FROM PLAYERMONEY WHERE PLAYERUUID = " + player.getUniqueId( ).toString( ).toLowerCase( );
+        final String getBalance = "SELECT MONEY FROM PLAYERMONEY WHERE PLAYERUUID = '" + player.getUniqueId( ).toString( ) + "';";
 
         try {
 
-            return Double.parseDouble( ResultSQL.resultSQL( getBalance, CreateConnectionSQL.getConnection( ) ).toString( ) );
+            ResultSet result = ResultSQL.resultSQL( getBalance, CreateConnectionSQL.getConnection( ) );
+
+            if ( result.next() ) return result.getDouble("MONEY");
+
+            return -1;
 
         } catch ( SQLException exc ) {
 
-            exc.printStackTrace( );
             return -1;
 
         }
@@ -164,7 +168,7 @@ public class MoneyCommand {
 
         getMoney = getMoney - removingBalance;
 
-        final String removeBalance = "UPDATE PLAYERMONEY SET MONEY = " + getMoney + " WHERE PLAYERUUID = " + player.getUniqueId( ).toString( ).toLowerCase( );
+        final String removeBalance = "UPDATE PLAYERMONEY SET MONEY = " + getMoney + " WHERE PLAYERUUID = '" + player.getUniqueId( ).toString( ).toLowerCase( ) + "';";
 
         try {
 
@@ -183,7 +187,7 @@ public class MoneyCommand {
 
         getMoney = getMoney + addingBalance;
 
-        final String addBalance = "UPDATE PLAYERMONEY SET MONEY = " + getMoney + " WHERE PLAYERUUID = " + player.getUniqueId( ).toString( ).toLowerCase( );
+        final String addBalance = "UPDATE PLAYERMONEY SET MONEY = " + getMoney + " WHERE PLAYERUUID = '" + player.getUniqueId( ).toString( ).toLowerCase( ) + "';";
 
         try {
 
@@ -198,16 +202,23 @@ public class MoneyCommand {
 
     public void setFearzys ( final Player player, final double setBal ) {
 
-        final String setBalance = "UPDATE PLAYERMONEY SET MONEY = " + setBal + " WHERE PLAYERUUID = " + player.getUniqueId().toString().toLowerCase();
-
+        final String setBalance = "UPDATE PLAYERMONEY SET MONEY = " + setBal + " WHERE PLAYERUUID = " + player.getUniqueId().toString() + "'";
+        final String insertPlayerMoney = "INSERT INTO PLAYERMONEY ( MONEY, PLAYERUUID ) VALUES ( " + 1000.00 + ", '" + player.getUniqueId().toString() + "');";
         try {
 
-            UpdateSQL.updateSQL( setBalance, CreateConnectionSQL.getConnection( ) );
+             UpdateSQL.updateSQL( setBalance, CreateConnectionSQL.getConnection( ) );
 
         } catch ( SQLException exc ) {
 
-            exc.printStackTrace( );
+            try {
 
+                UpdateSQL.updateSQL( insertPlayerMoney, CreateConnectionSQL.getConnection( ) );
+
+            } catch ( SQLException exc2 ) {
+
+                exc2.printStackTrace();
+
+            }
         }
     }
 }

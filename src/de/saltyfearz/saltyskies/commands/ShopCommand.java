@@ -33,6 +33,7 @@ public class ShopCommand {
 
         final Player player = args.getPlayer();
 
+        viewStartShop( player );
     }
 
     public void viewStartShop( final Player player ) {

@@ -39,6 +39,8 @@ public class SaltySkies extends JavaPlugin {
 
   private MessageHandlerDE msgDE;
 
+  private EnchantCommand eC;
+
   private FarmingEvent farmingEvent;
   private MiningEvent miningEvent;
   private WoodcuttingEvent woodcuttingEvent;
@@ -223,7 +225,7 @@ public class SaltySkies extends JavaPlugin {
     cfw.registerCommands( new TeleportCommand( this ) );
     cfw.registerCommands( new PunishCommand( this ) );
     cfw.registerCommands( new SkyblockCommand( this ));
-
+    cfw.registerCommands( new ShopCommand( this ));
   }
 
   private void registerListenerToServer ( ) {

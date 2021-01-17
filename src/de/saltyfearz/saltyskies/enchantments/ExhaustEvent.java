@@ -30,7 +30,7 @@ public class ExhaustEvent implements Listener {
 
         if ( !iS.getEnchantments().containsKey( Enchantment.getByKey( CustomEnchantments.EXHAUST.getKey( ) ) ) ) return;
 
-        level = iS.getEnchantments().get( Enchantment.getByKey( CustomEnchantments.EXPHUNTER.getKey( ) ) );
+        level = iS.getEnchantments().get( Enchantment.getByKey( CustomEnchantments.EXHAUST.getKey( ) ) );
 
         if ( Math.random() > ( 0.2 * level ) ) return;
 

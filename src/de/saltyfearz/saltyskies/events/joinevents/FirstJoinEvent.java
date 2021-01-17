@@ -77,7 +77,7 @@ public class FirstJoinEvent implements Listener {
 
   public boolean checkIfPlayerExists( final Player player ) {
 
-    final String searchPlayer = "SELECT * FROM PLAYERDATA WHERE PLAYERUUID = " + player.getUniqueId( ).toString( ).toLowerCase( );
+    final String searchPlayer = "SELECT * FROM PLAYERDATA WHERE PLAYERUUID = '" + player.getUniqueId( ).toString( ) + "'";
 
     try {
 
@@ -107,7 +107,7 @@ public class FirstJoinEvent implements Listener {
 
   public void setPlayerMoney ( final Player player ) {
 
-    final String insertPlayerMoney = "INSERT INTO PLAYERMONEY ( MONEY ) VALUES ( " + 1000.00 + " ) WHERE PLAYERUUID = " + player.getUniqueId( ).toString( ).toLowerCase( );
+    final String insertPlayerMoney = "INSERT INTO PLAYERMONEY ( MONEY, PLAYERUUID ) VALUES ( " + 1000.00 + ", '" + player.getUniqueId( ).toString( ).toLowerCase( ) + "');";
 
     try {
 

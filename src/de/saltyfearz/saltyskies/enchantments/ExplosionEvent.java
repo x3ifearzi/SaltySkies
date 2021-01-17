@@ -18,7 +18,17 @@ public class ExplosionEvent implements Listener {
     @EventHandler
     public void onHitExplosion ( EntityDamageByEntityEvent event ) {
 
-        Player player = ( ( Player ) event.getDamager() ).getPlayer();
+        Player player;
+        try {
+
+            player = ( ( Player ) event.getDamager() ).getPlayer();
+
+        } catch ( ClassCastException exc ) {
+
+            //im Falle eines Mobangriffes
+            return;
+
+        }
 
         ItemStack iS = player.getInventory().getItemInMainHand();
 
