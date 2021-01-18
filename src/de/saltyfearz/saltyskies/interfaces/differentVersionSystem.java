@@ -1,6 +1,7 @@
 package de.saltyfearz.saltyskies.interfaces;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -15,6 +16,8 @@ public interface differentVersionSystem {
     public ItemStack item( final Material material, final String displayName );
 
     public ItemStack itemWithFlags( final Material material, final String displayName );
+
+    public ItemStack skull( final Material material, final String displayName, final String singleLore, final Player playerName );
 
     public void addItemFlags( final ItemMeta iM );
 

@@ -1,7 +1,6 @@
-/*
 package de.saltyfearz.saltyskies.utils;
 
-import me.x3ifearzi.skyblock.Main;
+import de.saltyfearz.saltyskies.SaltySkies;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,9 +17,9 @@ import java.util.HashMap;
 
 public class AInventory implements Listener{
   
-  private Main plugin;
+  private SaltySkies plugin;
   
-  public AInventory(final Main plugin) { this.plugin = plugin; }
+  public AInventory(final SaltySkies plugin) { this.plugin = plugin; }
   
   public static class AnvilClickEvent {
     
@@ -206,4 +205,4 @@ public class AInventory implements Listener{
     items.put(slot, item);
   }
   
-}*/
+}

@@ -1,19 +1,17 @@
 package de.saltyfearz.saltyskies.items;
 
 import de.saltyfearz.saltyskies.interfaces.differentVersionSystem;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.config.LoggerConfig;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
-public class v_1_16_2 implements differentVersionSystem {
+public class v_1_16_1 implements differentVersionSystem {
 
     @Override
     public ItemStack item( final Material material, final String displayName, final String singleLore ) {
@@ -103,6 +101,27 @@ public class v_1_16_2 implements differentVersionSystem {
 
         return iS;
 
+
+    }
+    
+    @Override
+    public ItemStack skull( final Material material, final String displayName, final String lore, final Player player ) {
+
+        final ItemStack iS = new ItemStack( material );
+
+        final SkullMeta sM = ( SkullMeta ) iS.getItemMeta();
+
+        if ( sM == null ) return null;
+
+        sM.setOwningPlayer( Bukkit.getOfflinePlayer( player.getUniqueId() ) );
+
+        sM.setDisplayName( player.getName() );
+
+        sM.setLore( Collections.singletonList( lore ) );
+
+        iS.setItemMeta( sM );
+
+        return iS;
 
     }
 
