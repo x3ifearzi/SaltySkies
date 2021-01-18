@@ -5,8 +5,14 @@ import de.saltyfearz.saltyskies.commands.ShopCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class InventoryShopClickEvent implements Listener {
 
@@ -25,8 +31,6 @@ public class InventoryShopClickEvent implements Listener {
 
         event.setCancelled( true );
         player.updateInventory();
-
-        double money = shopObj.getMoney();
 
         final ItemStack clickedI = event.getCurrentItem();
 
@@ -58,5 +62,85 @@ public class InventoryShopClickEvent implements Listener {
 
             }
         }
+    }
+
+    @EventHandler
+    public void onShopBuyEvent ( final InventoryClickEvent event ) {
+
+        if (! event.getView().getTitle().startsWith("§4§lSHOP")) return;
+
+        final Player    player    = (Player) event.getWhoClicked();
+
+        final ClickType clickType = event.getClick();
+
+        final ItemStack clickedI = event.getCurrentItem();
+
+        if ( clickedI == null || clickedI.getItemMeta() == null ) return;
+
+        final String nameClickedI = clickedI.getItemMeta().getDisplayName();
+
+        final ShopCommand shopObj = new ShopCommand( plugin );
+
+        event.setCancelled( true );
+        player.updateInventory();
+
+        if ( clickType.isLeftClick() && nameClickedI.startsWith( "§6" ) ) {
+
+            double iCosts = shopObj.buyItems( nameClickedI.replace( "§6", "" ).replace( " ", "_" ) );
+
+            if ( player.getInventory().firstEmpty() <= - 1 ) {
+
+                player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "shop-command", "notEnoughSpace" ) );
+                return;
+
+            }
+
+            if ( shopObj.reduceMoney( iCosts, player ) ) {
+
+                ItemMeta iM = clickedI.getItemMeta();
+
+                iM.setDisplayName(  iM.getDisplayName().replace( "&6", "&d" ) );
+
+                iM.setLore( null );
+
+                clickedI.setItemMeta( iM );
+
+                player.getInventory().addItem( clickedI );
+
+                player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "shop-command", "successItemBought" ) ); //TODO MIT KONTOSTAND NOCH
+
+                shopObj.addMoney( iCosts, player );
+
+                player.updateInventory();
+
+            } else {
+
+                player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "shop-command", "notEnoughFearzys" ) );
+
+            }
+        } else if ( clickType.isRightClick() && nameClickedI.startsWith( "&6" ) ) {
+
+            double iSellPrice = shopObj.sellItems( nameClickedI.replace( "§6", "" ).replace( " ", "_" ) );
+
+            for ( ItemStack iS : player.getOpenInventory().getBottomInventory().getContents() ) {
+
+                if ( clickedI == iS ) {
+
+                    final int amountOfSoldI = player.getOpenInventory().getBottomInventory().all( iS ).size();
+
+                    player.getOpenInventory().getBottomInventory().removeItem( iS );
+
+                    player.updateInventory();
+
+                    shopObj.addMoney( ( iSellPrice * amountOfSoldI ), player );
+
+                    player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "shop-command", "successItemSold" ) ); //TODO MIT KONTOSTAND NOCH
+                    break;
+
+                }
+
+            }
+        }
+
     }
 }

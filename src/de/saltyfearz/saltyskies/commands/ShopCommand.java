@@ -455,13 +455,13 @@ public class ShopCommand {
 
     }
 
-    private double buyItems ( String item ) {
+    public double buyItems ( String item ) {
 
         return Double.parseDouble( Objects.requireNonNull( plugin.getiCS( ).getFile( ).get( "shop.items." + item + ".item_buy_price" ) ).toString( ) );
 
     }
 
-    private double sellItems ( String item ) {
+    public double sellItems ( String item ) {
 
         return Double.parseDouble( Objects.requireNonNull( plugin.getiCS( ).getFile( ).get( "shop.items." + item + ".item_sell_price" ) ).toString( ) );
 
@@ -472,7 +472,7 @@ public class ShopCommand {
         return money;
     }
 
-    private boolean reduceMoney ( final double costs, final Player player ) {
+    public boolean reduceMoney ( final double costs, final Player player ) {
 
         if ( money >= costs ) {
 
@@ -490,7 +490,7 @@ public class ShopCommand {
 
     }
 
-    private void addMoney ( final double win, final Player player ) {
+    public void addMoney ( final double win, final Player player ) {
 
         money = money + win;
 
@@ -498,7 +498,7 @@ public class ShopCommand {
 
     }
 
-    private void setMoney ( final double money, final Player player ) {
+    public void setMoney ( final double money, final Player player ) {
 
         try {
 
