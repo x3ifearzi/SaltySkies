@@ -1,0 +1,16 @@
+
+E	java:S108")Either remove or fill this block of code.(Çà±ä8ş¥§Œå.
+E	java:S108")Either remove or fill this block of code.(í¸¡Ù8âÆµŒå.
+M
+java:S1481"+Remove this unused "target" local variable.(äÿ•Üûÿÿÿÿ8™¥ŒŒå.
+J	java:S108")Either remove or fill this block of code.(ôÕŞıÿÿÿÿ8”•¶Œå.
+R
+java:S1128"0Remove this unused import 'org.bukkit.Material'.(ÜÎ¬©ùÿÿÿÿ8¤¢½Œå.
+]
+java:S1128	";Remove this unused import 'org.bukkit.inventory.ItemStack'.(‰‚ö½ùÿÿÿÿ8¤¢½Œå.
+i
+java:S1871"LThis branch's code block is the same as the block for the branch on line 25.(í¸¡Ù8âÆµŒå.
+\
+java:S1854":Remove this useless assignment to local variable "target".(äÿ•Üûÿÿÿÿ8™¥ŒŒå.
+n
+java:S1871"LThis branch's code block is the same as the block for the branch on line 25.(ôÕŞıÿÿÿÿ8”•¶Œå.

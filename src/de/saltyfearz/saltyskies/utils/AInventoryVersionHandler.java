@@ -1,7 +1,5 @@
-/*
 package de.saltyfearz.saltyskies.utils;
 
-import me.x3ifearzi.skyblock.utils.AInventory.AnvilSlot;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -14,6 +12,5 @@ public interface AInventoryVersionHandler {
 
     public void loadClasses();
 
-    public void open(Player player, HashMap<AnvilSlot, ItemStack> items);
+    public void open(Player player, HashMap<AInventory.AnvilSlot, ItemStack> items);
 }
-*/

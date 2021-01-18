@@ -3,8 +3,10 @@ package de.saltyfearz.saltyskies;
 import de.minnymin.command.CommandFramework;
 import de.saltyfearz.saltyskies.commands.*;
 import de.saltyfearz.saltyskies.configs.CustomConfigMessager;
+import de.saltyfearz.saltyskies.configs.ItemConfigShop;
 import de.saltyfearz.saltyskies.enchantments.*;
 import de.saltyfearz.saltyskies.events.chatevents.PlayerChatEvent;
+import de.saltyfearz.saltyskies.events.inventoryclickevents.InventoryPunishClickEvent;
 import de.saltyfearz.saltyskies.events.jobevents.FarmingEvent;
 import de.saltyfearz.saltyskies.events.jobevents.MiningEvent;
 import de.saltyfearz.saltyskies.events.jobevents.SkillEvents;
@@ -39,7 +41,7 @@ public class SaltySkies extends JavaPlugin {
 
   private MessageHandlerDE msgDE;
 
-  private EnchantCommand eC;
+  private ItemConfigShop iCS;
 
   private FarmingEvent farmingEvent;
   private MiningEvent miningEvent;
@@ -47,11 +49,11 @@ public class SaltySkies extends JavaPlugin {
 
   private WorldGuardCommand wG;
 
-  public static Map<UUID, HashMap<Location, Location>> userRegions = new LinkedHashMap<>();
+  protected static Map<UUID, HashMap<Location, Location>> userRegions = new LinkedHashMap<>();
 
   public static World skyblockWorld = null;
 
-  public HashMap < String, IslandLogic > playerIslands = new HashMap <>( );
+  public static HashMap < String, IslandLogic > playerIslands = new HashMap <>( );
 
   @Override
   public void onEnable ( ) {
@@ -64,9 +66,12 @@ public class SaltySkies extends JavaPlugin {
     try {
       executeTableCreations( );
 
-      MoneySQL.executePlayerSQL();
+      new MoneySQL().executeMoneySQL();
+
     } catch ( SQLException exc ) {
+
       exc.printStackTrace( );
+
     }
 
     this.configMessenger = new CustomConfigMessager( this );
@@ -77,9 +82,11 @@ public class SaltySkies extends JavaPlugin {
 
     this.wG = new WorldGuardCommand( this );
 
-    this.iLI = new InventoryLayoutItems( this );
+    this.iLI = new InventoryLayoutItems( );
 
     this.msgDE = new MessageHandlerDE( this );
+
+    this.iCS = new ItemConfigShop( this );
 
     registerConfigs( );
 
@@ -94,6 +101,8 @@ public class SaltySkies extends JavaPlugin {
 
   @Override
   public void onDisable ( ) {
+
+    if ( CreateConnectionSQL.getConnection() != null ) CreateConnectionSQL.disconnect();
 
   }
 
@@ -246,6 +255,7 @@ public class SaltySkies extends JavaPlugin {
     plManager.registerEvents( new MotdModifier( ), this );
 
     plManager.registerEvents( new SkillEvents( this ), this );
+    plManager.registerEvents( new InventoryPunishClickEvent( this ), this );
   }
 
   private void registerConfigs ( ) {
@@ -262,11 +272,7 @@ public class SaltySkies extends JavaPlugin {
 
     final String createPlayerTable = "PLAYERDATA (PLAYERUUID varchar ( 48 ), PLAYERNAME varchar ( 16 ), IP varchar ( 16 ), PRIMARY KEY ( PLAYERUUID ));";
 
-    final String createPlayerRankTable = "PLAYERRANKS ( PLAYERUUID varchar ( 48 ), RANK varchar ( 32 ), FOREIGN KEY ( PLAYERUUID ) REFERENCES PLAYERDATA ( PLAYERUUID ));";
-
     final String createPlayerPunishTable = "PLAYERPUNISH ( ID int (255) NOT NULL AUTO_INCREMENT, IS_BANNED boolean, IS_BANNED_UNTIL bigint, IS_MUTED boolean, IS_MUTED_UNTIL bigint, PLAYERUUID varchar ( 48 ), PRIMARY KEY ( ID ), FOREIGN KEY (PLAYERUUID) REFERENCES PLAYERDATA(PLAYERUUID));";
-
-    final String createPlayerMoneyTable = "PLAYERMONEY ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, MONEY double, PLAYERUUID varchar ( 48 ), PRIMARY KEY ( ID ), FOREIGN KEY (PLAYERUUID) REFERENCES PLAYERDATA(PLAYERUUID));";
 
     final String createRegionTable = "REGIONS ( ID int ( 255 ) AUTO_INCREMENT, OWNERUUID varchar ( 48 ), REGIONNAME varchar ( 32 ), WORLDNAME varchar ( 32 ), POSITIONX_1 double, POSITIONY_1 double, POSITIONZ_1 double, POSITIONX_2 double, POSITIONY_2 double, POSITIONZ_2 double, PRIMARY KEY ( ID ) );";
 
@@ -274,15 +280,19 @@ public class SaltySkies extends JavaPlugin {
 
     final String createSkyblockTable = "SKYBLOCKISLANDS ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, OWNERUUID varchar ( 48 ), ISLANDNAME varchar ( 32 ), POSITIONX double, POSITIONY double, POSITIONZ double, PRIMARY KEY ( ID ) );";
 
+    final String createRankTable = "RANKS (RANK varchar ( 16 ), LEVEL int ( 10 ), PRIMARY KEY ( LEVEL ) );";
+
+    final String createPlayerRank = "PLAYERRANK (PLAYERUUID varchar ( 48 ), RANK varchar ( 16 ), PRIMARY KEY ( PLAYERUUID ), FOREIGN KEY ( RANK ) REFERENCES RANKS ( RANK ) );";
+
     Connection con = CreateConnectionSQL.getConnection( );
 
     CreateTableSQL.createTableSQL( createSpawnTable, con );
     CreateTableSQL.createTableSQL( createPlayerTable, con );
-    CreateTableSQL.createTableSQL( createPlayerRankTable, con );
     CreateTableSQL.createTableSQL( createPlayerPunishTable, con );
-    CreateTableSQL.createTableSQL( createPlayerMoneyTable, con );
     CreateTableSQL.createTableSQL( createRegionTable, con );
     CreateTableSQL.createTableSQL( createSkyblockTable, con );
+    CreateTableSQL.createTableSQL( createRankTable, con );
+    CreateTableSQL.createTableSQL( createPlayerRank, con );
 
   }
 
@@ -298,6 +308,8 @@ public class SaltySkies extends JavaPlugin {
   public InventoryLayoutItems getiLI ( ) {
     return iLI;
   }
+
+  public ItemConfigShop getiCS ( ) { return iCS; }
 
   public WorldGuardCommand getWG ( ) {
     return wG;
