@@ -272,8 +272,6 @@ public class SaltySkies extends JavaPlugin {
 
     final String createPlayerTable = "PLAYERDATA (PLAYERUUID varchar ( 48 ), PLAYERNAME varchar ( 16 ), IP varchar ( 16 ), PRIMARY KEY ( PLAYERUUID ));";
 
-    final String createPlayerRankTable = "PLAYERRANKS ( PLAYERUUID varchar ( 48 ), RANK varchar ( 32 ), FOREIGN KEY ( PLAYERUUID ) REFERENCES PLAYERDATA ( PLAYERUUID ));";
-
     final String createPlayerPunishTable = "PLAYERPUNISH ( ID int (255) NOT NULL AUTO_INCREMENT, IS_BANNED boolean, IS_BANNED_UNTIL bigint, IS_MUTED boolean, IS_MUTED_UNTIL bigint, PLAYERUUID varchar ( 48 ), PRIMARY KEY ( ID ), FOREIGN KEY (PLAYERUUID) REFERENCES PLAYERDATA(PLAYERUUID));";
 
     final String createRegionTable = "REGIONS ( ID int ( 255 ) AUTO_INCREMENT, OWNERUUID varchar ( 48 ), REGIONNAME varchar ( 32 ), WORLDNAME varchar ( 32 ), POSITIONX_1 double, POSITIONY_1 double, POSITIONZ_1 double, POSITIONX_2 double, POSITIONY_2 double, POSITIONZ_2 double, PRIMARY KEY ( ID ) );";
@@ -282,14 +280,19 @@ public class SaltySkies extends JavaPlugin {
 
     final String createSkyblockTable = "SKYBLOCKISLANDS ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, OWNERUUID varchar ( 48 ), ISLANDNAME varchar ( 32 ), POSITIONX double, POSITIONY double, POSITIONZ double, PRIMARY KEY ( ID ) );";
 
+    final String createRankTable = "RANKS (RANK varchar ( 16 ), LEVEL int ( 10 ), PRIMARY KEY ( LEVEL ) );";
+
+    final String createPlayerRank = "PLAYERRANK (PLAYERUUID varchar ( 48 ), RANK varchar ( 16 ), PRIMARY KEY ( PLAYERUUID ), FOREIGN KEY ( RANK ) REFERENCES RANKS ( RANK ) );";
+
     Connection con = CreateConnectionSQL.getConnection( );
 
     CreateTableSQL.createTableSQL( createSpawnTable, con );
     CreateTableSQL.createTableSQL( createPlayerTable, con );
-    CreateTableSQL.createTableSQL( createPlayerRankTable, con );
     CreateTableSQL.createTableSQL( createPlayerPunishTable, con );
     CreateTableSQL.createTableSQL( createRegionTable, con );
     CreateTableSQL.createTableSQL( createSkyblockTable, con );
+    CreateTableSQL.createTableSQL( createRankTable, con );
+    CreateTableSQL.createTableSQL( createPlayerRank, con );
 
   }
 
