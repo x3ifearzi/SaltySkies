@@ -280,9 +280,9 @@ public class SaltySkies extends JavaPlugin {
 
     final String createSkyblockTable = "SKYBLOCKISLANDS ( ID int ( 255 ) NOT NULL AUTO_INCREMENT, OWNERUUID varchar ( 48 ), ISLANDNAME varchar ( 32 ), POSITIONX double, POSITIONY double, POSITIONZ double, PRIMARY KEY ( ID ) );";
 
-    final String createRankTable = "RANKS (RANK varchar ( 16 ), LEVEL int ( 10 ), PRIMARY KEY ( LEVEL ) );";
+    final String createRankTable = "RANKS (RANK varchar ( 16 ), LEVEL int ( 10 ), PRIMARY KEY ( RANK ) );";
 
-    final String createPlayerRank = "PLAYERRANK (PLAYERUUID varchar ( 48 ), RANK varchar ( 16 ), PRIMARY KEY ( PLAYERUUID ), FOREIGN KEY ( RANK ) REFERENCES RANKS ( RANK ) );";
+    final String createPlayerRank = "PLAYERRANKS (PLAYERUUID varchar ( 48 ), RANK varchar ( 16 ), PRIMARY KEY ( PLAYERUUID ), FOREIGN KEY ( RANK ) REFERENCES RANKS ( RANK ) );";
 
     Connection con = CreateConnectionSQL.getConnection( );
 
