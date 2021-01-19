@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="SaltySkies">
+    <output-path>$USER_HOME$/Desktop/Server 1.16/plugins</output-path>
+    <root id="archive" name="SaltySkies.jar">
+      <element id="module-output" name="SaltySkies" />
+    </root>
+  </artifact>
+</component>
