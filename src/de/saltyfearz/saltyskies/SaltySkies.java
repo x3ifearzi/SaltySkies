@@ -7,6 +7,7 @@ import de.saltyfearz.saltyskies.configs.ItemConfigShop;
 import de.saltyfearz.saltyskies.enchantments.*;
 import de.saltyfearz.saltyskies.events.chatevents.PlayerChatEvent;
 import de.saltyfearz.saltyskies.events.inventoryclickevents.InventoryPunishClickEvent;
+import de.saltyfearz.saltyskies.events.inventoryclickevents.InventoryShopClickEvent;
 import de.saltyfearz.saltyskies.events.jobevents.FarmingEvent;
 import de.saltyfearz.saltyskies.events.jobevents.MiningEvent;
 import de.saltyfearz.saltyskies.events.jobevents.SkillEvents;
@@ -74,7 +75,7 @@ public class SaltySkies extends JavaPlugin {
 
     }
 
-    this.configMessenger = new CustomConfigMessager( this );
+    this.configMessenger = new CustomConfigMessager( );
 
     this.farmingEvent = new FarmingEvent( this );
     this.miningEvent = new MiningEvent( this );
@@ -256,6 +257,8 @@ public class SaltySkies extends JavaPlugin {
 
     plManager.registerEvents( new SkillEvents( this ), this );
     plManager.registerEvents( new InventoryPunishClickEvent( this ), this );
+    plManager.registerEvents( new InventoryShopClickEvent( this ), this );
+
   }
 
   private void registerConfigs ( ) {

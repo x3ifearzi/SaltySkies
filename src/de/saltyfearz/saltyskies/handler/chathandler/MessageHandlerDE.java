@@ -4,7 +4,7 @@ import de.saltyfearz.saltyskies.SaltySkies;
 
 public class MessageHandlerDE {
 
-  final private SaltySkies plugin;
+  private final SaltySkies plugin;
 
   public MessageHandlerDE ( final SaltySkies plugin ) { this.plugin = plugin; }
 

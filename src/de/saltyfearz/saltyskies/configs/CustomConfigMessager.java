@@ -1,6 +1,5 @@
 package de.saltyfearz.saltyskies.configs;
 
-import de.saltyfearz.saltyskies.SaltySkies;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -10,14 +9,12 @@ import java.io.IOException;
 
 public class CustomConfigMessager {
 
-  final private SaltySkies plugin;
-
   private File messageFile;
 
   private FileConfiguration messageFileConfiguration;
 
-  public CustomConfigMessager(final SaltySkies plugin) {
-    this.plugin = plugin;
+  public CustomConfigMessager() {
+
   }
 
   public void generateMessageFile() {

@@ -1,6 +1,8 @@
 package de.saltyfearz.saltyskies.mysql;
 
+import de.saltyfearz.saltyskies.SaltySkies;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RankSQL {
+
+    private static final SaltySkies plugin = JavaPlugin.getPlugin( SaltySkies.class );
+
+    private RankSQL() { }
 
     public static List <String> getRanks() {
 
@@ -45,6 +51,8 @@ public class RankSQL {
         } catch ( SQLException exc ) {
 
             exc.printStackTrace();
+
+            player.sendMessage( plugin.getMsgDE().getMessageErrorDE( "rank-command", "specifiedRankDoesNotExist" ));
 
         }
     }

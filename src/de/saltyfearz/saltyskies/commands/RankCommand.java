@@ -27,9 +27,7 @@ public class RankCommand {
 
         }
 
-        if ( arg.length == 1 ) {
-
-            if ( arg[0].equalsIgnoreCase( "list" ) ) {
+        if ( arg.length == 1 && arg[0].equalsIgnoreCase( "list" )) {
 
                 player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "layoutbox", "chatLayoutTopLeft" ) + plugin.getMsgDE().getMessage( "layoutbox", "prefixForLayoutRanks" ) + plugin.getMsgDE().getMessage( "layoutbox", "chatLayoutTopRight" ));
 
@@ -40,8 +38,6 @@ public class RankCommand {
                 }
 
                 player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "layoutbox", "chatLayoutBottomLeft" ) + plugin.getMsgDE().getMessage( "layoutbox", "prefixForLayoutRanks" ) + plugin.getMsgDE().getMessage( "layoutbox", "chatLayoutBottomRight" ) );
-
-            }
 
         }
 
