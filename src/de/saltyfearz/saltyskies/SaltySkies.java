@@ -88,6 +88,7 @@ public class SaltySkies extends JavaPlugin {
     this.msgDE = new MessageHandlerDE( this );
 
     this.iCS = new ItemConfigShop( this );
+    iCS.setupFile( );
 
     registerConfigs( );
 

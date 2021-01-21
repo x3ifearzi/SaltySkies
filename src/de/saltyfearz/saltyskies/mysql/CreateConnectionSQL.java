@@ -22,9 +22,9 @@ public class CreateConnectionSQL {
     int portAddress = 3306;*/
 
     String hostAddress = "sql7.freemysqlhosting.net";
-    String database = "sql7386750";
-    String username = "sql7386750";
-    String password = "Zx84VPLZ2N";
+    String database = "sql7388332";
+    String username = "sql7388332";
+    String password = "zmwW4gqgfF";
     int portAddress = 3306;
 
     try {

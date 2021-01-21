@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class InventoryShopClickEvent implements Listener {
@@ -32,29 +31,49 @@ public class InventoryShopClickEvent implements Listener {
         ShopCommand shopObj = ( ShopCommand )   dataList.get( 3 );
 
 
-        if (nameClickedI.equals("§4S§cand") || nameClickedI.equals("§4H§colz") || nameClickedI.equals("§4B§cesonderes") || nameClickedI.equals("§4E§crde") || nameClickedI.equals("§4R§cüstungen") || nameClickedI.equals("§4N§cether") || nameClickedI.equals("§4V§cerschiedenes") || nameClickedI.equals("§4R§cedstone") || nameClickedI.equals("§4D§ceko") || nameClickedI.equals("§4N§catur") || nameClickedI.equals("§4S§cteine") || nameClickedI.equals("§4B§causteine") || nameClickedI.equals("§4E§crze") || nameClickedI.equals("§4W§cerkzeuge & §4W§caffen") || nameClickedI.equals("§4W§colle") || nameClickedI.equals("§4G§cglas") || nameClickedI.equals("§4E§cssen") || nameClickedI.equals("§4N§catur") || nameClickedI.equals("§4N§cether") || nameClickedI.equals("§4V§cerschiedenes") || nameClickedI.equals("§4D§ceko") || nameClickedI.equals("§4B§causteine") || nameClickedI.equals("§4E§cssen") || nameClickedI.equals("§4E§crze") || nameClickedI.equals("§4G§clas") || nameClickedI.equals("§4G§cehärteter Lehm")) {
+        switch ( nameClickedI ) {
+            case "§4S§cand":
+            case "§4H§colz":
+            case "§4B§cesonderes":
+            case "§4E§crde":
+            case "§4R§cüstungen":
+            case "§4W§cerkzeuge & §4W§caffen":
+            case "§4W§colle":
+            case "§4G§cglas":
+            case "§4N§catur":
+            case "§4N§cether":
+            case "§4V§cerschiedenes":
+            case "§4D§ceko":
+            case "§4B§causteine":
+            case "§4E§cssen":
+            case "§4E§crze":
+            case "§4G§clas":
+            case "§4G§cehärteter Lehm":
 
-            shopObj.viewShopItemList( player, nameClickedI );
+                shopObj.viewShopItemList( player, nameClickedI );
 
-        } else if ( nameClickedI.equals( "§4Z§curück" ) ) {
+                break;
+            case "§4Z§curück":
 
-            if ( shopObj.pageBack.equals( "startShop" ) ) {
+                if ( ShopCommand.pageBack.equals( "startShop" ) ) {
 
-                shopObj.viewStartShop( player );
+                    shopObj.viewStartShop( player );
 
-            } else {
+                } else {
 
-                shopObj.viewShopItemList( player, shopObj.pageBack );
+                    shopObj.viewShopItemList( player, ShopCommand.pageBack );
 
-            }
+                }
 
-        } else if ( nameClickedI.equals( "§4V§corwärts" ) ) {
+                break;
+            case "§4V§corwärts":
 
-            if ( shopObj.pageForward != null ) {
+                if ( ShopCommand.pageForward != null ) {
 
-                shopObj.viewShopItemList2( player, shopObj.pageForward );
+                    shopObj.viewShopItemList2( player, ShopCommand.pageForward );
 
-            }
+                }
+                break;
         }
     }
 
@@ -78,24 +97,26 @@ public class InventoryShopClickEvent implements Listener {
 
             if ( player.getInventory().firstEmpty() <= - 1 ) {
 
-                player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "shop-command", "notEnoughSpace" ) );
+                player.sendMessage( plugin.getMsgDE().getMessageInfoDE( "shop-command", "notEnoughFearzys" ) );
                 return;
 
             }
 
             if ( shopObj.reduceMoney( iCosts, player ) ) {
 
-                ItemMeta iM = clickedI.getItemMeta();
+                ItemStack newI = new ItemStack( clickedI );
+
+                ItemMeta iM = newI.getItemMeta();
 
                 Objects.requireNonNull( iM ).setDisplayName(  iM.getDisplayName().replace( "§6", "§d" ) );
 
                 iM.setLore( null );
 
-                clickedI.setItemMeta( iM );
+                newI.setItemMeta( iM );
 
-                player.getInventory().addItem( clickedI );
+                player.getInventory().addItem( newI );
 
-                player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "shop-command", "successItemBought" ) ); //TODO MIT KONTOSTAND NOCH
+                player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "shop-command", "successItemBought" ) );
 
                 player.updateInventory();
 
@@ -110,9 +131,10 @@ public class InventoryShopClickEvent implements Listener {
 
             for ( ItemStack iS : player.getOpenInventory().getBottomInventory().getContents() ) {
 
-                if ( clickedI == iS ) {
+                if ( iS == null ) continue;
+                if ( clickedI.getType() == iS.getType() ) {
 
-                    final int amountOfSoldI = player.getOpenInventory().getBottomInventory().all( iS ).size();
+                    final int amountOfSoldI = iS.getAmount(); //checkmaxamount
 
                     player.getOpenInventory().getBottomInventory().removeItem( iS );
 
@@ -120,7 +142,7 @@ public class InventoryShopClickEvent implements Listener {
 
                     shopObj.addMoney( ( iSellPrice * amountOfSoldI ), player );
 
-                    player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "shop-command", "successItemSold" ) ); //TODO MIT KONTOSTAND NOCH
+                    player.sendMessage( plugin.getMsgDE().getMessageSuccessDE( "shop-command", "successItemSold" ) );
                     break;
 
                 }
@@ -157,10 +179,10 @@ public class InventoryShopClickEvent implements Listener {
 
         ArrayList <Object> dataList = new ArrayList<>(  );
 
-        dataList.add( 0, player );
-        dataList.add( 1, clickedI );
-        dataList.add( 2, nameClickedI );
-        dataList.add( 4, shopObj );
+        dataList.add( player );
+        dataList.add( clickedI );
+        dataList.add( nameClickedI );
+        dataList.add( shopObj );
 
         return dataList;
 

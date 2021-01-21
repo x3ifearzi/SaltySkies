@@ -23,7 +23,7 @@ public class ItemConfigShop {
 
     //Finds or Generates the Config File
     public void setupFile ( ) {
-        file = new File( Objects.requireNonNull( Bukkit.getServer( ).getPluginManager( ).getPlugin( "Skyblock" ) ).getDataFolder( ), "shopitems.yml" );
+        file = new File( Objects.requireNonNull( Bukkit.getServer( ).getPluginManager( ).getPlugin( "SaltySkies" ) ).getDataFolder( ), "shopitems.yml" );
 
         if ( !file.exists( ) ) {
             try {

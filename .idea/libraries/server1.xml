@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="server1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../Skyblock/lib/server.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../Skyblock/lib/server.jar!/" />
+    </SOURCES>
+  </library>
+</component>

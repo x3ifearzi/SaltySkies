@@ -38,8 +38,9 @@ messages:
   shop-command:
     successItemSold: §7 Du hast einen Gegenstand erfolgreich verkauft.
     successItemBought: §7 Du hast einen Gegenstand erfolgreich gekauft.
-    notEnoughSpaceInv: §7 Du hast nicht genügend Platz in deinem Inventar, um diesen
-      Gegenstand kaufen zu können.
+    notEnoughSpaceInv: §7 Du hast nicht genügend Platz in deinem Inventar, um diesen Gegenstand kaufen zu können.
+    notEnoughFearzys: §7 Du besitzt nicht genug FeaRzy's um einen Gegenstand kaufen zu können.
+    notEnoughSpace: §7 Du hast nicht ausreichend Platz in deinem Inventar um Gegenstände kaufen zu können.
   system:
     autoplayerselect: §7 Da der Spieler nicht §aOnline §7ist, wurdest du automatisch
       ausgewählt.
@@ -180,15 +181,15 @@ messages:
     posSuccessfully: §a [ERFOLG] §a /region <create> [<text>]
     regionAlreadyExists: §c [ERROR] Die aktuelle Region wurde schon von jemanden besetzt.
   teleport-command:
-    sendTpa: Es wurde eine Teleportanfrage an %target versendet.
-    sendTpaTarget: Der Spieler %player möchte sich zu dir teleportieren.
-    sendTpaTargetAccept: Akzeptieren? [/tpa accept] %player
-    sendTpaTargetDeny: Ablehnen? [/tpa deny] %player
-    sendTpaNotToYourself: Du kannst keine Teleportierungsanfragen an dich selber stellen.
-    sendTpaPlayerNotFound: Der Spieler %target konnte nicht gefunden werden.
-    sendTpaSuccessfullyAccepted: Du hast die Teleportierungsanfrage von %player angenommen.
-    sendTpaSuccessfullyAcceptedTarget: Der Spieler %target hat deine Teleportierungsanfrage angenommen.
-    sendTpaSuccessfullyDenied: Du hast die Teleportierungsanfrage von %player abgelehnt.
-    sendTpaSuccessfullyDeniedTarget: Der Spieler %target hat deine Teleportierungsanfrage abgelehnt.
-    sendTpaNotSended: Der Spieler %target hat dir keine Teleportierungsanfrage geschickt.
+    sendTpa: §7 Es wurde eine Teleportanfrage an %target versendet.
+    sendTpaTarget: §7 Der Spieler %player möchte sich zu dir teleportieren.
+    sendTpaTargetAccept: §7 Akzeptieren? [/tpa accept] %player
+    sendTpaTargetDeny: §7 Ablehnen? [/tpa deny] %player
+    sendTpaNotToYourself: §7 Du kannst keine Teleportierungsanfragen an dich selber stellen.
+    sendTpaPlayerNotFound: §7 Der Spieler %target konnte nicht gefunden werden.
+    sendTpaSuccessfullyAccepted: §7 Du hast die Teleportierungsanfrage von %player angenommen.
+    sendTpaSuccessfullyAcceptedTarget: §7 Der Spieler %target hat deine Teleportierungsanfrage angenommen.
+    sendTpaSuccessfullyDenied: §7 Du hast die Teleportierungsanfrage von %player abgelehnt.
+    sendTpaSuccessfullyDeniedTarget: §7 Der Spieler %target hat deine Teleportierungsanfrage abgelehnt.
+    sendTpaNotSended: §7 Der Spieler %target hat dir keine Teleportierungsanfrage geschickt.
 
